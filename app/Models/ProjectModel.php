@@ -11,9 +11,18 @@ class ProjectModel extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = [
+
         'title',
+
         'description',
+
+        'location',
+
         'image',
-        'location'
+
+        'gallery'
+
     ];
+
+    protected $useTimestamps = false;
 }

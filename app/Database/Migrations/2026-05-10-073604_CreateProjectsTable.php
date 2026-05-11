@@ -50,8 +50,7 @@ class CreateProjectsTable extends Migration
 
         $this->forge->addKey('id', true);
 
-        $this->forge->createTable('projects');
-    }
+$this->forge->createTable('projects', true);    }
 
     public function down()
     {
