@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProjectModel;
 use App\Controllers\BaseController;
+use App\Models\SettingModel;
 
 class Admin extends BaseController
 {
@@ -362,4 +363,207 @@ class Admin extends BaseController
             'Project Deleted'
         );
     }
+        /*
+    |-----------------------------------
+    | EDIT PROJECT
+    |-----------------------------------
+    */
+
+    public function edit($id)
+    {
+        $model =
+        new ProjectModel();
+
+        $project =
+        $model->find($id);
+
+        if (!$project)
+        {
+            return redirect()->to('/admin');
+        }
+
+        return view(
+            'admin/edit',
+            [
+                'project' => $project
+            ]
+        );
+    }
+
+    /*
+    |-----------------------------------
+    | UPDATE PROJECT
+    |-----------------------------------
+    */
+
+    public function update($id)
+    {
+        $model =
+        new ProjectModel();
+
+        /*
+        |-----------------------------------
+        | FIND PROJECT
+        |-----------------------------------
+        */
+
+        $project =
+        $model->find($id);
+
+        if (!$project)
+        {
+            return redirect()->to('/admin');
+        }
+
+        /*
+        |-----------------------------------
+        | FORM DATA
+        |-----------------------------------
+        */
+
+        $title =
+        $this->request->getPost('title');
+
+        $description =
+        $this->request->getPost('description');
+
+        $location =
+        $this->request->getPost('location');
+
+        /*
+        |-----------------------------------
+        | OLD IMAGE
+        |-----------------------------------
+        */
+
+        $mainImage =
+        $project['image'];
+
+        $gallery =
+        json_decode(
+            $project['gallery'],
+            true
+        ) ?? [];
+
+        /*
+        |-----------------------------------
+        | NEW FILES
+        |-----------------------------------
+        */
+
+        $files =
+        $this->request->getFileMultiple(
+            'project_files'
+        );
+
+        $uploadPath =
+        FCPATH .
+        'uploads/projects/';
+
+        if ($files)
+        {
+            foreach ($files as $file)
+            {
+                if (
+                    $file->isValid()
+                    &&
+                    ! $file->hasMoved()
+                )
+                {
+                    $newName =
+                    $file->getRandomName();
+
+                    $file->move(
+                        $uploadPath,
+                        $newName
+                    );
+
+                    $gallery[] =
+                    'projects/' .
+                    $newName;
+                }
+            }
+
+            /*
+            |-----------------------------------
+            | NEW THUMBNAIL
+            |-----------------------------------
+            */
+
+            $mainImage =
+            $gallery[0];
+        }
+
+        /*
+        |-----------------------------------
+        | UPDATE DATABASE
+        |-----------------------------------
+        */
+
+        $model->update($id, [
+
+            'title' =>
+            $title,
+
+            'description' =>
+            $description,
+
+            'location' =>
+            $location,
+
+            'image' =>
+            $mainImage,
+
+            'gallery' =>
+            json_encode($gallery)
+
+        ]);
+
+        return redirect()
+        ->to('/admin')
+        ->with(
+            'success',
+            'Project updated successfully!'
+        );
+    }
+  public function logo()
+{
+    $model = new SettingModel();
+
+    $data['setting'] = $model->first();
+
+    return view('admin/logo', $data);
+}
+// use App\Models\SettingModel;
+
+public function updateLogo()
+{
+    $model = new SettingModel();
+
+    $file = $this->request->getFile('site_logo');
+
+    if ($file && $file->isValid() && !$file->hasMoved()) {
+
+        $newName = $file->getRandomName();
+        $file->move(FCPATH . 'uploads/projects/', $newName);
+
+        $setting = $model->first();
+
+        if ($setting) {
+
+            // delete old logo (optional but recommended)
+            if (!empty($setting['site_logo']) && file_exists(FCPATH . 'uploads/projects/' . $setting['site_logo'])) {
+                unlink(FCPATH . 'uploads/projects/' . $setting['site_logo']);
+            }
+
+            // update new logo
+            $model->update($setting['id'], [
+                'site_logo' => $newName
+            ]);
+        }
+    }
+
+    return redirect()->to('/admin/logo')
+        ->with('success', 'Logo updated successfully');
+}
 }

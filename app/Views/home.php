@@ -839,7 +839,21 @@ to{
 <nav class="navbar">
 
 <div class="logo">
-FB DESIGN STUDIO
+
+<?php if (!empty($setting['site_logo'])): ?>
+
+    <img
+        src="<?= base_url('uploads/projects/' . $setting['site_logo']) ?>"
+        style="height:40px; object-fit:contain;"
+        alt="Logo"
+    >
+
+<?php else: ?>
+
+    FB DESIGN STUDIO
+
+<?php endif; ?>
+
 </div>
 
 <div class="nav-links">

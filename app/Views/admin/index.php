@@ -345,8 +345,12 @@ class="add-btn"
 >
 Add Project
 </a>
+<a href="/admin/logo" class="btn btn-primary">
+    Change Logo
+</a>
 
 </div>
+
 
 <!-- PROJECTS -->
 
@@ -439,8 +443,20 @@ onclick="return confirm('Delete this project?')"
 Delete
 
 </a>
+<a
+href="/admin/edit/<?= $project['id'] ?>"
+class="action-btn"
+style="
+background:rgba(255,255,255,0.06);
+color:#f3e7d6;
+border:1px solid rgba(255,255,255,0.06);
+"
+>
+Edit
+</a>
 
 </div>
+
 
 </div>
 
