@@ -18,7 +18,7 @@ href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
 >
 
 <link
-href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap"
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap"
 rel="stylesheet"
 >
 
@@ -31,11 +31,11 @@ rel="stylesheet"
 }
 
 body{
-    background:#0f0d0b;
+    background:#f4f1ec;
 
     font-family:'Outfit',sans-serif;
 
-    color:white;
+    color:#111;
 
     min-height:100vh;
 
@@ -43,23 +43,28 @@ body{
     justify-content:center;
     align-items:center;
 
-    padding:50px;
+    padding:60px 20px;
+
+    overflow-x:hidden;
+
+    position:relative;
 }
 
-/* BG */
+/* LIGHT BG EFFECT */
 
-body::before{
+/* DARK BLUR OVERLAY */
+
+body::after{
     content:"";
 
     position:fixed;
+
     inset:0;
 
     background:
-    radial-gradient(
-        circle at top left,
-        rgba(201,169,110,0.08),
-        transparent 40%
-    );
+    rgba(0,0,0,0.28);
+
+    backdrop-filter:blur(14px);
 
     z-index:-1;
 }
@@ -68,47 +73,137 @@ body::before{
 
 .form-container{
     width:100%;
-    max-width:850px;
+    max-width:920px;
 
     background:
-    rgba(20,18,15,0.72);
+    rgba(255,255,255,0.58);
 
     border:
-    1px solid rgba(255,255,255,0.05);
+    1px solid rgba(255,255,255,0.35);
 
-    backdrop-filter:blur(26px);
+    backdrop-filter:blur(30px);
 
-    border-radius:34px;
+    -webkit-backdrop-filter:blur(30px);
 
-    padding:55px;
+    border-radius:36px;
+
+    padding:60px;
+
+    box-shadow:
+    0 20px 80px rgba(0,0,0,0.12);
+
+    position:relative;
 }
 
 /* HEADER */
 
 .form-header{
-    margin-bottom:45px;
+    margin-bottom:50px;
 }
 
 .form-header h1{
-    font-size:58px;
+    font-size:64px;
 
     font-weight:300;
 
-    margin-bottom:18px;
+    margin-bottom:16px;
 
-    color:#f3e7d6;
+    color:#1a1a1a;
+
+    font-family:
+    'Cormorant Garamond',
+    serif;
+
+    line-height:0.95;
+}
+/* CLOSE BUTTON */
+
+.close-popup{
+    position:absolute;
+
+    top:24px;
+    right:24px;
+
+    width:54px;
+    height:54px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,0.6);
+
+    backdrop-filter:blur(10px);
+
+    -webkit-backdrop-filter:blur(10px);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-decoration:none;
+
+    color:#111;
+
+    transition:0.4s;
+
+    border:
+    1px solid rgba(0,0,0,0.05);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08);
 }
 
-.form-header p{
-    color:#bca991;
+.close-popup:hover{
+    transform:
+    rotate(90deg)
+    scale(1.05);
 
-    line-height:1.9;
+    background:white;
+}
+
+.close-popup i{
+    font-size:30px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.form-container{
+    padding:34px 24px;
+}
+
+.form-header h1{
+    font-size:48px;
+}
+
+.close-popup{
+    width:48px;
+    height:48px;
+
+    top:18px;
+    right:18px;
+}
+
+.close-popup i{
+    font-size:26px;
+}
+
+}
+.form-header p{
+    color:#666;
+
+    line-height:2;
+
+    font-size:15px;
+
+    letter-spacing:0.08em;
 }
 
 /* INPUTS */
 
 .input-group{
-    margin-bottom:28px;
+    margin-bottom:30px;
 }
 
 .input-group label{
@@ -116,7 +211,13 @@ body::before{
 
     margin-bottom:14px;
 
-    color:#d5c3ac;
+    color:#555;
+
+    font-size:13px;
+
+    letter-spacing:0.15em;
+
+    text-transform:uppercase;
 }
 
 .input-box{
@@ -126,10 +227,10 @@ body::before{
 .input-box i{
     position:absolute;
 
-    left:20px;
+    left:22px;
     top:22px;
 
-    color:#9f7c45;
+    color:#777;
 
     font-size:20px;
 }
@@ -139,22 +240,31 @@ textarea{
     width:100%;
 
     background:
-    rgba(255,255,255,0.03);
+    rgba(255,255,255,0.7);
 
     border:
-    1px solid rgba(255,255,255,0.04);
+    1px solid rgba(0,0,0,0.06);
 
     outline:none;
 
-    color:white;
+    color:#111;
 
-    padding:20px 20px 20px 58px;
+    padding:22px 22px 22px 60px;
 
-    border-radius:22px;
+    border-radius:24px;
 
-    font-size:16px;
+    font-size:15px;
 
     font-family:'Outfit',sans-serif;
+
+    transition:0.4s;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#111;
+
+    background:white;
 }
 
 textarea{
@@ -162,19 +272,18 @@ textarea{
 
     resize:none;
 }
-
 /* FILE */
 
 .file-upload{
     background:
-    rgba(255,255,255,0.02);
+    rgba(255,255,255,0.45);
 
     border:
-    2px dashed rgba(217,199,184,0.28);
+    2px dashed rgba(0,0,0,0.12);
 
-    border-radius:24px;
+    border-radius:30px;
 
-    padding:60px 30px;
+    padding:70px 30px;
 
     text-align:center;
 
@@ -184,46 +293,54 @@ textarea{
 }
 
 .file-upload:hover{
-    border-color:#D9C7B8;
+    transform:translateY(-3px);
+
+    background:white;
 }
 
 .file-upload i{
-    font-size:56px;
+    font-size:60px;
 
-    color:#D9C7B8;
+    color:#111;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 
     display:block;
+}
+
+.file-upload p{
+    color:#555;
+
+    letter-spacing:0.12em;
+
+    text-transform:uppercase;
+
+    font-size:12px;
 }
 
 .file-upload input{
     display:none;
 }
-
-/* BUTTON */
-
 .submit-btn{
     width:100%;
 
     border:none;
 
-    background:
-    linear-gradient(
-        135deg,
-        #d9b078,
-        #9f7c45
-    );
+    background:#111;
 
-    color:#111;
+    color:white;
 
     padding:22px;
 
-    border-radius:60px;
+    border-radius:100px;
 
-    font-size:16px;
+    font-size:12px;
 
-    font-weight:600;
+    font-weight:500;
+
+    letter-spacing:0.25em;
+
+    text-transform:uppercase;
 
     cursor:pointer;
 
@@ -232,8 +349,23 @@ textarea{
 
 .submit-btn:hover{
     transform:translateY(-4px);
+
+    background:#2a2a2a;
 }
 
+/* MOBILE */
+
+@media(max-width:768px){
+
+.form-container{
+    padding:34px 24px;
+}
+
+.form-header h1{
+    font-size:48px;
+}
+
+}
 </style>
 
 </head>
@@ -241,6 +373,12 @@ textarea{
 <body>
 
 <div class="form-container">
+    <a
+href="/admin"
+class="close-popup"
+>
+<i class="ri-close-line"></i>
+</a>
 
 <div class="form-header">
 

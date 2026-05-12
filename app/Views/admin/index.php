@@ -57,14 +57,17 @@ body{
 .top-bar{
     display:flex;
 
-    justify-content:space-between;
-
     align-items:center;
 
+    gap:16px;
+
     margin-bottom:60px;
+
+    flex-wrap:wrap;
 }
 
 .top-bar h1{
+    margin-right:auto;
     font-size:56px;
 
     font-weight:300;
@@ -658,24 +661,15 @@ Update Logo
 
 /* BOX */
 
-.logo-popup-box{
-    width:420px;
-
-    padding:40px;
-
-    border-radius:34px;
-
-    background:
-    rgba(20,18,15,0.72);
-
-    border:
-    1px solid rgba(255,255,255,0.06);
-
-    backdrop-filter:blur(24px);
-
-    position:relative;
-
-    animation:popupShow 0.4s ease;
+.logo-popup-box {
+    width: 420px;
+    padding: 40px;
+    border-radius: 34px;
+    background: rgb(220 220 220 / 72%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(24px);
+    position: relative;
+    animation: popupShow 0.4s ease;
 }
 
 /* ANIMATION */
@@ -799,13 +793,11 @@ to{
 
 /* SAVE */
 
-.popup-save-btn{
-    background:
-    linear-gradient(
-        135deg,
-        #d9b078,
-        #9f7c45
-    );
+.popup-save-btn {
+    background: linear-gradient(135deg, #5c574f, #f8f4ee);
+    color: #111;
+    margin-bottom: 14px;
+}
 
     color:#111;
 
