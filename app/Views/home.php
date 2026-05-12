@@ -1,406 +1,633 @@
-<!DOCTYPE html>
-<html lang="en">
+<?= $this->extend('layouts/main') ?>
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
-
-<title>
-FB Design Studio
-</title>
+<?= $this->section('content') ?>
 
 <link
-href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap"
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@200;300;400;500;600&display=swap"
 rel="stylesheet"
 >
 
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+<!-- HERO -->
+
+<section class="lux-hero">
+
+<!-- VIDEO BG -->
+
+<div class="hero-video">
+
+<video
+autoplay
+muted
+loop
+playsinline
 >
+
+<source
+src="<?= base_url('assets/videos/hero.mp4') ?>"
+type="video/mp4"
+>
+
+</video>
+
+</div>
+
+<!-- OVERLAY -->
+
+<div class="hero-overlay"></div>
+
+<!-- CONTENT -->
+
+<div class="hero-content">
+
+<div class="hero-top-line">
+
+<div class="line"></div>
+
+<span>
+ARCHITECTURE & INTERIOR DESIGN
+</span>
+
+</div>
+
+<div class="hero-small">
+
+FB
+
+</div>
+
+<h1>
+
+Design
+Studio
+
+</h1>
+
+<div class="hero-est">
+
+EST. 2026
+
+</div>
+
+<h2>
+
+TIMELESS LUXURY SPACES
+
+</h2>
+
+<p>
+
+Crafting immersive architecture and cinematic
+interiors through minimal forms, natural textures,
+luxury spatial composition and emotionally
+elevated experiences.
+
+</p>
+
+<a
+href="/projects"
+class="hero-btn"
+>
+
+VIEW PROJECTS
+
+<span></span>
+
+</a>
+
+</div>
+
+<!-- STATS -->
+
+<div class="hero-stats">
+
+<div class="stat-box">
+
+<h3>
+20+
+</h3>
+
+<span>
+PROJECTS
+</span>
+
+</div>
+
+<div class="stat-box">
+
+<h3>
+3+
+</h3>
+
+<span>
+YEARS
+</span>
+
+</div>
+
+<div class="stat-box">
+
+<h3>
+5+
+</h3>
+
+<span>
+CITIES
+</span>
+
+</div>
+
+</div>
+
+<!-- SCROLL -->
+
+<div class="scroll-text">
+
+SCROLL
+
+</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section class="gallery-section">
+
+<div class="masonry-grid">
+
+<div class="masonry-item tall">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item large">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item small">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item tall">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item wide">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+<div class="masonry-item">
+<img src="<?= base_url('assets/images/project.jpg') ?>">
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about-section">
+
+<div class="about-left">
+
+<div class="about-mini">
+
+ABOUT FB DESIGN STUDIO
+
+</div>
+
+<h2>
+
+Architecture
+Beyond Aesthetics
+
+</h2>
+
+</div>
+
+<div class="about-right">
+
+<p>
+
+FB Design Studio creates emotionally immersive
+spaces inspired by cinematic storytelling,
+modern architecture and timeless luxury.
+Each project is designed through light,
+texture, proportion and spatial emotion.
+
+</p>
+
+<a
+href="/contact"
+class="about-btn"
+>
+
+GET IN TOUCH
+
+</a>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<section class="minimal-footer">
+
+<div class="footer-logo">
+
+FB DESIGN STUDIO
+
+</div>
+
+<div class="footer-links">
+
+<a href="/projects">
+PROJECTS
+</a>
+
+<a href="/contact">
+CONTACT
+</a>
+
+<a href="#">
+INSTAGRAM
+</a>
+
+</div>
+
+<div class="footer-bottom">
+
+© <?= date('Y') ?> FB DESIGN STUDIO
+
+</div>
+
+</section>
+
+<!-- FLOATING SOCIALS -->
+
+<div class="floating-socials">
+
+<a
+href="https://instagram.com"
+target="_blank"
+class="instagram-btn"
+>
+
+<i class="ri-instagram-line"></i>
+
+</a>
+
+<a
+href="https://wa.me/917359129662"
+target="_blank"
+class="whatsapp-btn"
+>
+
+<i class="ri-whatsapp-line"></i>
+
+</a>
+
+</div>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* GLOBAL */
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#090909;
-    color:white;
-    font-family:'Outfit',sans-serif;
+    background:#f4f1ec;
+    color:#111;
     overflow-x:hidden;
-}
-
-/* NAVBAR */
-
-.navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:28px 6%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:9999;
-
-    backdrop-filter:blur(18px);
-
-    background:
-    rgba(0,0,0,0.18);
-
-    border-bottom:
-    1px solid rgba(255,255,255,0.04);
-}
-
-.logo{
-    font-size:15px;
-    letter-spacing:0.42em;
-    color:#f3e7d6;
-}
-
-.nav-links{
-    display:flex;
-    gap:14px;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#f3e7d6;
-    font-size:13px;
-    padding:12px 24px;
-    border-radius:100px;
-    transition:0.4s;
-
-    background:
-    rgba(255,255,255,0.03);
-
-    border:
-    1px solid rgba(255,255,255,0.04);
-}
-
-.nav-links a:hover{
-    transform:
-    translateY(-2px);
-
-    background:
-    rgba(217,176,120,0.12);
+    font-family:'Outfit',sans-serif;
 }
 
 /* HERO */
 
-.hero{
+.lux-hero{
     position:relative;
     width:100%;
     height:100vh;
     overflow:hidden;
 }
 
-.hero video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+/* VIDEO */
 
-.hero::after{
-    content:"";
+.hero-video{
     position:absolute;
     inset:0;
-
-    background:
-    linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.18),
-        rgba(5,5,5,0.9)
-    );
 }
 
-/* HERO CONTENT */
-
-.hero-content{
-    position:absolute;
-    inset:0;
-    z-index:2;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-    padding:0 7%;
-}
-
-.hero-content h1{
-    font-size:9vw;
-    line-height:0.9;
-    font-weight:200;
-    color:#f7ede1;
-
-    animation:
-    reveal 1.2s ease;
-}
-
-.hero-content p{
-    margin-top:34px;
-    max-width:620px;
-    line-height:2;
-    color:#d9c7b8;
-    font-size:17px;
-
-    animation:
-    fadeUp 1s ease;
-}
-
-/* BUTTONS */
-
-.hero-buttons{
-    margin-top:44px;
-    display:flex;
-    gap:18px;
-}
-
-.hero-buttons a{
-    text-decoration:none;
-    padding:18px 36px;
-    border-radius:100px;
-    transition:0.4s;
-}
-
-.primary-btn{
-    background:
-    linear-gradient(
-        135deg,
-        #d9b078,
-        #9f7c45
-    );
-
-    color:#111;
-    font-weight:600;
-}
-
-.secondary-btn{
-    background:
-    rgba(255,255,255,0.04);
-
-    border:
-    1px solid rgba(255,255,255,0.05);
-
-    color:#f3e7d6;
-}
-
-.hero-buttons a:hover{
-    transform:
-    translateY(-4px);
-}
-
-/* ABOUT */
-
-.about{
-    width:88%;
-    margin:auto;
-    padding:160px 0;
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:80px;
-}
-
-.about h2{
-    font-size:72px;
-    font-weight:200;
-    line-height:0.95;
-    color:#f3e7d6;
-}
-
-.about p{
-    line-height:2.2;
-    color:#c7b59e;
-    font-size:17px;
-}
-
-/* PROJECT BUTTON */
-
-.projects-section{
-    display:flex;
-    justify-content:center;
-    padding-bottom:160px;
-}
-
-.projects-btn{
-    padding:22px 46px;
-    border:none;
-    border-radius:100px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #d9b078,
-        #9f7c45
-    );
-
-    color:#111;
-    font-weight:600;
-    letter-spacing:0.2em;
-
-    cursor:pointer;
-    transition:0.5s;
-}
-
-.projects-btn:hover{
-    transform:
-    translateY(-4px);
-
-    box-shadow:
-    0 20px 50px rgba(217,176,120,0.25);
-}
-
-/* PROJECT POPUP */
-
-.projects-popup{
-    position:fixed;
-    inset:0;
-
-    display:none;
-
-    z-index:999999;
-}
-
-.projects-popup video{
-    position:absolute;
-    inset:0;
-
+.hero-video video{
     width:100%;
     height:100%;
 
     object-fit:cover;
 
     filter:
-    blur(8px)
-    brightness(0.35);
-
-    transform:scale(1.1);
+    brightness(0.82);
 }
 
-.projects-overlay{
+/* OVERLAY */
+
+.hero-overlay{
     position:absolute;
     inset:0;
 
     background:
-    rgba(0,0,0,0.55);
-
-    backdrop-filter:blur(10px);
+    linear-gradient(
+        to right,
+        rgba(244,241,236,0.95),
+        rgba(244,241,236,0.15)
+    );
 }
 
-.projects-content{
+/* CONTENT */
+
+.hero-content{
     position:relative;
+    z-index:5;
 
-    z-index:2;
+    width:90%;
+    height:100%;
 
-    width:94%;
-    max-width:1600px;
+    margin:auto;
 
-    height:92vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 
-    margin:4vh auto;
-
-    overflow-y:auto;
-
-    padding:60px;
-
-    border-radius:34px;
-
-    background:
-    rgba(15,15,15,0.18);
-
-    backdrop-filter:blur(24px);
-
-    border:
-    1px solid rgba(255,255,255,0.05);
+    max-width:760px;
 }
 
-/* CLOSE */
+/* TOP LINE */
 
-.close-btn{
-    position:absolute;
-    top:24px;
-    right:34px;
+.hero-top-line{
+    display:flex;
+    align-items:center;
+    gap:18px;
 
-    font-size:60px;
+    margin-bottom:36px;
+}
 
-    cursor:pointer;
+.line{
+    width:70px;
+    height:1px;
 
-    color:#f3e7d6;
+    background:#777;
+}
+
+.hero-top-line span{
+    font-size:11px;
+    letter-spacing:0.45em;
+    color:#555;
+}
+
+/* SMALL */
+
+.hero-small{
+    font-size:18px;
+    letter-spacing:0.5em;
+    color:#444;
 }
 
 /* TITLE */
 
-.projects-title{
-    text-align:center;
+.hero-content h1{
+    font-family:
+    'Cormorant Garamond',
+    serif;
 
-    font-size:82px;
+    font-size:10vw;
+
+    line-height:0.85;
+
+    font-weight:300;
+
+    color:#1a1a1a;
+}
+
+/* EST */
+
+.hero-est{
+    margin-top:24px;
+
+    font-size:11px;
+
+    letter-spacing:0.35em;
+
+    color:#666;
+}
+
+/* SUBTITLE */
+
+.hero-content h2{
+    margin-top:24px;
+
+    font-size:38px;
+
+    font-weight:300;
 
     letter-spacing:0.08em;
-
-    text-transform:uppercase;
-
-    font-weight:200;
-
-    margin-bottom:70px;
-
-    color:#f3e7d6;
 }
 
-/* GRID */
+/* TEXT */
 
-.projects-grid{
-    display:grid;
+.hero-content p{
+    margin-top:34px;
 
-    grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(320px,1fr)
-    );
+    max-width:620px;
 
-    gap:34px;
+    line-height:2;
+
+    color:#555;
+
+    font-size:16px;
 }
 
-/* CARD */
+/* BUTTON */
 
-.project-card{
+.hero-btn{
+    margin-top:42px;
+
+    width:260px;
+    height:72px;
+
+    border:
+    1px solid rgba(0,0,0,0.15);
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    text-decoration:none;
+
+    color:#111;
+
+    background:white;
+
+    letter-spacing:0.28em;
+
+    font-size:11px;
+
+    transition:
+    1s cubic-bezier(.19,1,.22,1);
+}
+
+.hero-btn span{
+    width:50px;
+    height:1px;
+
+    background:#111;
+}
+
+.hero-btn:hover{
+    background:#111;
+    color:white;
+}
+
+/* STATS */
+
+.hero-stats{
+    position:absolute;
+
+    right:7%;
+    bottom:80px;
+
+    display:flex;
+
+    gap:50px;
+
+    z-index:5;
+}
+
+.stat-box{
+    text-align:center;
+}
+
+.stat-box h3{
+    font-size:38px;
+    font-weight:300;
+}
+
+.stat-box span{
+    font-size:10px;
+
+    letter-spacing:0.35em;
+
+    color:#666;
+}
+
+/* SCROLL */
+
+.scroll-text{
+    position:absolute;
+
+    bottom:20px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:10px;
+
+    letter-spacing:0.5em;
+
+    color:#777;
+
+    z-index:10;
+}
+
+/* GALLERY */
+
+.gallery-section{
+    padding:30px 3% 100px;
+    background:#f4f1ec;
+}
+
+/* MASONRY */
+
+.masonry-grid{
+    column-count:4;
+    column-gap:16px;
+}
+
+/* ITEMS */
+
+.masonry-item{
     position:relative;
+
+    margin-bottom:16px;
+
+    overflow:hidden;
+
+    break-inside:avoid;
 
     cursor:pointer;
 
-    transition:0.5s;
-}
-
-.project-card:hover{
-    transform:
-    translateY(-6px);
+    background:white;
 }
 
 /* IMAGE */
 
-.main-project-image{
-    position:relative;
-
+.masonry-item img{
     width:100%;
 
-    height:230px;
+    display:block;
 
-    overflow:hidden;
+    object-fit:cover;
 
-    border-radius:24px;
+    transition:
+    1.2s cubic-bezier(.19,1,.22,1);
+
+    height:420px;
 }
 
-.main-project-image::after{
+/* HEIGHTS */
+
+.masonry-item.tall img{
+    height:680px;
+}
+
+.masonry-item.large img{
+    height:560px;
+}
+
+.masonry-item.small img{
+    height:300px;
+}
+
+.masonry-item.wide img{
+    height:500px;
+}
+
+/* HOVER */
+
+.masonry-item:hover img{
+    transform:scale(1.05);
+}
+
+/* OVERLAY */
+
+.masonry-item::after{
     content:"";
 
     position:absolute;
@@ -409,257 +636,141 @@ body{
     background:
     linear-gradient(
         to top,
-        rgba(0,0,0,0.82),
-        rgba(0,0,0,0.15)
+        rgba(0,0,0,0.25),
+        transparent
     );
-}
-
-.main-project-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:1s;
-}
-
-.project-card:hover .main-project-image img{
-    transform:scale(1.06);
-}
-
-/* INFO */
-
-.project-info{
-    position:absolute;
-    top:24px;
-    left:24px;
-    z-index:5;
-}
-
-.project-info h3{
-    font-size:24px;
-    line-height:1.1;
-    text-transform:uppercase;
-    font-weight:700;
-    color:white;
-    margin-bottom:8px;
-}
-
-.project-info span{
-    font-size:10px;
-
-    letter-spacing:0.22em;
-
-    text-transform:uppercase;
-
-    color:
-    rgba(255,255,255,0.7);
-}
-
-/* FULLSCREEN VIEWER */
-
-.image-viewer{
-    position:fixed;
-    inset:0;
-
-    background:
-    rgba(0,0,0,0.92);
-
-    z-index:9999999;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
 
     opacity:0;
-    visibility:hidden;
 
-    transition:0.5s;
-
-    backdrop-filter:blur(20px);
+    transition:0.6s;
 }
 
-.image-viewer.active{
+.masonry-item:hover::after{
     opacity:1;
-    visibility:visible;
 }
 
-/* MAIN IMAGE */
+/* ABOUT */
 
-.image-viewer img{
-    width:82vw;
-    height:74vh;
+.about-section{
+    width:88%;
 
-    object-fit:cover;
+    margin:auto;
 
-    border-radius:26px;
+    padding:140px 0;
 
-    transform:
-    scale(0.86);
+    display:grid;
 
-    transition:0.8s;
+    grid-template-columns:1fr 1fr;
 
-    box-shadow:
-    0 40px 120px rgba(0,0,0,0.55);
+    gap:80px;
 }
 
-.image-viewer.active img{
-    transform:scale(1);
+.about-mini{
+    font-size:11px;
+
+    letter-spacing:0.35em;
+
+    color:#777;
+
+    margin-bottom:20px;
 }
 
-/* CLOSE */
+.about-left h2{
+    font-family:
+    'Cormorant Garamond',
+    serif;
 
-.close-viewer{
-    position:absolute;
+    font-size:6vw;
 
-    top:28px;
-    right:40px;
+    line-height:0.95;
 
-    font-size:70px;
-
-    color:white;
-
-    cursor:pointer;
-
-    z-index:5;
+    font-weight:300;
 }
 
-/* COUNTER */
+.about-right p{
+    line-height:2.1;
 
-.image-counter{
-    position:absolute;
+    color:#555;
 
-    top:34px;
-    left:50%;
+    font-size:17px;
 
-    transform:translateX(-50%);
-
-    background:
-    rgba(255,255,255,0.08);
-
-    padding:12px 24px;
-
-    border-radius:100px;
-
-    font-size:15px;
-
-    letter-spacing:0.15em;
-
-    z-index:5;
+    margin-bottom:40px;
 }
 
-/* ARROWS */
+/* BUTTON */
 
-.nav-arrow{
-    position:absolute;
+.about-btn{
+    display:inline-flex;
 
-    top:50%;
+    align-items:center;
+    justify-content:center;
 
-    transform:translateY(-50%);
-
-    width:70px;
+    width:240px;
     height:70px;
 
-    border-radius:50%;
+    background:#111;
 
-    background:
-    rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(10px);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    cursor:pointer;
-
-    z-index:5;
-
-    transition:0.4s;
-}
-
-.nav-arrow:hover{
-    background:
-    rgba(255,255,255,0.16);
-
-    transform:
-    translateY(-50%)
-    scale(1.08);
-}
-
-.nav-arrow i{
-    font-size:42px;
     color:white;
+
+    text-decoration:none;
+
+    letter-spacing:0.28em;
+
+    font-size:11px;
+
+    transition:0.5s;
 }
 
-.left-arrow{
-    left:28px;
+.about-btn:hover{
+    transform:translateY(-4px);
 }
 
-.right-arrow{
-    right:28px;
+/* FOOTER */
+
+.minimal-footer{
+    border-top:
+    1px solid rgba(0,0,0,0.08);
+
+    padding:80px 5% 40px;
 }
 
-/* THUMBNAILS */
+.footer-logo{
+    font-size:32px;
 
-.viewer-thumbnails{
-    margin-top:24px;
+    margin-bottom:50px;
 
-    width:82vw;
+    letter-spacing:0.2em;
+}
 
+.footer-links{
     display:flex;
 
-    gap:14px;
+    gap:50px;
 
-    overflow-x:auto;
-
-    padding-bottom:10px;
-
-    scrollbar-width:none;
+    margin-bottom:70px;
 }
 
-.viewer-thumbnails::-webkit-scrollbar{
-    display:none;
+.footer-links a{
+    text-decoration:none;
+
+    color:#111;
+
+    letter-spacing:0.25em;
+
+    font-size:11px;
 }
 
-.viewer-thumbnails img{
-    width:150px;
-    height:90px;
+.footer-bottom{
+    font-size:11px;
 
-    object-fit:cover;
+    letter-spacing:0.28em;
 
-    border-radius:16px;
-
-    cursor:pointer;
-
-    flex-shrink:0;
-
-    opacity:0.5;
-
-    transition:0.4s;
-
-    border:
-    2px solid transparent;
+    color:#777;
 }
 
-.viewer-thumbnails img.active-thumb{
-    opacity:1;
+/* FLOATING SOCIALS */
 
-    border:
-    2px solid white;
-}
-
-.viewer-thumbnails img:hover{
-    opacity:1;
-
-    transform:
-    translateY(-4px);
-}
-
-/* SOCIALS */
-
-.socials{
+.floating-socials{
     position:fixed;
 
     right:24px;
@@ -670,12 +781,12 @@ body{
 
     gap:14px;
 
-    z-index:999;
+    z-index:9999;
 }
 
-.socials a{
-    width:64px;
-    height:64px;
+.floating-socials a{
+    width:70px;
+    height:70px;
 
     border-radius:50%;
 
@@ -683,16 +794,16 @@ body{
     justify-content:center;
     align-items:center;
 
-    font-size:28px;
+    color:white;
 
     text-decoration:none;
 
-    color:white;
+    font-size:30px;
 
     transition:0.4s;
 }
 
-.instagram{
+.instagram-btn{
     background:
     radial-gradient(
         circle at 30% 107%,
@@ -703,608 +814,66 @@ body{
     );
 }
 
-.whatsapp{
+.whatsapp-btn{
     background:#25D366;
 }
 
-.instagram:hover{
+.floating-socials a:hover{
     transform:
-    translateY(-4px)
-    scale(1.08);
-
-    box-shadow:
-    0 0 20px rgba(214,36,159,0.8);
-}
-
-.whatsapp:hover{
-    transform:
-    translateY(-4px)
-    scale(1.08);
-
-    box-shadow:
-    0 0 20px rgba(37,211,102,0.85);
-}
-
-/* ANIMATIONS */
-
-@keyframes reveal{
-
-from{
-    opacity:0;
-
-    transform:
-    translateY(100px);
-
-    filter:blur(10px);
-}
-
-to{
-    opacity:1;
-
-    transform:
-    translateY(0);
-
-    filter:blur(0);
-}
-
-}
-
-@keyframes fadeUp{
-
-from{
-    opacity:0;
-
-    transform:
-    translateY(40px);
-}
-
-to{
-    opacity:1;
-
-    transform:
-    translateY(0);
-}
-
+    scale(1.08)
+    translateY(-4px);
 }
 
 /* MOBILE */
 
+@media(max-width:992px){
+
+.masonry-grid{
+    column-count:2;
+}
+
+}
+
 @media(max-width:768px){
 
 .hero-content h1{
-    font-size:72px;
+    font-size:82px;
 }
 
-.about{
+.hero-content h2{
+    font-size:26px;
+}
+
+.hero-stats{
+    position:relative;
+
+    right:auto;
+    bottom:auto;
+
+    margin-top:60px;
+
+    justify-content:space-between;
+}
+
+.masonry-grid{
+    column-count:1;
+}
+
+.about-section{
     grid-template-columns:1fr;
 }
 
-.about h2{
-    font-size:52px;
+.about-left h2{
+    font-size:58px;
 }
 
-.projects-grid{
-    grid-template-columns:1fr;
-}
-
-.main-project-image{
-    height:210px;
-}
-
-.project-info h3{
-    font-size:20px;
-}
-
-.projects-title{
-    font-size:52px;
-}
-
-.image-viewer img{
-    width:94vw;
-    height:58vh;
-}
-
-.viewer-thumbnails{
-    width:94vw;
-}
-
-.viewer-thumbnails img{
-    width:100px;
-    height:70px;
-}
-
-.nav-arrow{
-    width:54px;
-    height:54px;
-}
-
-.nav-arrow i{
-    font-size:32px;
-}
-
-.nav-links{
-    display:none;
+.footer-links{
+    flex-direction:column;
+    gap:20px;
 }
 
 }
 
 </style>
 
-</head>
-
-<body>
-
-<!-- NAVBAR -->
-
-<nav class="navbar">
-
-<div class="logo">
-
-<?php if (!empty($setting['site_logo'])): ?>
-
-    <img
-        src="<?= base_url('uploads/projects/' . $setting['site_logo']) ?>"
-        style="height:40px; object-fit:contain;"
-        alt="Logo"
-    >
-
-<?php else: ?>
-
-    FB DESIGN STUDIO
-
-<?php endif; ?>
-
-</div>
-
-<div class="nav-links">
-
-<a href="#">
-Home
-</a>
-
-<a
-href="javascript:void(0)"
-onclick="openProjects()"
->
-Projects
-</a>
-
-<a href="/contact">
-Contact
-</a>
-
-</div>
-
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-
-<video autoplay muted loop playsinline>
-
-<source
-src="/assets/videos/hero.mp4"
-type="video/mp4"
->
-
-</video>
-
-<div class="hero-content">
-
-<h1>
-Architecture <br>
-& Interiors
-</h1>
-
-<p>
-Crafting timeless luxury spaces through
-minimal architecture, cinematic storytelling
-and emotionally driven interiors.
-</p>
-
-<div class="hero-buttons">
-
-<a
-href="javascript:void(0)"
-onclick="openProjects()"
-class="primary-btn"
->
-View Projects
-</a>
-
-<a
-href="/contact"
-class="secondary-btn"
->
-Contact Studio
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ABOUT -->
-
-<section class="about">
-
-<div>
-
-<h2>
-Designing <br>
-Experiences
-</h2>
-
-</div>
-
-<div>
-
-<p>
-FB Design Studio creates emotionally immersive
-spaces inspired by cinematic architecture,
-minimal luxury and timeless spatial storytelling.
-Every project is crafted with material sensitivity,
-light composition and elevated aesthetics.
-</p>
-
-</div>
-
-</section>
-
-<!-- BUTTON -->
-
-<section class="projects-section">
-
-<button
-class="projects-btn"
-onclick="openProjects()"
->
-
-VIEW PROJECTS
-
-</button>
-
-</section>
-
-<!-- PROJECT POPUP -->
-
-<div
-class="projects-popup"
-id="projectsPopup"
->
-
-<video autoplay muted loop playsinline>
-
-<source
-src="/assets/videos/hero.mp4"
-type="video/mp4"
->
-
-</video>
-
-<div class="projects-overlay"></div>
-
-<div class="projects-content">
-
-<span
-class="close-btn"
-onclick="closeProjects()"
->
-&times;
-</span>
-
-<h2 class="projects-title">
-Projects
-</h2>
-
-<div class="projects-grid">
-
-<?php foreach($projects ?? [] as $project): ?>
-
-<?php
-
-$gallery =
-json_decode(
-$project['gallery'] ?? '[]',
-true
-);
-
-$mainImage =
-isset($gallery[0])
-? $gallery[0]
-: '';
-
-?>
-
-<div class="project-card">
-
-<div
-class="main-project-image"
-
-onclick='openViewer(
-
-<?= json_encode(
-array_map(
-fn($img)=>
-base_url(
-"uploads/projects/" .
-basename($img)
-),
-$gallery
-)
-) ?>
-
-)'
->
-
-<?php if(!empty($mainImage)): ?>
-
-<img
-src="<?= base_url('uploads/projects/' . basename($mainImage)) ?>"
-alt=""
->
-
-<?php endif; ?>
-
-</div>
-
-<div class="project-info">
-
-<h3>
-<?= esc((string)$project['title']) ?>
-</h3>
-
-<span>
-<?= esc((string)$project['location']) ?>
-</span>
-
-</div>
-
-</div>
-
-<?php endforeach; ?>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- FULLSCREEN VIEWER -->
-
-<div
-class="image-viewer"
-id="imageViewer"
->
-
-<!-- CLOSE -->
-
-<span
-class="close-viewer"
-onclick="closeViewer()"
->
-&times;
-</span>
-
-<!-- COUNTER -->
-
-<div class="image-counter">
-
-<span id="currentImage">
-1
-</span>
-
-/
-
-<span id="totalImages">
-1
-</span>
-
-</div>
-
-<!-- LEFT -->
-
-<div
-class="nav-arrow left-arrow"
-onclick="prevImage()"
->
-<i class="ri-arrow-left-s-line"></i>
-</div>
-
-<!-- RIGHT -->
-
-<div
-class="nav-arrow right-arrow"
-onclick="nextImage()"
->
-<i class="ri-arrow-right-s-line"></i>
-</div>
-
-<!-- IMAGE -->
-
-<img
-id="viewerImage"
-src=""
->
-
-<!-- THUMBNAILS -->
-
-<div
-class="viewer-thumbnails"
-id="viewerThumbnails"
->
-</div>
-
-</div>
-
-<!-- SOCIALS -->
-
-<div class="socials">
-
-<a
-href="https://instagram.com"
-target="_blank"
-class="instagram"
->
-
-<i class="ri-instagram-line"></i>
-
-</a>
-
-<a
-href="https://wa.me/917359129662"
-target="_blank"
-class="whatsapp"
->
-
-<i class="ri-whatsapp-line"></i>
-
-</a>
-
-</div>
-
-<script>
-
-/* PROJECTS */
-
-function openProjects()
-{
-    document.getElementById(
-    'projectsPopup'
-    ).style.display='block';
-
-    document.body.style.overflow='hidden';
-}
-
-function closeProjects()
-{
-    document.getElementById(
-    'projectsPopup'
-    ).style.display='none';
-
-    document.body.style.overflow='auto';
-}
-
-/* GALLERY */
-
-let currentGallery = [];
-
-let currentIndex = 0;
-
-/* OPEN */
-
-function openViewer(images,index=0)
-{
-    currentGallery = images;
-
-    currentIndex = index;
-
-    updateViewer();
-
-    document.getElementById(
-    'imageViewer'
-    ).classList.add(
-    'active'
-    );
-
-    document.body.style.overflow='hidden';
-}
-
-/* CLOSE */
-
-function closeViewer()
-{
-    document.getElementById(
-    'imageViewer'
-    ).classList.remove(
-    'active'
-    );
-
-    document.body.style.overflow='auto';
-}
-
-/* UPDATE */
-
-function updateViewer()
-{
-    document.getElementById(
-    'viewerImage'
-    ).src =
-    currentGallery[currentIndex];
-
-    document.getElementById(
-    'currentImage'
-    ).innerText =
-    currentIndex + 1;
-
-    document.getElementById(
-    'totalImages'
-    ).innerText =
-    currentGallery.length;
-
-    let thumbs = '';
-
-    currentGallery.forEach(
-    (img,index)=>
-    {
-        thumbs += `
-        <img
-        src="${img}"
-
-        class="${
-        index===currentIndex
-        ? 'active-thumb'
-        : ''
-        }"
-
-        onclick="
-        currentIndex=${index};
-        updateViewer();
-        "
-        >
-        `;
-    });
-
-    document.getElementById(
-    'viewerThumbnails'
-    ).innerHTML = thumbs;
-}
-
-/* NEXT */
-
-function nextImage()
-{
-    currentIndex++;
-
-    if(
-    currentIndex >=
-    currentGallery.length
-    )
-    {
-        currentIndex = 0;
-    }
-
-    updateViewer();
-}
-
-/* PREV */
-
-function prevImage()
-{
-    currentIndex--;
-
-    if(currentIndex < 0)
-    {
-        currentIndex =
-        currentGallery.length - 1;
-    }
-
-    updateViewer();
-}
-
-</script>
-
-</body>
-</html>
+<?= $this->endSection() ?>

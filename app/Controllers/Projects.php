@@ -5,6 +5,23 @@ namespace App\Controllers;
 use App\Models\ProjectModel;
 use CodeIgniter\Controller;
 
+class Projects extends BaseController
+{
+    public function index()
+    {
+        $model =
+        new ProjectModel();
+
+        $data['projects'] =
+        $model->findAll();
+
+        return view(
+            'projects',
+            $data
+        );
+    }
+}
+
 class Admin extends Controller
 {
     /*

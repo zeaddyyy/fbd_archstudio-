@@ -8,7 +8,21 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->get('/', 'Home::index');
 
+/*
+|--------------------------------------------------------------------------
+| PROJECTS
+|--------------------------------------------------------------------------
+*/
+
+$routes->get('/projects', 'Projects::index');
+
 $routes->get('/project/(:num)', 'Projects::view/$1');
+
+/*
+|--------------------------------------------------------------------------
+| CONTACT
+|--------------------------------------------------------------------------
+*/
 
 $routes->get('/contact', 'Contact::index');
 
@@ -31,6 +45,12 @@ $routes->post('/admin/update/(:num)', 'Admin::update/$1');
 $routes->post('/admin/store', 'Admin::store');
 
 $routes->get('/admin/delete/(:num)', 'Admin::delete/$1');
+
+/*
+|--------------------------------------------------------------------------
+| LOGO
+|--------------------------------------------------------------------------
+*/
 
 $routes->get('admin/logo', 'Admin::logo');
 
