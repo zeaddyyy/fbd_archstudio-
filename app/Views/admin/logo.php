@@ -63,7 +63,11 @@ button{
 
 <?php if (!empty($setting['site_logo'])): ?>
 
-    <img src="<?= base_url('uploads/projects/' . $setting['site_logo']) ?>">
+   <img
+src="<?= base_url('uploads/' . $setting['site_logo']) ?>"
+alt="Logo"
+style="width:120px;"
+>
 
 <?php else: ?>
 

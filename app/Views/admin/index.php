@@ -33,9 +33,9 @@ rel="stylesheet"
 }
 
 body{
-    background:#0f0d0b;
+    background:#f4f1ec;
 
-    color:white;
+    color:#111;
 
     font-family:'Outfit',sans-serif;
 
@@ -69,32 +69,46 @@ body{
 
     font-weight:300;
 
-    color:#f3e7d6;
+    color:#1a1a1a;
+     font-family:
+    'Cormorant Garamond',
+    serif;
+
+    letter-spacing:0.03em;
 }
 
 .add-btn{
-    background:
-    linear-gradient(
-        135deg,
-        #d9b078,
-        #9f7c45
-    );
+    background:#111;
 
-    color:#111;
+    color:white;
 
-    padding:18px 32px;
+    padding:18px 34px;
 
     text-decoration:none;
 
     border-radius:100px;
 
-    font-weight:600;
+    font-weight:500;
+
+    letter-spacing:0.18em;
 
     transition:0.4s;
+
+    border:none;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .add-btn:hover{
     transform:translateY(-4px);
+
+    background:#2a2a2a;
 }
 
 /* GRID */
@@ -115,18 +129,18 @@ body{
 
 .project-card{
     background:
-    rgba(20,18,15,0.72);
+    rgba(255,255,255,0.72);
 
     border:
-    1px solid rgba(255,255,255,0.05);
+    1px solid rgba(0,0,0,0.05);
 
     border-radius:30px;
 
     overflow:hidden;
 
-    transition:0.4s;
+    transition:0.5s;
 
-    backdrop-filter:blur(20px);
+    backdrop-filter:blur(18px);
 }
 
 .project-card:hover{
@@ -134,7 +148,7 @@ body{
     translateY(-8px);
 
     box-shadow:
-    0 20px 50px rgba(0,0,0,0.35);
+    0 20px 50px rgba(0,0,0,0.08);
 }
 
 /* MAIN IMAGE */
@@ -155,6 +169,13 @@ body{
     object-fit:cover;
 
     display:block;
+
+    transition:1s cubic-bezier(.19,1,.22,1);
+}
+
+.project-card:hover
+.project-main-image img{
+    transform:scale(1.04);
 }
 
 /* CONTENT */
@@ -164,27 +185,36 @@ body{
 }
 
 .project-content h2{
-    font-size:34px;
+    font-size:38px;
 
     margin-bottom:14px;
 
-    color:#f3e7d6;
+    color:#1a1a1a;
 
-    font-weight:400;
+    font-weight:300;
+
+     font-family:
+    'Cormorant Garamond',
+    serif;
 }
 
+
 .location{
-    color:#c2af95;
+    color:#777;
 
     margin-bottom:16px;
 
-    font-size:15px;
+    font-size:13px;
+
+    letter-spacing:0.18em;
+
+    text-transform:uppercase;
 }
 
 .description{
-    color:#8f8f8f;
+    color:#555;
 
-    line-height:1.9;
+    line-height:2;
 
     font-size:15px;
 }
@@ -202,13 +232,12 @@ body{
 
     padding-bottom:5px;
 }
-
 .gallery-preview::-webkit-scrollbar{
     height:4px;
 }
 
 .gallery-preview::-webkit-scrollbar-thumb{
-    background:#444;
+    background:#bbb;
 
     border-radius:20px;
 }
@@ -225,7 +254,7 @@ body{
     flex-shrink:0;
 
     border:
-    1px solid rgba(255,255,255,0.05);
+    1px solid rgba(0,0,0,0.04);
 }
 
 /* ACTIONS */
@@ -251,14 +280,18 @@ body{
 
     transition:0.4s;
 
-    font-size:15px;
+    font-size:12px;
+
+    letter-spacing:0.14em;
+
+    text-transform:uppercase;
 }
 
 .delete-btn{
     background:
-    rgba(255,0,0,0.08);
+    rgba(255,0,0,0.05);
 
-    color:#ff8d8d;
+    color:#d94b4b;
 
     border:
     1px solid rgba(255,0,0,0.08);
@@ -266,8 +299,9 @@ body{
 
 .delete-btn:hover{
     background:
-    rgba(255,0,0,0.14);
+    rgba(255,0,0,0.1);
 }
+
 
 /* EMPTY */
 
@@ -276,7 +310,7 @@ body{
 
     padding:120px 20px;
 
-    color:#777;
+    color:#666;
 }
 
 .empty-state i{
@@ -284,7 +318,7 @@ body{
 
     margin-bottom:20px;
 
-    color:#9f7c45;
+    color:#111;
 }
 
 .empty-state h2{
@@ -294,8 +328,13 @@ body{
 
     margin-bottom:12px;
 
-    color:#f3e7d6;
+    color:#1a1a1a;
+
+    font-family:
+    'Cormorant Garamond',
+    serif;
 }
+
 
 /* MOBILE */
 
@@ -318,7 +357,29 @@ body{
 }
 
 .project-content h2{
-    font-size:28px;
+    font-size:30px;
+}
+
+}@media(max-width:768px){
+
+.top-bar{
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:24px;
+}
+
+.top-bar h1{
+    font-size:42px;
+}
+
+.projects-grid{
+    grid-template-columns:1fr;
+}
+
+.project-content h2{
+    font-size:30px;
 }
 
 }
@@ -345,9 +406,16 @@ class="add-btn"
 >
 Add Project
 </a>
-<a href="/admin/logo" class="btn btn-primary">
-    Change Logo
-</a>
+<button
+class="add-btn"
+onclick="openLogoPopup()"
+style="
+border:none;
+cursor:pointer;
+"
+>
+Change Logo
+</button>
 
 </div>
 
@@ -447,9 +515,9 @@ Delete
 href="/admin/edit/<?= $project['id'] ?>"
 class="action-btn"
 style="
-background:rgba(255,255,255,0.06);
-color:#f3e7d6;
-border:1px solid rgba(255,255,255,0.06);
+background:rgba(0,0,0,0.04);
+color:#111;
+border:1px solid rgba(0,0,0,0.05);
 "
 >
 Edit
@@ -489,4 +557,286 @@ Upload your first architecture project.
 </div>
 
 </body>
+<!-- LOGO POPUP -->
+
+<?php
+
+use App\Models\SettingModel;
+
+$settingModel = new SettingModel();
+$setting = $settingModel->first();
+
+?>
+
+<div
+class="logo-popup"
+id="logoPopup"
+>
+
+<div class="logo-popup-box">
+
+<!-- CLOSE -->
+
+<button
+class="close-popup"
+onclick="closeLogoPopup()"
+>
+<i class="ri-close-line"></i>
+</button>
+
+<!-- TITLE -->
+
+<h2>
+Website Logo
+</h2>
+
+<!-- LOGO -->
+
+<?php if(!empty($setting['site_logo'])): ?>
+
+<div class="popup-logo-preview">
+
+<img
+src="<?= base_url('uploads/' . $setting['site_logo']) ?>"
+alt=""
+>
+
+</div>
+
+<?php endif; ?>
+
+<!-- FORM -->
+
+<form
+action="<?= base_url('admin/logo/update') ?>"
+method="POST"
+enctype="multipart/form-data"
+>
+
+<input
+type="file"
+name="site_logo"
+required
+>
+
+<button
+type="submit"
+class="popup-save-btn"
+>
+Update Logo
+</button>
+
+</form>
+
+
+
+</div>
+
+</div>
+
+<style>
+
+/* POPUP */
+
+.logo-popup{
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,0.62);
+
+    backdrop-filter:blur(14px);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999999;
+}
+
+/* BOX */
+
+.logo-popup-box{
+    width:420px;
+
+    padding:40px;
+
+    border-radius:34px;
+
+    background:
+    rgba(20,18,15,0.72);
+
+    border:
+    1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(24px);
+
+    position:relative;
+
+    animation:popupShow 0.4s ease;
+}
+
+/* ANIMATION */
+
+@keyframes popupShow{
+
+from{
+    opacity:0;
+
+    transform:
+    translateY(40px)
+    scale(0.95);
+}
+
+to{
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+}
+
+}
+
+/* CLOSE */
+
+.close-popup{
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    background:none;
+    border:none;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.close-popup i{
+    font-size:32px;
+}
+
+/* TITLE */
+
+.logo-popup-box h2{
+    font-size:38px;
+
+    font-weight:300;
+
+    color:#f3e7d6;
+
+    margin-bottom:30px;
+}
+
+/* LOGO PREVIEW */
+
+.popup-logo-preview{
+    width:130px;
+    height:130px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    margin-bottom:28px;
+
+    background:
+    rgba(255,255,255,0.04);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.popup-logo-preview img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+}
+
+/* INPUT */
+
+.logo-popup-box input{
+    width:100%;
+
+    margin-bottom:20px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    border:none;
+
+    background:
+    rgba(255,255,255,0.06);
+
+    color:white;
+}
+
+/* BUTTONS */
+
+.popup-save-btn,
+.popup-back-btn{
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:100px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:0.4s;
+}
+
+/* SAVE */
+
+.popup-save-btn{
+    background:
+    linear-gradient(
+        135deg,
+        #d9b078,
+        #9f7c45
+    );
+
+    color:#111;
+
+    margin-bottom:14px;
+}
+
+/* BACK */
+
+
+.popup-save-btn:hover,
+.popup-back-btn:hover{
+    transform:translateY(-3px);
+}
+
+</style>
+
+<script>
+
+function openLogoPopup()
+{
+    document.getElementById(
+    'logoPopup'
+    ).style.display = 'flex';
+}
+
+function closeLogoPopup()
+{
+    document.getElementById(
+    'logoPopup'
+    ).style.display = 'none';
+}
+
+</script>
 </html>

@@ -545,15 +545,15 @@ public function updateLogo()
     if ($file && $file->isValid() && !$file->hasMoved()) {
 
         $newName = $file->getRandomName();
-        $file->move(FCPATH . 'uploads/projects/', $newName);
+        $file->move(FCPATH . 'uploads/', $newName);
 
         $setting = $model->first();
 
         if ($setting) {
 
             // delete old logo (optional but recommended)
-            if (!empty($setting['site_logo']) && file_exists(FCPATH . 'uploads/projects/' . $setting['site_logo'])) {
-                unlink(FCPATH . 'uploads/projects/' . $setting['site_logo']);
+            if (!empty($setting['site_logo']) && file_exists(FCPATH . 'uploads/' . $setting['site_logo'])) {
+                unlink(FCPATH . 'uploads/' . $setting['site_logo']);
             }
 
             // update new logo

@@ -351,14 +351,38 @@ body{
 
 <!-- LOGO -->
 
-<a
-href="/"
-class="logo"
+<?php
+
+use App\Models\SettingModel;
+
+$settingModel = new SettingModel();
+$settings = $settingModel->first();
+
+?>
+
+<a href="/" class="logo">
+
+<?php if(!empty($settings['site_logo'])): ?>
+
+<img
+src="<?= base_url('uploads/' . $settings['site_logo']) ?>"
+alt="Logo"
+style="
+height:55px;
+width:auto;
+object-fit:contain;
+display:block;
+"
 >
+
+<?php else: ?>
 
 FB DESIGN STUDIO
 
+<?php endif; ?>
+
 </a>
+
 
 <!-- NAVIGATION -->
 
