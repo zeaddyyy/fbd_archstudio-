@@ -39,8 +39,10 @@ html{
 }
 
 body{
-    background:#f4f1ec;
+    background:#0b0b0b;
+
     font-family:'Outfit',sans-serif;
+
     overflow-x:hidden;
 }
 
@@ -56,7 +58,7 @@ body{
 
     z-index:999999;
 
-    padding:28px 5%;
+    padding:30px 5%;
 
     display:flex;
 
@@ -64,35 +66,91 @@ body{
 
     align-items:center;
 
-    transition:0.5s;
+    transition:
+    0.7s cubic-bezier(.19,1,.22,1);
 
-    backdrop-filter:blur(18px);
+    background:transparent;
+
+    border:none;
+
+    backdrop-filter:none;
+}
+
+/* SCROLL GLASS */
+
+.main-header.scrolled{
 
     background:
-    rgba(244,241,236,0.55);
+    rgba(0,0,0,0.28);
+
+    backdrop-filter:blur(20px);
 
     border-bottom:
-    1px solid rgba(0,0,0,0.05);
+    1px solid rgba(255,255,255,0.06);
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.12);
+}
+
+/* LIGHT EFFECT */
+
+.main-header::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to right,
+        rgba(255,255,255,0.04),
+        transparent
+    );
+
+    pointer-events:none;
 }
 
 /* LOGO */
 
 .logo{
+    position:relative;
+
+    z-index:10;
+
+    display:flex;
+
+    align-items:center;
+
     text-decoration:none;
 
-    color:#111;
+    color:white;
 
-    font-size:13px;
-
-    letter-spacing:0.45em;
-
-    font-weight:400;
-
-    transition:0.4s;
+    transition:0.5s;
 }
 
-.logo:hover{
-    opacity:0.6;
+/* LOGO IMAGE */
+
+.site-logo{
+    height:64px;
+
+    width:auto;
+
+    object-fit:contain;
+
+    display:block;
+
+    transition:
+    0.7s cubic-bezier(.19,1,.22,1);
+}
+
+/* HOVER */
+
+.logo:hover .site-logo{
+    transform:
+    scale(1.04);
+
+    opacity:0.82;
 }
 
 /* NAVBAR */
@@ -102,32 +160,32 @@ body{
 
     align-items:center;
 
-    gap:16px;
+    gap:28px;
+
+    position:relative;
+
+    z-index:10;
 }
 
-/* LINKS */
+/* NAV LINKS */
 
 .navbar a{
     text-decoration:none;
 
-    color:#111;
+    color:white;
 
     font-size:11px;
 
-    letter-spacing:0.32em;
+    letter-spacing:0.35em;
 
     text-transform:uppercase;
 
-    transition:0.4s;
-}
-
-/* SIMPLE LINKS */
-
-.nav-link{
     position:relative;
 
-    padding-bottom:6px;
+    transition:0.5s;
 }
+
+/* UNDERLINE */
 
 .nav-link::after{
     content:"";
@@ -135,75 +193,134 @@ body{
     position:absolute;
 
     left:0;
-    bottom:0;
+    bottom:-8px;
 
     width:0%;
+
     height:1px;
 
-    background:#111;
+    background:white;
 
-    transition:0.5s;
+    transition:
+    0.6s cubic-bezier(.19,1,.22,1);
 }
+
+/* HOVER */
 
 .nav-link:hover::after{
     width:100%;
 }
 
-/* BUTTON */
+/* CONTACT BUTTON */
 
 .contact-btn{
-    width:170px;
-    height:54px;
+    width:190px;
+    height:58px;
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
-    background:#111;
+    border:
+    1px solid rgba(255,255,255,0.16);
 
-    color:white !important;
+    border-radius:100px;
 
-    letter-spacing:0.28em;
+    backdrop-filter:blur(18px);
 
-    transition:0.5s;
+    background:
+    rgba(255,255,255,0.04);
+
+    overflow:hidden;
+
+    position:relative;
 }
 
-.contact-btn:hover{
-    background:#2a2a2a;
+/* BUTTON SHINE */
 
+.contact-btn::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.22),
+        transparent
+    );
+
+    transition:1s;
+}
+
+.contact-btn:hover::before{
+    left:120%;
+}
+
+/* BUTTON HOVER */
+
+.contact-btn:hover{
     transform:
-    translateY(-3px);
+    translateY(-4px);
+
+    background:
+    rgba(255,255,255,0.1);
 }
 
 /* MENU */
 
 .menu-btn{
-    width:56px;
-    height:56px;
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
 
     display:none;
 
     justify-content:center;
     align-items:center;
 
-    border-radius:50%;
-
     cursor:pointer;
 
     border:
-    1px solid rgba(0,0,0,0.08);
+    1px solid rgba(255,255,255,0.08);
 
-    transition:0.4s;
+    backdrop-filter:blur(14px);
+
+    background:
+    rgba(255,255,255,0.04);
+
+    transition:0.5s;
+
+    position:relative;
+
+    z-index:10;
 }
+
+/* MENU HOVER */
 
 .menu-btn:hover{
-    transform:rotate(90deg);
+    transform:
+    rotate(90deg);
+
+    background:
+    rgba(255,255,255,0.08);
 }
 
-.menu-btn i{
-    font-size:24px;
+/* ICON */
 
-    color:#111;
+.menu-btn i{
+    color:white;
+
+    font-size:24px;
 }
 
 /* MOBILE NAV */
@@ -214,9 +331,11 @@ body{
     inset:0;
 
     background:
-    rgba(245,242,236,0.98);
+    rgba(8,8,8,0.94);
 
-    z-index:9999999;
+    backdrop-filter:blur(24px);
+
+    z-index:99999999;
 
     display:flex;
 
@@ -225,13 +344,13 @@ body{
     justify-content:center;
     align-items:center;
 
-    gap:34px;
+    gap:36px;
 
     transform:
     translateY(-100%);
 
     transition:
-    0.8s cubic-bezier(.19,1,.22,1);
+    1s cubic-bezier(.19,1,.22,1);
 }
 
 /* ACTIVE */
@@ -246,18 +365,20 @@ body{
 .mobile-nav a{
     text-decoration:none;
 
-    color:#111;
+    color:white;
 
-    font-size:42px;
+    font-size:46px;
 
     font-family:
     'Cormorant Garamond',
     serif;
 
-    font-weight:400;
+    font-weight:300;
 
-    transition:0.4s;
+    transition:0.5s;
 }
+
+/* HOVER */
 
 .mobile-nav a:hover{
     transform:
@@ -277,29 +398,12 @@ body{
     cursor:pointer;
 }
 
+/* CLOSE ICON */
+
 .close-mobile i{
-    font-size:52px;
+    font-size:58px;
 
-    color:#111;
-}
-
-/* GLASS EFFECT */
-
-.main-header::before{
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-    linear-gradient(
-        to right,
-        rgba(255,255,255,0.2),
-        rgba(255,255,255,0.04)
-    );
-
-    pointer-events:none;
+    color:white;
 }
 
 /* MOBILE */
@@ -314,27 +418,31 @@ body{
     display:flex;
 }
 
-.logo{
-    font-size:11px;
-    letter-spacing:0.32em;
-}
-
 .main-header{
-    padding:22px 6%;
+    padding:24px 6%;
+}
+
+.site-logo{
+    height:54px;
 }
 
 }
 
-/* SMALL MOBILE */
+/* SMALL */
 
 @media(max-width:500px){
 
 .mobile-nav a{
-    font-size:34px;
+    font-size:36px;
 }
 
-.logo{
-    font-size:10px;
+.site-logo{
+    height:46px;
+}
+
+.contact-btn{
+    width:170px;
+    height:54px;
 }
 
 }
@@ -355,8 +463,11 @@ body{
 
 use App\Models\SettingModel;
 
-$settingModel = new SettingModel();
-$settings = $settingModel->first();
+$settingModel =
+new SettingModel();
+
+$settings =
+$settingModel->first();
 
 ?>
 
@@ -367,24 +478,28 @@ $settings = $settingModel->first();
 <img
 src="<?= base_url('uploads/' . $settings['site_logo']) ?>"
 alt="Logo"
-style="
-height:55px;
-width:auto;
-object-fit:contain;
-display:block;
-"
+class="site-logo"
 >
 
 <?php else: ?>
 
+<span
+style="
+font-size:13px;
+letter-spacing:0.45em;
+font-weight:300;
+"
+>
+
 FB DESIGN STUDIO
+
+</span>
 
 <?php endif; ?>
 
 </a>
 
-
-<!-- NAVIGATION -->
+<!-- NAVBAR -->
 
 <nav class="navbar">
 
@@ -392,21 +507,27 @@ FB DESIGN STUDIO
 href="/"
 class="nav-link"
 >
+
 HOME
+
 </a>
 
 <a
 href="/projects"
 class="nav-link"
 >
+
 PROJECTS
+
 </a>
 
 <a
 href="/admin"
 class="nav-link"
 >
+
 ADMIN
+
 </a>
 
 <a
@@ -457,33 +578,43 @@ onclick="toggleMenu()"
 href="/"
 onclick="toggleMenu()"
 >
+
 Home
+
 </a>
 
 <a
 href="/projects"
 onclick="toggleMenu()"
 >
+
 Projects
+
 </a>
 
 <a
 href="/contact"
 onclick="toggleMenu()"
 >
+
 Contact
+
 </a>
 
 <a
 href="/admin"
 onclick="toggleMenu()"
 >
+
 Admin
+
 </a>
 
 </div>
 
 <script>
+
+/* MOBILE MENU */
 
 function toggleMenu()
 {
@@ -507,23 +638,46 @@ function()
 
     if(window.scrollY > 40)
     {
-        header.style.padding =
-        '20px 5%';
+        header.classList.add(
+        'scrolled'
+        );
 
-        header.style.background =
-        'rgba(244,241,236,0.82)';
+        header.style.padding =
+        '22px 5%';
     }
     else
     {
-        header.style.padding =
-        '28px 5%';
+        header.classList.remove(
+        'scrolled'
+        );
 
-        header.style.background =
-        'rgba(244,241,236,0.55)';
+        header.style.padding =
+        '30px 5%';
     }
+});
+
+/* HERO PARALLAX */
+
+window.addEventListener(
+'mousemove',
+(e)=>
+{
+    const x =
+    (window.innerWidth / 2 - e.pageX)
+    / 90;
+
+    const y =
+    (window.innerHeight / 2 - e.pageY)
+    / 90;
+
+    document.querySelector(
+    '.main-header'
+    ).style.transform =
+    `translate(${x}px, ${y}px)`;
 });
 
 </script>
 
 </body>
+
 </html>

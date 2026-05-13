@@ -7,6 +7,11 @@ href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;5
 rel="stylesheet"
 >
 
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
+>
+
 <!-- HERO -->
 
 <section class="lux-hero">
@@ -155,43 +160,93 @@ SCROLL
 <div class="masonry-grid">
 
 <div class="masonry-item tall">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img1.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img2.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item large">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img3.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img4.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item small">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img5.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img6.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item tall">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img7.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img8.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item wide">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img9.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 <div class="masonry-item">
-<img src="<?= base_url('assets/images/project.jpg') ?>">
+
+<img
+src="<?= base_url('assets/images/img10.jpeg') ?>"
+alt=""
+>
+
 </div>
 
 </div>
@@ -244,39 +299,6 @@ GET IN TOUCH
 
 </section>
 
-<!-- FOOTER -->
-
-<section class="minimal-footer">
-
-<div class="footer-logo">
-
-FB DESIGN STUDIO
-
-</div>
-
-<div class="footer-links">
-
-<a href="/projects">
-PROJECTS
-</a>
-
-<a href="/contact">
-CONTACT
-</a>
-
-<a href="#">
-INSTAGRAM
-</a>
-
-</div>
-
-<div class="footer-bottom">
-
-© <?= date('Y') ?> FB DESIGN STUDIO
-
-</div>
-
-</section>
 
 <!-- FLOATING SOCIALS -->
 
@@ -306,7 +328,13 @@ class="whatsapp-btn"
 
 <style>
 
-/* GLOBAL */
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
 html{
     scroll-behavior:smooth;
@@ -342,7 +370,9 @@ body{
     object-fit:cover;
 
     filter:
-    brightness(0.82);
+    brightness(0.78);
+
+    transform:scale(1.04);
 }
 
 /* OVERLAY */
@@ -354,8 +384,8 @@ body{
     background:
     linear-gradient(
         to right,
-        rgba(244,241,236,0.95),
-        rgba(244,241,236,0.15)
+        rgba(244,241,236,0.96),
+        rgba(244,241,236,0.12)
     );
 }
 
@@ -377,7 +407,7 @@ body{
     max-width:760px;
 }
 
-/* TOP LINE */
+/* TOP */
 
 .hero-top-line{
     display:flex;
@@ -421,7 +451,7 @@ body{
 
     font-weight:300;
 
-    color:#1a1a1a;
+    color:#111;
 }
 
 /* EST */
@@ -471,7 +501,7 @@ body{
     height:72px;
 
     border:
-    1px solid rgba(0,0,0,0.15);
+    1px solid rgba(0,0,0,0.1);
 
     display:flex;
     align-items:center;
@@ -491,6 +521,36 @@ body{
 
     transition:
     1s cubic-bezier(.19,1,.22,1);
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.hero-btn::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+
+    transition:1s;
+}
+
+.hero-btn:hover::before{
+    left:120%;
 }
 
 .hero-btn span{
@@ -503,6 +563,13 @@ body{
 .hero-btn:hover{
     background:#111;
     color:white;
+
+    transform:
+    translateY(-4px);
+}
+
+.hero-btn:hover span{
+    background:white;
 }
 
 /* STATS */
@@ -559,31 +626,36 @@ body{
 /* GALLERY */
 
 .gallery-section{
-    padding:30px 3% 100px;
-    background:#f4f1ec;
+    padding:40px 3% 100px;
 }
-
-/* MASONRY */
 
 .masonry-grid{
     column-count:4;
     column-gap:16px;
 }
 
-/* ITEMS */
+/* ITEM */
 
 .masonry-item{
     position:relative;
 
-    margin-bottom:16px;
-
     overflow:hidden;
+
+    margin-bottom:16px;
 
     break-inside:avoid;
 
+    border-radius:24px;
+
     cursor:pointer;
 
-    background:white;
+    opacity:0;
+
+    transform:
+    translateY(100px);
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,0.06);
 }
 
 /* IMAGE */
@@ -596,12 +668,12 @@ body{
     object-fit:cover;
 
     transition:
-    1.2s cubic-bezier(.19,1,.22,1);
+    1.4s cubic-bezier(.19,1,.22,1);
 
     height:420px;
 }
 
-/* HEIGHTS */
+/* SIZES */
 
 .masonry-item.tall img{
     height:680px;
@@ -621,12 +693,6 @@ body{
 
 /* HOVER */
 
-.masonry-item:hover img{
-    transform:scale(1.05);
-}
-
-/* OVERLAY */
-
 .masonry-item::after{
     content:"";
 
@@ -636,13 +702,18 @@ body{
     background:
     linear-gradient(
         to top,
-        rgba(0,0,0,0.25),
+        rgba(0,0,0,0.28),
         transparent
     );
 
     opacity:0;
 
-    transition:0.6s;
+    transition:0.7s;
+}
+
+.masonry-item:hover img{
+    transform:
+    scale(1.08);
 }
 
 .masonry-item:hover::after{
@@ -697,7 +768,7 @@ body{
     margin-bottom:40px;
 }
 
-/* BUTTON */
+/* ABOUT BUTTON */
 
 .about-btn{
     display:inline-flex;
@@ -722,7 +793,8 @@ body{
 }
 
 .about-btn:hover{
-    transform:translateY(-4px);
+    transform:
+    translateY(-4px);
 }
 
 /* FOOTER */
@@ -800,7 +872,7 @@ body{
 
     font-size:30px;
 
-    transition:0.4s;
+    transition:0.5s;
 }
 
 .instagram-btn{
@@ -875,5 +947,266 @@ body{
 }
 
 </style>
+
+<!-- GSAP -->
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+></script>
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+></script>
+
+<script>
+
+gsap.registerPlugin(
+ScrollTrigger
+);
+
+/* PAGE LOAD */
+
+window.addEventListener(
+'load',
+()=>
+{
+
+gsap.from(
+'body',
+{
+    opacity:0,
+    duration:1.2,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-video video',
+{
+    scale:1.25,
+    opacity:0,
+    duration:2.2,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-top-line',
+{
+    y:80,
+    opacity:0,
+    duration:1.5,
+    delay:0.2,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-small',
+{
+    y:50,
+    opacity:0,
+    duration:1.3,
+    delay:0.4,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-content h1',
+{
+    y:140,
+    opacity:0,
+    duration:1.8,
+    delay:0.5,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-est',
+{
+    y:40,
+    opacity:0,
+    duration:1.2,
+    delay:0.8,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-content h2',
+{
+    y:60,
+    opacity:0,
+    duration:1.4,
+    delay:0.9,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-content p',
+{
+    y:60,
+    opacity:0,
+    duration:1.5,
+    delay:1,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.hero-btn',
+{
+    y:60,
+    opacity:0,
+    duration:1.4,
+    delay:1.2,
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.stat-box',
+{
+    y:80,
+    opacity:0,
+    stagger:0.15,
+    duration:1.4,
+    delay:1.4,
+    ease:'power4.out'
+}
+);
+
+});
+
+/* FLOAT */
+
+gsap.to(
+'.hero-content',
+{
+    y:20,
+    duration:5,
+    repeat:-1,
+    yoyo:true,
+    ease:'sine.inOut'
+}
+);
+
+/* SCROLL */
+
+gsap.to(
+'.scroll-text',
+{
+    y:15,
+    duration:1.5,
+    repeat:-1,
+    yoyo:true,
+    ease:'sine.inOut'
+}
+);
+
+/* GALLERY */
+
+gsap.utils.toArray(
+'.masonry-item'
+).forEach(
+(item, i)=>
+{
+    gsap.to(
+    item,
+    {
+        scrollTrigger:{
+            trigger:item,
+            start:'top 92%'
+        },
+
+        opacity:1,
+
+        y:0,
+
+        duration:1.6,
+
+        delay:i * 0.05,
+
+        ease:'power4.out'
+    }
+    );
+}
+);
+
+/* ABOUT */
+
+gsap.from(
+'.about-left',
+{
+    scrollTrigger:{
+        trigger:'.about-section',
+        start:'top 80%'
+    },
+
+    x:-120,
+
+    opacity:0,
+
+    duration:1.6,
+
+    ease:'power4.out'
+}
+);
+
+gsap.from(
+'.about-right',
+{
+    scrollTrigger:{
+        trigger:'.about-section',
+        start:'top 80%'
+    },
+
+    x:120,
+
+    opacity:0,
+
+    duration:1.6,
+
+    ease:'power4.out'
+}
+);
+
+/* FOOTER */
+
+gsap.from(
+'.minimal-footer',
+{
+    scrollTrigger:{
+        trigger:'.minimal-footer',
+        start:'top 95%'
+    },
+
+    y:100,
+
+    opacity:0,
+
+    duration:1.6,
+
+    ease:'power4.out'
+}
+);
+
+/* SOCIALS */
+
+gsap.to(
+'.floating-socials',
+{
+    y:-12,
+    duration:2,
+    repeat:-1,
+    yoyo:true,
+    ease:'sine.inOut'
+}
+);
+
+</script>
 
 <?= $this->endSection() ?>

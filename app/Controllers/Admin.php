@@ -673,8 +673,8 @@ class Admin extends BaseController
         $email = $this->request->getPost('email');
         
         // Admin email for demo (change to your email)
-        $adminEmail = 'mantashashaikh657@gmail.com';
-        
+        $adminEmail = 'zaidp2639@gmail.com';
+
         if ($email !== $adminEmail) {
             return redirect()->back()
                             ->with('error', 'Email not found in our records')

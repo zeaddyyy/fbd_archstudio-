@@ -12,7 +12,7 @@ class Email extends BaseConfig
     |--------------------------------------------------------------------------
     */
 
-    public string $fromEmail = 'mantashashaikh657@gmail.com';
+    public string $fromEmail = 'zaidp2639@gmail.com';
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ class Email extends BaseConfig
     |--------------------------------------------------------------------------
     */
 
-    public string $SMTPUser = 'mantashashaikh657@gmail.com';
+    public string $SMTPUser = 'zaidp2639@gmail.com';
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ class Email extends BaseConfig
     | Use Gmail App Password
     */
 
-    public string $SMTPPass = 'stwg vfxo mqtf ugwo';
+    public string $SMTPPass = 'ouko rdtx flkz orhi';
 
     /*
     |--------------------------------------------------------------------------
@@ -186,7 +186,7 @@ class Email extends BaseConfig
     /*
     |--------------------------------------------------------------------------
     | BCC Batch Size
-    |--------------------------------------------------------------------------
+    |---------------------------------------------------------------------------
     */
 
     public int $BCCBatchSize = 200;
