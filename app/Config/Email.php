@@ -12,7 +12,7 @@ class Email extends BaseConfig
     |--------------------------------------------------------------------------
     */
 
-    public string $fromEmail = 'fbdemo76@gmail.com';
+    public string $fromEmail = 'mantashashaikh657@gmail.com';
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ class Email extends BaseConfig
     |--------------------------------------------------------------------------
     */
 
-    public string $SMTPUser = 'fbdemo76@gmail.com';
+    public string $SMTPUser = 'mantashashaikh657@gmail.com';
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ class Email extends BaseConfig
     | Use Gmail App Password
     */
 
-    public string $SMTPPass = 'faiyazbhayji';
+    public string $SMTPPass = 'stwg vfxo mqtf ugwo';
 
     /*
     |--------------------------------------------------------------------------

@@ -419,7 +419,15 @@ cursor:pointer;
 >
 Change Logo
 </button>
-
+<a
+href="/admin/logout"
+class="add-btn"
+style="
+background:#d94b4b;
+"
+>
+Logout
+</a>
 </div>
 
 
@@ -702,12 +710,31 @@ to{
     top:20px;
     right:20px;
 
-    background:none;
+    width:46px;
+    height:46px;
+
+    border-radius:50%;
+
+    background:
+    rgba(0,0,0,0.06);
+
     border:none;
 
-    color:white;
+    color:#111;
 
     cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:0.4s;
+}
+
+.close-popup:hover{
+    transform:rotate(90deg);
+
+    background:white;
 }
 
 .close-popup i{
@@ -793,11 +820,13 @@ to{
 
 /* SAVE */
 
-.popup-save-btn {
-    background: linear-gradient(135deg, #5c574f, #f8f4ee);
-    color: #111;
-    margin-bottom: 14px;
-}
+.popup-save-btn{
+    background:
+    linear-gradient(
+        135deg,
+        #5c574f,
+        #f8f4ee
+    );
 
     color:#111;
 
