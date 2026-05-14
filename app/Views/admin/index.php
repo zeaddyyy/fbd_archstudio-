@@ -2,762 +2,811 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FB Design Studio | Admin</title>
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
-
-<title>
-FB Design Studio Admin
-</title>
-
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
->
-
-<link
-href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
-rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 
 <style>
-
-/* RESET */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+    scroll-behavior: smooth;
 }
 
-body{
-    background:#f5f1ea;
-    color:#111;
-
-    font-family:'Outfit',sans-serif;
-
-    overflow-x:hidden;
+body {
+    background: #f4f1ec;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    color: #111;
 }
 
-/* BACKGROUND GLOW */
-
-body::before{
-    content:"";
-
-    position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(
-        circle at top left,
-        rgba(0,0,0,0.04),
-        transparent 35%
-    ),
-    radial-gradient(
-        circle at bottom right,
-        rgba(201,169,110,0.12),
-        transparent 35%
-    );
-
-    pointer-events:none;
-
-    z-index:-1;
+/* BACKGROUND GLOW - Same as User Side */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(0,0,0,0.02), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(201,169,110,0.08), transparent 35%);
+    pointer-events: none;
+    z-index: -1;
 }
 
-/* HEADER */
+/* HEADER - Same as User Side */
+.admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999999;
+    padding: 28px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.7s cubic-bezier(.19,1,.22,1);
+    background: rgba(244, 241, 236, 0.55);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
 
-.admin-header{
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    padding:22px 5%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    z-index:99999;
-
-    backdrop-filter:blur(24px);
-
-    background:
-    rgba(255,255,255,0.55);
-
-    border-bottom:
-    1px solid rgba(0,0,0,0.05);
-
-    transition:0.5s;
+.admin-header.scrolled {
+    background: rgba(244, 241, 236, 0.82);
+    padding: 22px 5%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
 }
 
 /* LOGO */
-
-.admin-logo{
-    display:flex;
-    flex-direction:column;
+.admin-logo {
+    display: flex;
+    flex-direction: column;
 }
 
-.admin-logo span{
-    font-size:12px;
-
-    letter-spacing:0.42em;
-
-    color:#777;
+.admin-logo span {
+    font-size: 11px;
+    letter-spacing: 0.45em;
+    color: #777;
 }
 
-.admin-logo h1{
-    font-size:32px;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    font-weight:400;
-
-    color:#111;
+.admin-logo h1 {
+    font-size: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    color: #1a1a1a;
 }
 
-/* HEADER BUTTONS */
-
-.header-actions{
-    display:flex;
-    gap:14px;
+/* DESKTOP BUTTONS */
+.header-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 
-/* BUTTON */
-
-.action-btn-top{
-    height:54px;
-
-    padding:0 28px;
-
-    border-radius:100px;
-
-    border:none;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:10px;
-
-    cursor:pointer;
-
-    text-decoration:none;
-
-    font-size:11px;
-
-    letter-spacing:0.25em;
-
-    text-transform:uppercase;
-
-    transition:
-    0.6s cubic-bezier(.19,1,.22,1);
-
-    position:relative;
-
-    overflow:hidden;
+.action-btn-top {
+    height: 52px;
+    padding: 0 28px;
+    border-radius: 100px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    transition: 0.5s;
+    position: relative;
+    overflow: hidden;
 }
 
-/* SHINE */
-
-.action-btn-top::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:-120%;
-
-    width:100%;
-    height:100%;
-
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.3),
-        transparent
-    );
-
-    transition:0.8s;
+.action-btn-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.8s;
 }
 
-.action-btn-top:hover::before{
-    left:120%;
+.action-btn-top:hover::before {
+    left: 120%;
 }
 
-/* PRIMARY */
-
-.primary-btn{
-    background:#111;
-    color:white;
+.primary-btn {
+    background: #111;
+    color: white;
 }
 
-.primary-btn:hover{
-    transform:
-    translateY(-4px);
-
-    background:#1c1c1c;
+.primary-btn:hover {
+    transform: translateY(-3px);
+    background: #2a2a2a;
 }
 
-/* LIGHT */
-
-.light-btn{
-    background:
-    rgba(255,255,255,0.55);
-
-    color:#111;
-
-    border:
-    1px solid rgba(0,0,0,0.05);
+.light-btn {
+    background: rgba(255, 255, 255, 0.6);
+    color: #111;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.light-btn:hover{
-    transform:
-    translateY(-4px);
+.light-btn:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.8);
 }
 
-/* LOGOUT */
-
-.logout-btn{
-    background:#d94b4b;
-    color:white;
+.logout-btn {
+    background: #d94b4b;
+    color: white;
 }
 
-.logout-btn:hover{
-    background:#b93b3b;
-
-    transform:
-    translateY(-4px);
+.logout-btn:hover {
+    background: #c03939;
+    transform: translateY(-3px);
 }
 
-/* CONTAINER */
-
-.container{
-    width:92%;
-
-    max-width:1500px;
-
-    margin:auto;
-
-    padding-top:140px;
-    padding-bottom:80px;
+/* MOBILE MENU BUTTON */
+.menu-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.6);
+    transition: 0.5s;
 }
 
-/* GRID */
-
-.projects-grid{
-    display:grid;
-
-    grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(380px,1fr)
-    );
-
-    gap:34px;
+.menu-btn:hover {
+    transform: rotate(90deg);
+    background: rgba(255, 255, 255, 0.8);
 }
 
-/* CARD */
-
-.project-card{
-    position:relative;
-
-    border-radius:34px;
-
-    overflow:hidden;
-
-    background:
-    rgba(255,255,255,0.65);
-
-    backdrop-filter:blur(20px);
-
-    border:
-    1px solid rgba(255,255,255,0.5);
-
-    transition:
-    0.8s cubic-bezier(.19,1,.22,1);
-
-    box-shadow:
-    0 15px 50px rgba(0,0,0,0.04);
+.menu-btn i {
+    color: #111;
+    font-size: 22px;
 }
 
-/* GLOW */
-
-.project-card::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,0.45),
-        transparent
-    );
-
-    opacity:0;
-
-    transition:0.6s;
-
-    pointer-events:none;
+/* LEFT SIDEBAR - MOBILE */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: rgba(245, 242, 236, 0.98);
+    backdrop-filter: blur(24px);
+    z-index: 100000;
+    transform: translateX(-100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 30px;
+    gap: 25px;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.project-card:hover::before{
-    opacity:1;
+.sidebar.active {
+    transform: translateX(0);
 }
 
-.project-card:hover{
-    transform:
-    translateY(-10px);
-
-    box-shadow:
-    0 30px 80px rgba(0,0,0,0.08);
+.sidebar a, .sidebar button {
+    text-decoration: none;
+    color: #111;
+    font-size: 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 0;
+    text-align: left;
+    width: 100%;
+    transition: 0.3s;
 }
 
-/* IMAGE */
-
-.project-image{
-    width:100%;
-    height:340px;
-
-    overflow:hidden;
+.sidebar a:hover, .sidebar button:hover {
+    transform: translateX(8px);
+    opacity: 0.6;
 }
 
-.project-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:
-    1.3s cubic-bezier(.19,1,.22,1);
+.sidebar a:last-child {
+    color: #d94b4b;
 }
 
-.project-card:hover .project-image img{
-    transform:
-    scale(1.08);
+.close-sidebar {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
 }
 
-/* CONTENT */
-
-.project-content{
-    padding:30px;
+.close-sidebar:hover {
+    transform: rotate(90deg);
+    background: rgba(0, 0, 0, 0.05);
 }
 
-/* TITLE */
-
-.project-content h2{
-    font-size:44px;
-
-    line-height:0.95;
-
-    margin-bottom:14px;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    font-weight:400;
-
-    color:#111;
+.close-sidebar i {
+    font-size: 24px;
+    color: #111;
 }
 
-/* LOCATION */
-
-.location{
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-bottom:18px;
-
-    font-size:11px;
-
-    letter-spacing:0.28em;
-
-    text-transform:uppercase;
-
-    color:#777;
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
 
-/* DESCRIPTION */
-
-.description{
-    color:#555;
-
-    line-height:2;
-
-    font-size:15px;
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
-/* GALLERY */
-
-.gallery-preview{
-    margin-top:24px;
-
-    display:flex;
-
-    gap:10px;
-
-    overflow-x:auto;
-
-    padding-bottom:4px;
+/* MAIN CONTAINER */
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: auto;
+    padding-top: 130px;
+    padding-bottom: 80px;
 }
 
-.gallery-preview::-webkit-scrollbar{
-    height:4px;
+/* PAGE TITLE */
+.page-header {
+    margin-bottom: 60px;
+    text-align: center;
 }
 
-.gallery-preview::-webkit-scrollbar-thumb{
-    background:#bbb;
-    border-radius:20px;
+.page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: #1a1a1a;
 }
 
-.gallery-preview img{
-    width:95px;
-    height:95px;
-
-    object-fit:cover;
-
-    border-radius:18px;
-
-    flex-shrink:0;
-
-    transition:0.5s;
-
-    cursor:pointer;
+.page-header p {
+    color: #777;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 10px;
 }
 
-.gallery-preview img:hover{
-    transform:
-    translateY(-4px)
-    scale(1.04);
+/* PROJECTS GRID */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 34px;
 }
 
-/* ACTIONS */
-
-.project-actions{
-    margin-top:26px;
-
-    display:flex;
-
-    gap:12px;
+/* PROJECT CARD - Same Glass Style as User Side */
+.project-card {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    overflow: hidden;
+    transition: 0.5s cubic-bezier(.19,1,.22,1);
 }
 
-.project-actions a{
-    flex:1;
-
-    height:52px;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    border-radius:18px;
-
-    text-decoration:none;
-
-    font-size:11px;
-
-    letter-spacing:0.2em;
-
-    text-transform:uppercase;
-
-    transition:0.4s;
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
 }
 
-/* EDIT */
-
-.edit-btn{
-    background:
-    rgba(0,0,0,0.05);
-
-    color:#111;
+/* CARD IMAGE */
+.card-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
 }
 
-.edit-btn:hover{
-    background:#111;
-    color:white;
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 1.2s cubic-bezier(.19,1,.22,1);
 }
 
-/* DELETE */
-
-.delete-btn{
-    background:
-    rgba(255,0,0,0.08);
-
-    color:#d94b4b;
+.project-card:hover .card-image img {
+    transform: scale(1.06);
 }
 
-.delete-btn:hover{
-    background:#d94b4b;
-    color:white;
+/* CARD CONTENT */
+.card-content {
+    padding: 28px;
 }
 
-/* EMPTY */
-
-.empty-state{
-    text-align:center;
-
-    padding:140px 20px;
+.card-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 300;
+    color: #1a1a1a;
+    margin-bottom: 12px;
 }
 
-.empty-state i{
-    font-size:90px;
-
-    color:#111;
-
-    margin-bottom:20px;
+.location {
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.empty-state h2{
-    font-size:60px;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    font-weight:400;
-
-    margin-bottom:12px;
+.description {
+    color: #555;
+    line-height: 1.7;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
-.empty-state p{
-    color:#666;
+/* GALLERY PREVIEW */
+.gallery-preview {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
 }
 
-/* MOBILE */
-
-@media(max-width:900px){
-
-.header-actions{
-    display:none;
+.gallery-preview::-webkit-scrollbar {
+    height: 4px;
 }
 
-.projects-grid{
-    grid-template-columns:1fr;
+.gallery-preview::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
 }
 
-.project-content h2{
-    font-size:34px;
+.gallery-preview::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
-.admin-logo h1{
-    font-size:24px;
+.gallery-preview img {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
+.gallery-preview img:hover {
+    transform: translateY(-4px) scale(1.04);
 }
 
+/* CARD ACTIONS */
+.card-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    transition: 0.4s;
+    background: rgba(0, 0, 0, 0.04);
+    color: #111;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.edit-btn:hover {
+    background: #111;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.delete-btn {
+    color: #d94b4b;
+    border-color: rgba(217, 75, 75, 0.15);
+    background: rgba(217, 75, 75, 0.05);
+}
+
+.delete-btn:hover {
+    background: rgba(217, 75, 75, 0.12);
+    transform: translateY(-3px);
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    padding: 100px 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.empty-state i {
+    font-size: 70px;
+    color: #111;
+    margin-bottom: 20px;
+    opacity: 0.4;
+}
+
+.empty-state h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* LOGO POPUP */
+.logo-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.62);
+    backdrop-filter: blur(14px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999;
+}
+
+.popup-box {
+    width: 420px;
+    padding: 40px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    animation: popupShow 0.4s ease;
+}
+
+@keyframes popupShow {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.close-popup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.close-popup:hover {
+    transform: rotate(90deg);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.popup-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: #1a1a1a;
+    margin-bottom: 25px;
+}
+
+.popup-logo-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    background: #f4f1ec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.popup-logo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.popup-box input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    font-family: 'Outfit', sans-serif;
+}
+
+.popup-save-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.4s;
+    background: #111;
+    color: white;
+    letter-spacing: 0.1em;
+}
+
+.popup-save-btn:hover {
+    transform: translateY(-3px);
+    background: #2a2a2a;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 900px) {
+    .header-actions {
+        display: none;
+    }
+    
+    .menu-btn {
+        display: flex;
+    }
+    
+    .admin-header {
+        padding: 18px 6%;
+    }
+    
+    .admin-logo h1 {
+        font-size: 20px;
+    }
+    
+    .admin-logo span {
+        font-size: 9px;
+    }
+    
+    .container {
+        padding-top: 110px;
+        width: 88%;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-content h2 {
+        font-size: 30px;
+    }
+    
+    .page-header h1 {
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 550px) {
+    .popup-box {
+        width: 90%;
+        padding: 30px 20px;
+    }
+    
+    .popup-box h2 {
+        font-size: 28px;
+    }
+    
+    .page-header h1 {
+        font-size: 36px;
+    }
+}
 </style>
 
 </head>
 
 <body>
 
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- LEFT SIDEBAR - Mobile Only -->
+<div class="sidebar" id="sidebar">
+    <div class="close-sidebar" onclick="closeSidebar()">
+        <i class="ri-close-line"></i>
+    </div>
+    <a href="/admin/create" onclick="closeSidebar()">Add Project</a>
+    <button onclick="openLogoPopup(); closeSidebar();" style="background:none; border:none; cursor:pointer; text-align:left;">Change Logo</button>
+    <a href="/admin/logout" onclick="closeSidebar()" style="color:#d94b4b;">Logout</a>
+</div>
+
 <!-- HEADER -->
+<header class="admin-header" id="adminHeader">
+    <div class="admin-logo">
+        <span>FB DESIGN STUDIO</span>
+        <h1>Admin Panel</h1>
+    </div>
 
-<header class="admin-header">
+    <div class="header-actions">
+        <a href="/admin/create" class="action-btn-top primary-btn">
+            <i class="ri-add-line"></i>
+            Add Project
+        </a>
+        <button class="action-btn-top light-btn" onclick="openLogoPopup()">
+            <i class="ri-image-line"></i>
+            Change Logo
+        </button>
+        <a href="/admin/logout" class="action-btn-top logout-btn">
+            <i class="ri-logout-box-line"></i>
+            Logout
+        </a>
+    </div>
 
-<div class="admin-logo">
-
-<span>
-FB DESIGN STUDIO
-</span>
-
-<h1>
-Admin Panel
-</h1>
-
-</div>
-
-<div class="header-actions">
-
-<a
-href="/admin/create"
-class="action-btn-top primary-btn"
->
-
-<i class="ri-add-line"></i>
-
-Add Project
-
-</a>
-
-<a href="/admin/logo"
-class="action-btn-top light-btn"
->
-
-<i class="ri-image-line"></i>
-
-Change Logo
-
-</a>
-<a href="/admin/logout"
-class="action-btn-top logout-btn"
->
-
-<i class="ri-logout-box-line"></i>
-
-Logout
-
-</a>
-
-</div>
-
+    <div class="menu-btn" onclick="openSidebar()">
+        <i class="ri-menu-3-line"></i>
+    </div>
 </header>
 
-<!-- MAIN -->
-
+<!-- MAIN CONTENT -->
 <div class="container">
+    <div class="page-header">
+        <h1>Projects</h1>
+        <p>Manage your interior design portfolio</p>
+    </div>
 
-<?php if(!empty($projects)): ?>
-
-<div class="projects-grid">
-
-<?php foreach($projects as $project): ?>
-
-<div class="project-card">
-
-<!-- IMAGE -->
-
-<?php if(!empty($project['image'])): ?>
-
-<div class="project-image">
-
-<img
-src="<?= base_url('uploads/projects/' . basename($project['image'])) ?>"
-alt=""
->
-
+    <?php if(!empty($projects)): ?>
+    <div class="projects-grid">
+        <?php foreach($projects as $project): ?>
+        <div class="project-card">
+            <?php if(!empty($project['image'])): ?>
+            <div class="card-image">
+                <img src="<?= base_url('uploads/projects/' . basename($project['image'])) ?>" alt="">
+            </div>
+            <?php endif; ?>
+            
+            <div class="card-content">
+                <h2><?= esc((string)$project['title']) ?></h2>
+                <div class="location">
+                    <i class="ri-map-pin-line"></i>
+                    <?= esc((string)$project['location']) ?>
+                </div>
+                <p class="description"><?= esc((string)$project['description']) ?></p>
+                
+                <?php if(!empty($project['gallery'])): ?>
+                <div class="gallery-preview">
+                    <?php
+                    $gallery = json_decode($project['gallery'], true);
+                    if(is_array($gallery)):
+                        foreach(array_slice($gallery, 0, 4) as $image):
+                    ?>
+                    <img src="<?= base_url('uploads/projects/' . basename($image)) ?>" alt="">
+                    <?php endforeach; endif; ?>
+                </div>
+                <?php endif; ?>
+                
+                <div class="card-actions">
+                    <a href="/admin/edit/<?= $project['id'] ?>" class="action-btn edit-btn">Edit</a>
+                    <a href="/admin/delete/<?= $project['id'] ?>" class="action-btn delete-btn" onclick="return confirm('Delete this project?')">Delete</a>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+    <div class="empty-state">
+        <i class="ri-gallery-line"></i>
+        <h2>No Projects Found</h2>
+        <p>Upload your first architecture project</p>
+    </div>
+    <?php endif; ?>
 </div>
 
-<?php endif; ?>
-
-<!-- CONTENT -->
-
-<div class="project-content">
-
-<h2>
-
-<?= esc((string)$project['title']) ?>
-
-</h2>
-
-<div class="location">
-
-<i class="ri-map-pin-line"></i>
-
-<?= esc((string)$project['location']) ?>
-
+<!-- LOGO POPUP -->
+<div class="logo-popup" id="logoPopup">
+    <div class="popup-box">
+        <button class="close-popup" onclick="closeLogoPopup()">
+            <i class="ri-close-line"></i>
+        </button>
+        <h2>Website Logo</h2>
+        <?php
+        use App\Models\SettingModel;
+        $settingModel = new SettingModel();
+        $settings = $settingModel->first();
+        ?>
+        <?php if(!empty($settings['site_logo'])): ?>
+        <div class="popup-logo-preview">
+            <img src="<?= base_url('uploads/' . $settings['site_logo']) ?>" alt="">
+        </div>
+        <?php endif; ?>
+        <form action="<?= base_url('admin/logo/update') ?>" method="POST" enctype="multipart/form-data">
+            <input type="file" name="site_logo" required>
+            <button type="submit" class="popup-save-btn">Update Logo</button>
+        </form>
+    </div>
 </div>
 
-<p class="description">
+<script>
+// Sidebar Functions
+function openSidebar() {
+    document.getElementById('sidebar').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
 
-<?= esc((string)$project['description']) ?>
+function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+}
 
-</p>
+// Logo Popup Functions
+function openLogoPopup() {
+    document.getElementById('logoPopup').style.display = 'flex';
+}
 
-<!-- GALLERY -->
+function closeLogoPopup() {
+    document.getElementById('logoPopup').style.display = 'none';
+}
 
-<?php if(!empty($project['gallery'])): ?>
+// Close with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeSidebar();
+        closeLogoPopup();
+    }
+});
 
-<div class="gallery-preview">
-
-<?php
-$gallery =
-json_decode(
-$project['gallery'],
-true
-);
-
-if(is_array($gallery)):
-foreach($gallery as $image):
-?>
-
-<img
-src="<?= base_url('uploads/projects/' . basename($image)) ?>"
-alt=""
->
-
-<?php endforeach; endif; ?>
-
-</div>
-
-<?php endif; ?>
-
-<!-- ACTIONS -->
-
-<div class="project-actions">
-
-<a
-href="/admin/edit/<?= $project['id'] ?>"
-class="edit-btn"
->
-
-Edit
-
-</a>
-
-<a
-href="/admin/delete/<?= $project['id'] ?>"
-class="delete-btn"
-onclick="return confirm('Delete this project?')"
->
-
-Delete
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<?php endforeach; ?>
-
-</div>
-
-<?php else: ?>
-
-<div class="empty-state">
-
-<i class="ri-gallery-line"></i>
-
-<h2>
-No Projects
-</h2>
-
-<p>
-Upload your first architecture project.
-</p>
-
-</div>
-
-<?php endif; ?>
-
-</div>
+// Header scroll effect
+window.addEventListener('scroll', function() {
+    const header = document.getElementById('adminHeader');
+    if (window.scrollY > 40) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+</script>
 
 </body>
-
 </html>
