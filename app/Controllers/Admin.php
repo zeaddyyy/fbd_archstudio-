@@ -5,9 +5,17 @@ namespace App\Controllers;
 use App\Models\ProjectModel;
 use App\Controllers\BaseController;
 use App\Models\SettingModel;
+use App\Models\AdminModel;  // ← ADDED
 
 class Admin extends BaseController
 {
+    protected $adminModel;  // ← ADDED
+    
+    public function __construct()  // ← ADDED
+    {
+        $this->adminModel = new AdminModel();
+    }
+    
     /*
     |-----------------------------------
     | ADMIN DASHBOARD
@@ -616,7 +624,7 @@ class Admin extends BaseController
 
     /*
     |-----------------------------------
-    | LOGIN AUTH
+    | LOGIN AUTH - UPDATED WITH DATABASE
     |-----------------------------------
     */
 
@@ -625,23 +633,26 @@ class Admin extends BaseController
     $username = $this->request->getPost('username');
     $password = $this->request->getPost('password');
     $remember = $this->request->getPost('remember_me');
-
-    $adminUser = 'admin';
     
-    // Get saved password from session, or use default
-    $adminPass = session()->get('saved_password') ?? '123456';
-
-    if ($username === $adminUser && $password === $adminPass)
-    {
-        session()->set('admin_logged_in', true);
+    // Find admin by username
+    $admin = $this->adminModel->where('username', $username)->first();
+    
+    // ✅ Verify against DATABASE password
+    if ($admin && $this->adminModel->verifyPassword($password, $admin['password'])) {
+        session()->set([
+            'admin_logged_in' => true,
+            'admin_id' => $admin['id'],
+            'admin_username' => $admin['username'],
+            'admin_email' => $admin['email']
+        ]);
         
         if ($remember) {
             session()->set('remember_me', true);
         }
-
+        
         return redirect()->to('/admin');
     }
-
+    
     return redirect()
         ->to('/admin/login')
         ->with('error', 'Invalid Login Details')
@@ -664,79 +675,79 @@ class Admin extends BaseController
 
     /*
     |-----------------------------------
-    | SEND OTP TO EMAIL
+    | SEND OTP TO EMAIL - UPDATED WITH DATABASE
     |-----------------------------------
     */
 
-    public function sendOTP()   
-    {
-        $email = $this->request->getPost('email');
-        
-        // Admin email for demo (change to your email)
-        $adminEmail = 'zaidp2639@gmail.com';
-
-        if ($email !== $adminEmail) {
-            return redirect()->back()
-                            ->with('error', 'Email not found in our records')
-                            ->withInput();
-        }
-        
-        // Generate 6-digit OTP
-        $otp = sprintf("%06d", mt_rand(1, 999999));
-        
-        // Store OTP in session
-        session()->set('reset_otp', $otp);
-        session()->set('reset_email', $email);
-        session()->set('otp_expires', time() + 900); // 15 minutes
-        
-        // Load email service
-        $emailService = \Config\Services::email();
-        
-        $emailService->setTo($email);
-        $emailService->setSubject('Password Reset OTP - FB Design Studio');
-        
-        $message = "
-        <html>
-        <head>
-            <style>
-                body { font-family: Arial, sans-serif; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background: #111; color: white; padding: 20px; text-align: center; }
-                .otp-code { font-size: 32px; font-weight: bold; color: #111; padding: 20px; text-align: center; letter-spacing: 5px; }
-                .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
-            </style>
-        </head>
-        <body>
-            <div class='container'>
-                <div class='header'>
-                    <h2>FB Design Studio</h2>
-                    <p>Password Reset Request</p>
-                </div>
-                <div class='otp-code'>
-                    <strong>{$otp}</strong>
-                </div>
-                <p style='text-align: center;'>Use this OTP to reset your password. This OTP is valid for 15 minutes.</p>
-                <div class='footer'>
-                    <p>&copy; " . date('Y') . " FB Design Studio. All rights reserved.</p>
-                </div>
-            </div>
-        </body>
-        </html>
-        ";
-        
-        $emailService->setMessage($message);
-        $emailService->setMailType('html');
-        
-        if ($emailService->send()) {
-            return redirect()->to('/admin/verify-otp')
-                            ->with('success', 'OTP sent to your email. Please check your inbox.');
-        } else {
-            return redirect()->back()
-                            ->with('error', 'Failed to send OTP. Please try again.')
-                            ->withInput();
-        }
+   public function sendOTP()   
+{
+    $email = $this->request->getPost('email');
+    
+    // Check if email exists in database
+    $admin = $this->adminModel->where('email', $email)->first();
+    
+    if (!$admin) {
+        return redirect()->back()
+                        ->with('error', 'Email not found in our records')
+                        ->withInput();
     }
-
+    
+    // Generate OTP using model
+    $otp = $this->adminModel->generateOTP();
+    
+    // Save OTP to database
+    $this->adminModel->saveOTP($email, $otp);
+    
+    // Store email in session
+    session()->set('reset_email', $email);
+    
+    // Load email service
+    $emailService = \Config\Services::email();
+    
+    $emailService->setTo($email);
+    $emailService->setSubject('Password Reset OTP - FB Design Studio');
+    
+    $message = "
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: #111; color: white; padding: 20px; text-align: center; }
+            .otp-code { font-size: 32px; font-weight: bold; color: #111; padding: 20px; text-align: center; letter-spacing: 5px; }
+            .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <h2>FB Design Studio</h2>
+                <p>Password Reset Request</p>
+            </div>
+            <div class='otp-code'>
+                <strong>{$otp}</strong>
+            </div>
+            <p style='text-align: center;'>Use this OTP to reset your password. This OTP is valid for 15 minutes.</p>
+            <div class='footer'>
+                <p>&copy; " . date('Y') . " FB Design Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    ";
+    
+    $emailService->setMessage($message);
+    $emailService->setMailType('html');
+    
+    if ($emailService->send()) {
+        return redirect()->to('/admin/verify-otp')
+                        ->with('success', 'OTP sent to your email. Please check your inbox.');
+    } else {
+        // If email fails, show OTP on screen (for testing)
+        return redirect()->to('/admin/verify-otp')
+                        ->with('success', '🔐 Your OTP is: ' . $otp . ' (Check console - Email not configured)');
+    }
+}
     /*
     |-----------------------------------
     | VERIFY OTP FORM
@@ -759,37 +770,31 @@ class Admin extends BaseController
 
     /*
     |-----------------------------------
-    | VERIFY OTP
+    | VERIFY OTP - UPDATED WITH DATABASE
     |-----------------------------------
     */
 
     public function verifyOTP()
     {
         $otp = $this->request->getPost('otp');
-        $sessionOtp = session()->get('reset_otp');
-        $expires = session()->get('otp_expires');
+        $email = session()->get('reset_email');
         
-        if (!$sessionOtp || !$expires) {
+        if (!$email) {
             return redirect()->to('/admin/forgot-password')
                             ->with('error', 'Session expired. Please request again.');
         }
         
-        if (time() > $expires) {
-            session()->remove(['reset_otp', 'reset_email', 'otp_expires']);
-            return redirect()->to('/admin/forgot-password')
-                            ->with('error', 'OTP has expired. Please request a new one.');
+        // Verify OTP using model
+        $admin = $this->adminModel->verifyOTP($email, $otp);
+        
+        if ($admin) {
+            session()->set('otp_verified', true);
+            return redirect()->to('/admin/reset-password')
+                            ->with('success', 'OTP verified! Please set your new password.');
         }
         
-        if ($otp !== $sessionOtp) {
-            return redirect()->back()
-                            ->with('error', 'Invalid OTP. Please try again.');
-        }
-        
-        // Mark as verified
-        session()->set('otp_verified', true);
-        
-        return redirect()->to('/admin/reset-password')
-                        ->with('success', 'OTP verified! Please set your new password.');
+        return redirect()->back()
+                        ->with('error', 'Invalid or expired OTP. Please try again.');
     }
 
     /*
@@ -814,11 +819,11 @@ class Admin extends BaseController
 
     /*
     |-----------------------------------
-    | UPDATE PASSWORD
+    | UPDATE PASSWORD - UPDATED WITH DATABASE
     |-----------------------------------
     */
 
-   public function updatePassword()
+public function updatePassword()
 {
     $password = $this->request->getPost('password');
     $confirmPassword = $this->request->getPost('confirm_password');
@@ -838,15 +843,23 @@ class Admin extends BaseController
                         ->with('error', 'Passwords do not match');
     }
     
-    // ACTUALLY SAVE THE NEW PASSWORD
-    // Save to a file or session for demo purposes
-    session()->set('saved_password', $password);
+    // ✅ FIXED: Save to DATABASE, not session
+    $email = session()->get('reset_email');
+    $admin = $this->adminModel->where('email', $email)->first();
     
-    // Clear OTP session
+    if ($admin) {
+        // Update password in database (model will auto-hash it)
+        $this->adminModel->update($admin['id'], ['password' => $password]);
+    }
+    
+    // Clear OTP from database
+    $this->adminModel->clearOTP($email);
+    
+    // Clear sessions
     session()->remove(['reset_otp', 'reset_email', 'otp_expires', 'otp_verified']);
     
     return redirect()->to('/admin/login')
-                    ->with('success', 'Password reset successful! Your new password is saved.');
+                    ->with('success', 'Password reset successful! Please login with your new password.');
 }
 
     /*
@@ -866,39 +879,45 @@ class Admin extends BaseController
 
     /*
     |-----------------------------------
-    | CHANGE PASSWORD (When Logged In)
+    | CHANGE PASSWORD (When Logged In) - UPDATED WITH DATABASE
     |-----------------------------------
     */
 
     public function changePassword()
-    {
-        if(!session()->get('admin_logged_in')) {
-            return redirect()->to('/admin/login');
-        }
-        
-        $currentPassword = $this->request->getPost('current_password');
-        $newPassword = $this->request->getPost('new_password');
-        $confirmPassword = $this->request->getPost('confirm_password');
-        
-        // Check current password (hardcoded for demo)
-        if ($currentPassword !== '123456') {
-            return redirect()->back()
-                            ->with('error', 'Current password is incorrect');
-        }
-        
-        if (strlen($newPassword) < 6) {
-            return redirect()->back()
-                            ->with('error', 'New password must be at least 6 characters');
-        }
-        
-        if ($newPassword !== $confirmPassword) {
-            return redirect()->back()
-                            ->with('error', 'New passwords do not match');
-        }
-        
-        return redirect()->to('/admin')
-                        ->with('success', 'Password changed successfully!');
+{
+    if(!session()->get('admin_logged_in')) {
+        return redirect()->to('/admin/login');
     }
+    
+    $currentPassword = $this->request->getPost('current_password');
+    $newPassword = $this->request->getPost('new_password');
+    $confirmPassword = $this->request->getPost('confirm_password');
+    
+    $adminId = session()->get('admin_id');
+    $admin = $this->adminModel->find($adminId);
+    
+    // Verify current password
+    if (!$this->adminModel->verifyPassword($currentPassword, $admin['password'])) {
+        return redirect()->back()
+                        ->with('error', 'Current password is incorrect');
+    }
+    
+    if (strlen($newPassword) < 6) {
+        return redirect()->back()
+                        ->with('error', 'New password must be at least 6 characters');
+    }
+    
+    if ($newPassword !== $confirmPassword) {
+        return redirect()->back()
+                        ->with('error', 'New passwords do not match');
+    }
+    
+    // ✅ Save new password to DATABASE
+    $this->adminModel->update($adminId, ['password' => $newPassword]);
+    
+    return redirect()->to('/admin')
+                    ->with('success', 'Password changed successfully!');
+}
 
     /*
     |-----------------------------------

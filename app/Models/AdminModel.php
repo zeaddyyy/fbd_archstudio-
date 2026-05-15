@@ -25,11 +25,15 @@ class AdminModel extends Model
         'password' => 'required|min_length[6]'
     ];
     
+    // ✅ FIXED: This method now works automatically before insert/update
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeUpdate = ['hashPassword'];
+    
     // Hash password before insert/update
     protected function hashPassword(array $data)
     {
-        if (isset($data['password'])) {
-            $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        if (isset($data['data']['password'])) {
+            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
         }
         return $data;
     }
