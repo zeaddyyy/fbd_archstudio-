@@ -27,7 +27,7 @@ body {
     color: #111;
 }
 
-/* BACKGROUND GLOW - Same as User Side */
+/* BACKGROUND GLOW */
 body::before {
     content: "";
     position: fixed;
@@ -38,7 +38,7 @@ body::before {
     z-index: -1;
 }
 
-/* HEADER - Same as User Side */
+/* HEADER */
 .admin-header {
     position: fixed;
     top: 0;
@@ -152,7 +152,7 @@ body::before {
     transform: translateY(-3px);
 }
 
-/* MOBILE MENU BUTTON */
+/* ANIMATED MENU BUTTON - 3 LINES TURNS INTO X */
 .menu-btn {
     width: 52px;
     height: 52px;
@@ -164,7 +164,23 @@ body::before {
     border: 1px solid rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(14px);
     background: rgba(255, 255, 255, 0.6);
-    transition: 0.5s;
+    transition: all 0.5s ease;
+    z-index: 1000000;
+}
+
+.menu-btn i {
+    color: #111;
+    font-size: 22px;
+    transition: all 0.3s ease;
+}
+
+.menu-btn.active {
+    background: #111;
+    transform: rotate(90deg);
+}
+
+.menu-btn.active i {
+    color: white;
 }
 
 .menu-btn:hover {
@@ -172,12 +188,11 @@ body::before {
     background: rgba(255, 255, 255, 0.8);
 }
 
-.menu-btn i {
-    color: #111;
-    font-size: 22px;
+.menu-btn.active:hover {
+    background: #333;
 }
 
-/* LEFT SIDEBAR - MOBILE */
+/* LEFT SIDEBAR */
 .sidebar {
     position: fixed;
     top: 0;
@@ -224,30 +239,6 @@ body::before {
 
 .sidebar a:last-child {
     color: #d94b4b;
-}
-
-.close-sidebar {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    cursor: pointer;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-
-.close-sidebar:hover {
-    transform: rotate(90deg);
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.close-sidebar i {
-    font-size: 24px;
-    color: #111;
 }
 
 /* Overlay */
@@ -307,7 +298,7 @@ body::before {
     gap: 34px;
 }
 
-/* PROJECT CARD - Same Glass Style as User Side */
+/* PROJECT CARD */
 .project-card {
     background: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(18px);
@@ -649,13 +640,10 @@ body::before {
 <body>
 
 <!-- Overlay -->
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="overlay" id="overlay"></div>
 
-<!-- LEFT SIDEBAR - Mobile Only -->
+<!-- LEFT SIDEBAR -->
 <div class="sidebar" id="sidebar">
-    <div class="close-sidebar" onclick="closeSidebar()">
-        <i class="ri-close-line"></i>
-    </div>
     <a href="/admin/create" onclick="closeSidebar()">Add Project</a>
     <button onclick="openLogoPopup(); closeSidebar();" style="background:none; border:none; cursor:pointer; text-align:left;">Change Logo</button>
     <a href="/admin/logout" onclick="closeSidebar()" style="color:#d94b4b;">Logout</a>
@@ -683,7 +671,7 @@ body::before {
         </a>
     </div>
 
-    <div class="menu-btn" onclick="openSidebar()">
+    <div class="menu-btn" id="menuBtn">
         <i class="ri-menu-3-line"></i>
     </div>
 </header>
@@ -767,18 +755,43 @@ body::before {
 </div>
 
 <script>
-// Sidebar Functions
+// Get elements
+const menuBtn = document.getElementById('menuBtn');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+// Function to close sidebar
+function closeSidebar() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    menuBtn.classList.remove('active');
+    menuBtn.innerHTML = '<i class="ri-menu-3-line"></i>';
+    document.body.style.overflow = '';
+}
+
+// Function to open sidebar
 function openSidebar() {
-    document.getElementById('sidebar').classList.add('active');
-    document.getElementById('overlay').classList.add('active');
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    menuBtn.classList.add('active');
+    menuBtn.innerHTML = '<i class="ri-close-line"></i>';
     document.body.style.overflow = 'hidden';
 }
 
-function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('active');
-    document.getElementById('overlay').classList.remove('active');
-    document.body.style.overflow = '';
+// Toggle function
+function toggleSidebar() {
+    if (sidebar.classList.contains('active')) {
+        closeSidebar();
+    } else {
+        openSidebar();
+    }
 }
+
+// Add click event to menu button
+menuBtn.onclick = toggleSidebar;
+
+// Overlay click closes sidebar
+overlay.onclick = closeSidebar;
 
 // Logo Popup Functions
 function openLogoPopup() {
