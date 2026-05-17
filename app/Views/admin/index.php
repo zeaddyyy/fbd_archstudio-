@@ -90,8 +90,13 @@ body::before{
 
     z-index:999999;
 
-    background-image:
-    url("https://grainy-gradients.vercel.app/noise.svg");
+background-image:
+radial-gradient(
+rgba(0,0,0,0.04) 1px,
+transparent 1px
+);
+
+background-size:4px 4px;
 }
 
 /* HEADER */
@@ -1182,7 +1187,6 @@ alt=""
 <?= esc((string)$project['description']) ?>
 
 </p>
-
 <?php if(!empty($project['gallery'])): ?>
 
 <div class="gallery-preview">
@@ -1197,20 +1201,84 @@ json_decode(
 
 if(is_array($gallery)):
 
-foreach(
-    array_slice(
-        $gallery,
-        0,
-        4
-    ) as $image
-):
+foreach($gallery as $media):
+
+/*
+|--------------------------------------------------------------------------
+| SUPPORT OLD + NEW GALLERY STRUCTURE
+|--------------------------------------------------------------------------
+*/
+
+$filePath = '';
+
+if(is_array($media))
+{
+    $filePath =
+    $media['file'] ?? '';
+}
+else
+{
+    $filePath =
+    $media;
+}
+
+/*
+|--------------------------------------------------------------------------
+| FILE EXTENSION
+|--------------------------------------------------------------------------
+*/
+
+$extension =
+pathinfo(
+    $filePath,
+    PATHINFO_EXTENSION
+);
+
+/*
+|--------------------------------------------------------------------------
+| VIDEO CHECK
+|--------------------------------------------------------------------------
+*/
+
+$isVideo =
+in_array(
+    strtolower($extension),
+    ['mp4','webm','mov','ogg']
+);
 
 ?>
 
+<?php if($isVideo): ?>
+
+<video
+controls
+muted
+playsinline
+style="
+width:90px;
+height:90px;
+object-fit:cover;
+border-radius:18px;
+flex-shrink:0;
+background:#000;
+"
+>
+
+<source
+src="<?= base_url('uploads/projects/' . basename($filePath)) ?>"
+type="video/mp4"
+>
+
+</video>
+
+<?php else: ?>
+
 <img
-src="<?= base_url('uploads/projects/' . basename($image)) ?>"
+src="<?= base_url('uploads/projects/' . basename($filePath)) ?>"
 alt=""
 >
+
+<?php endif; ?>
 
 <?php endforeach; endif; ?>
 

@@ -7,15 +7,16 @@ use App\Controllers\BaseController;
 use App\Models\SettingModel;
 use App\Models\AdminModel;  // ← ADDED
 use App\Models\HomepageProjectModel;
+
 class Admin extends BaseController
 {
     protected $adminModel;  // ← ADDED
-    
+
     public function __construct()  // ← ADDED
     {
         $this->adminModel = new AdminModel();
     }
-    
+
     /*
     |-----------------------------------
     | ADMIN DASHBOARD
@@ -24,12 +25,11 @@ class Admin extends BaseController
 
     public function index()
     {
-         if(!session()->get('admin_logged_in'))
-    {
-        return redirect()->to('/admin/login');
-    }
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
         $model =
-        new ProjectModel();
+            new ProjectModel();
 
         /*
         |-----------------------------------
@@ -38,9 +38,9 @@ class Admin extends BaseController
         */
 
         $projects =
-        $model
-        ->orderBy('id', 'DESC')
-        ->findAll();
+            $model
+            ->orderBy('id', 'DESC')
+            ->findAll();
 
         /*
         |-----------------------------------
@@ -64,10 +64,9 @@ class Admin extends BaseController
 
     public function create()
     {
-         if(!session()->get('admin_logged_in'))
-    {
-        return redirect()->to('/admin/login');
-    }
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
         return view(
             'admin/create'
         );
@@ -76,57 +75,49 @@ class Admin extends BaseController
     /*
     |-----------------------------------
     | STORE PROJECT
-    |-----------------------------------
-    */
+    |-----------------------------------*/
 
     public function store()
     {
-         if(!session()->get('admin_logged_in'))
-    {
-        return redirect()->to('/admin/login');
-    }
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
         $model =
-        new ProjectModel();
+            new ProjectModel();
 
         /*
-        |-----------------------------------
-        | GET FORM DATA
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | FORM DATA
+    |-----------------------------------
+    */
 
         $title =
-        $this->request->getPost(
-            'title'
-        );
+            $this->request->getPost(
+                'title'
+            );
 
         $description =
-        $this->request->getPost(
-            'description'
-        );
+            $this->request->getPost(
+                'description'
+            );
 
         $location =
-        $this->request->getPost(
-            'location'
-        );
+            $this->request->getPost(
+                'location'
+            );
 
         /*
-        |-----------------------------------
-        | UPLOAD PATH
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | UPLOAD DIRECTORY
+    |-----------------------------------
+    */
 
         $uploadPath =
-        FCPATH .
-        'uploads/projects/';
+            FCPATH .
+            'uploads/projects/';
 
-        /*
-        |-----------------------------------
-        | CREATE FOLDER IF NOT EXISTS
-        |-----------------------------------
-        */
-
-        if (! is_dir($uploadPath))
-        {
+        if (!is_dir($uploadPath)) {
             mkdir(
                 $uploadPath,
                 0777,
@@ -135,59 +126,89 @@ class Admin extends BaseController
         }
 
         /*
-        |-----------------------------------
-        | STORE IMAGES
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | STORE MEDIA
+    |-----------------------------------
+    */
 
         $uploadedImages = [];
 
         /*
-        |-----------------------------------
-        | GET FILES
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | GET FILES
+    |-----------------------------------
+    */
 
         $files =
-        $this->request->getFileMultiple(
-            'project_files'
-        );
+            $this->request->getFileMultiple(
+                'project_files'
+            );
 
         /*
-        |-----------------------------------
-        | LOOP FILES
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | PROCESS FILES
+    |-----------------------------------
+    */
 
-        if ($files)
-        {
-           foreach ($files as $file)
-{
-    if (
-        $file->isValid()
-        &&
-        !$file->hasMoved()
-        &&
-        strpos(
-            $file->getMimeType(),
-            'image'
-        ) !== false
-    )
-    {
-        /*
-        |---------------------------
-        | RANDOM FILE NAME
-        |---------------------------
-        */
+        if ($files) {
 
-                    $newName =
-                    $file->getRandomName();
+            foreach ($files as $file) {
+
+                if (
+                    $file
+                    &&
+                    $file->isValid()
+                    &&
+                    ! $file->hasMoved()
+                ) {
 
                     /*
-                    |---------------------------
-                    | MOVE FILE
-                    |---------------------------
-                    */
+                |---------------------------
+                | ALLOWED TYPES
+                |---------------------------
+                */
+
+                    $allowedExtensions = [
+
+                        'jpg',
+                        'jpeg',
+                        'png',
+                        'webp',
+                        'mp4',
+                        'mov',
+                        'webm',
+                        'ogg'
+
+                    ];
+
+                    $extension =
+                        strtolower(
+                            $file->getExtension()
+                        );
+
+                    if (
+                        ! in_array(
+                            $extension,
+                            $allowedExtensions
+                        )
+                    ) {
+                        continue;
+                    }
+
+                    /*
+                |---------------------------
+                | RANDOM NAME
+                |---------------------------
+                */
+
+                    $newName =
+                        $file->getRandomName();
+
+                    /*
+                |---------------------------
+                | MOVE FILE
+                |---------------------------
+                */
 
                     $file->move(
                         $uploadPath,
@@ -195,34 +216,66 @@ class Admin extends BaseController
                     );
 
                     /*
-                    |---------------------------
-                    | SAVE IMAGE PATH
-                    |---------------------------
-                    */
+                |---------------------------
+                | MEDIA TYPE
+                |---------------------------
+                */
 
-                    $uploadedImages[] =
-                    'projects/' .
-                    $newName;
+                    $type =
+                        in_array(
+                            $extension,
+                            [
+                                'mp4',
+                                'mov',
+                                'webm',
+                                'ogg'
+                            ]
+                        )
+                        ? 'video'
+                        : 'image';
+
+                    /*
+                |---------------------------
+                | SAVE MEDIA
+                |---------------------------
+                */
+
+                    $uploadedImages[] = [
+
+                        'file' =>
+                        'projects/' .
+                            $newName,
+
+                        'type' =>
+                        $type
+
+                    ];
                 }
             }
         }
 
         /*
-        |-----------------------------------
-        | MAIN THUMBNAIL
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | MAIN THUMBNAIL
+    |-----------------------------------
+    */
 
-        $mainImage =
-        ! empty($uploadedImages)
-        ? $uploadedImages[0]
-        : '';
+        $mainImage = '';
+
+        if (
+            isset($uploadedImages[0])
+            &&
+            isset($uploadedImages[0]['file'])
+        ) {
+            $mainImage =
+                $uploadedImages[0]['file'];
+        }
 
         /*
-        |-----------------------------------
-        | INSERT DATA
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | INSERT DATABASE
+    |-----------------------------------
+    */
 
         $insertData = [
 
@@ -240,64 +293,50 @@ class Admin extends BaseController
 
             'gallery' =>
             json_encode(
-                $uploadedImages
-            ),
+                $uploadedImages,
+                JSON_UNESCAPED_SLASHES
+            )
 
         ];
 
         /*
-        |-----------------------------------
-        | SAVE TO DATABASE
-        |-----------------------------------
-        */
+    |-----------------------------------
+    | SAVE
+    |-----------------------------------
+    */
 
-        $saved =
         $model->insert(
             $insertData
         );
 
         /*
-        |-----------------------------------
-        | ERROR CHECK
-        |-----------------------------------
-        */
-
-        if (! $saved)
-        {
-            dd(
-                $model->errors()
-            );
-        }
-
-        /*
-        |-----------------------------------
-        | REDIRECT
-        |-----------------------------------
-        */
-
-        return redirect()
-        ->to('/admin')
-        ->with(
-            'success',
-            'Project Uploaded Successfully'
-        );
-    }
-
-    /*
     |-----------------------------------
-    | DELETE PROJECT
+    | REDIRECT
     |-----------------------------------
     */
 
-  public function delete(?int $id = null)
+        return redirect()
+            ->to('/admin')
+            ->with(
+                'success',
+                'Project Uploaded Successfully'
+            );
+    }
+
+    /*
+|-----------------------------------
+| DELETE PROJECT
+|-----------------------------------
+*/
+
+    public function delete(?int $id = null)
     {
-        if(!session()->get('admin_logged_in'))
-{
-    return redirect()->to('/admin/login');
-}
-    
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
         $model =
-        new ProjectModel();
+            new ProjectModel();
 
         /*
         |-----------------------------------
@@ -306,12 +345,11 @@ class Admin extends BaseController
         */
 
         $project =
-        $model->find($id);
+            $model->find($id);
 
-        if (!$project)
-        {
+        if (!$project) {
             return redirect()
-            ->to('/admin');
+                ->to('/admin');
         }
 
         /*
@@ -325,15 +363,14 @@ class Admin extends BaseController
             &&
             file_exists(
                 FCPATH .
-                'uploads/' .
-                $project['image']
+                    'uploads/' .
+                    $project['image']
             )
-        )
-        {
+        ) {
             unlink(
                 FCPATH .
-                'uploads/' .
-                $project['image']
+                    'uploads/' .
+                    $project['image']
             );
         }
 
@@ -343,30 +380,51 @@ class Admin extends BaseController
         |-----------------------------------
         */
 
-        if (! empty($project['gallery']))
-        {
+        if (! empty($project['gallery'])) {
             $gallery =
-            json_decode(
-                $project['gallery'],
-                true
-            );
+                json_decode(
+                    $project['gallery'],
+                    true
+                );
 
-            if (is_array($gallery))
-            {
-                foreach ($gallery as $image)
-                {
+            if (is_array($gallery)) {
+                foreach ($gallery as $media) {
+
+                    /*
+    |-----------------------------------
+    | SUPPORT OLD + NEW GALLERY FORMAT
+    |-----------------------------------
+    */
+
+                    $filePath = '';
+
+                    if (is_array($media)) {
+                        $filePath =
+                            $media['file'] ?? '';
+                    } else {
+                        $filePath =
+                            $media;
+                    }
+
+                    /*
+    |-----------------------------------
+    | DELETE FILE
+    |-----------------------------------
+    */
+
                     if (
+                        ! empty($filePath)
+                        &&
                         file_exists(
                             FCPATH .
-                            'uploads/' .
-                            $image
+                                'uploads/' .
+                                $filePath
                         )
-                    )
-                    {
+                    ) {
                         unlink(
                             FCPATH .
-                            'uploads/' .
-                            $image
+                                'uploads/' .
+                                $filePath
                         );
                     }
                 }
@@ -382,13 +440,13 @@ class Admin extends BaseController
         $model->delete($id);
 
         return redirect()
-        ->to('/admin')
-        ->with(
-            'success',
-            'Project Deleted'
-        );
+            ->to('/admin')
+            ->with(
+                'success',
+                'Project Deleted'
+            );
     }
-        /*
+    /*
     |-----------------------------------
     | EDIT PROJECT
     |-----------------------------------
@@ -396,18 +454,16 @@ class Admin extends BaseController
 
     public function edit($id)
     {
-        if(!session()->get('admin_logged_in'))
-{
-    return redirect()->to('/admin/login');
-}
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
         $model =
-        new ProjectModel();
+            new ProjectModel();
 
         $project =
-        $model->find($id);
+            $model->find($id);
 
-        if (!$project)
-        {
+        if (!$project) {
             return redirect()->to('/admin');
         }
 
@@ -427,12 +483,11 @@ class Admin extends BaseController
 
     public function update($id)
     {
-        if(!session()->get('admin_logged_in'))
-{
-    return redirect()->to('/admin/login');
-}
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
         $model =
-        new ProjectModel();
+            new ProjectModel();
 
         /*
         |-----------------------------------
@@ -441,10 +496,9 @@ class Admin extends BaseController
         */
 
         $project =
-        $model->find($id);
+            $model->find($id);
 
-        if (!$project)
-        {
+        if (!$project) {
             return redirect()->to('/admin');
         }
 
@@ -455,13 +509,13 @@ class Admin extends BaseController
         */
 
         $title =
-        $this->request->getPost('title');
+            $this->request->getPost('title');
 
         $description =
-        $this->request->getPost('description');
+            $this->request->getPost('description');
 
         $location =
-        $this->request->getPost('location');
+            $this->request->getPost('location');
 
         /*
         |-----------------------------------
@@ -470,13 +524,13 @@ class Admin extends BaseController
         */
 
         $mainImage =
-        $project['image'];
+            $project['image'];
 
         $gallery =
-        json_decode(
-            $project['gallery'],
-            true
-        ) ?? [];
+            json_decode(
+                $project['gallery'],
+                true
+            ) ?? [];
 
         /*
         |-----------------------------------
@@ -485,26 +539,23 @@ class Admin extends BaseController
         */
 
         $files =
-        $this->request->getFileMultiple(
-            'project_files'
-        );
+            $this->request->getFileMultiple(
+                'project_files'
+            );
 
         $uploadPath =
-        FCPATH .
-        'uploads/projects/';
+            FCPATH .
+            'uploads/projects/';
 
-        if ($files)
-        {
-            foreach ($files as $file)
-            {
+        if ($files) {
+            foreach ($files as $file) {
                 if (
                     $file->isValid()
                     &&
                     ! $file->hasMoved()
-                )
-                {
+                ) {
                     $newName =
-                    $file->getRandomName();
+                        $file->getRandomName();
 
                     $file->move(
                         $uploadPath,
@@ -512,8 +563,8 @@ class Admin extends BaseController
                     );
 
                     $gallery[] =
-                    'projects/' .
-                    $newName;
+                        'projects/' .
+                        $newName;
                 }
             }
 
@@ -524,7 +575,7 @@ class Admin extends BaseController
             */
 
             $mainImage =
-            $gallery[0];
+                $gallery[0];
         }
 
         /*
@@ -553,107 +604,100 @@ class Admin extends BaseController
         ]);
 
         return redirect()
-        ->to('/admin')
-        ->with(
-            'success',
-            'Project updated successfully!'
-        );
-    }
-    
-public function logo()
-{
-    if(!session()->get('admin_logged_in'))
-    {
-        return redirect()->to('/admin/login');
-    }
-    $model = new SettingModel();
-
-    $data['setting'] = $model->first();
-
-    return view('admin/logo', $data);
-}
-
-public function updateLogo()
-{
-    if(!session()->get('admin_logged_in'))
-    {
-        return redirect()->to('/admin/login');
-    }
-
-    $settingModel =
-    new \App\Models\SettingModel();
-
-    $setting =
-    $settingModel->first();
-
-    $file =
-    $this->request->getFile(
-        'site_logo'
-    );
-
-    if($file && $file->isValid())
-    {
-        $newName =
-        $file->getRandomName();
-
-        $file->move(
-            FCPATH . 'uploads/',
-            $newName
-        );
-
-        /* DELETE OLD LOGO */
-
-        if(
-            !empty($setting['site_logo']) &&
-            file_exists(
-                FCPATH .
-                'uploads/' .
-                $setting['site_logo']
-            )
-        )
-        {
-            unlink(
-                FCPATH .
-                'uploads/' .
-                $setting['site_logo']
+            ->to('/admin')
+            ->with(
+                'success',
+                'Project updated successfully!'
             );
+    }
+
+    public function logo()
+    {
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+        $model = new SettingModel();
+
+        $data['setting'] = $model->first();
+
+        return view('admin/logo', $data);
+    }
+
+    public function updateLogo()
+    {
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
         }
 
-        /* UPDATE DATABASE */
+        $settingModel =
+            new \App\Models\SettingModel();
 
-        if($setting)
-        {
-            $settingModel->update(
-                $setting['id'],
-                [
+        $setting =
+            $settingModel->first();
+
+        $file =
+            $this->request->getFile(
+                'site_logo'
+            );
+
+        if ($file && $file->isValid()) {
+            $newName =
+                $file->getRandomName();
+
+            $file->move(
+                FCPATH . 'uploads/',
+                $newName
+            );
+
+            /* DELETE OLD LOGO */
+
+            if (
+                !empty($setting['site_logo']) &&
+                file_exists(
+                    FCPATH .
+                        'uploads/' .
+                        $setting['site_logo']
+                )
+            ) {
+                unlink(
+                    FCPATH .
+                        'uploads/' .
+                        $setting['site_logo']
+                );
+            }
+
+            /* UPDATE DATABASE */
+
+            if ($setting) {
+                $settingModel->update(
+                    $setting['id'],
+                    [
+                        'site_logo' =>
+                        $newName
+                    ]
+                );
+            } else {
+                $settingModel->insert([
                     'site_logo' =>
                     $newName
-                ]
-            );
-        }
-        else
-        {
-            $settingModel->insert([
-                'site_logo' =>
-                $newName
-            ]);
+                ]);
+            }
+
+            return redirect()
+                ->back()
+                ->with(
+                    'success',
+                    'Logo updated successfully'
+                );
         }
 
         return redirect()
-        ->back()
-        ->with(
-            'success',
-            'Logo updated successfully'
-        );
+            ->back()
+            ->with(
+                'error',
+                'Logo upload failed'
+            );
     }
-
-    return redirect()
-    ->back()
-    ->with(
-        'error',
-        'Logo upload failed'
-    );
-}
 
     /*
     |-----------------------------------
@@ -663,7 +707,7 @@ public function updateLogo()
 
     public function login()
     {
-        if(session()->get('admin_logged_in')) {
+        if (session()->get('admin_logged_in')) {
             return redirect()->to('/admin');
         }
         return view('admin/login');
@@ -675,36 +719,36 @@ public function updateLogo()
     |-----------------------------------
     */
 
-   public function auth()
-{
-    $username = $this->request->getPost('username');
-    $password = $this->request->getPost('password');
-    $remember = $this->request->getPost('remember_me');
-    
-    // Find admin by username
-    $admin = $this->adminModel->where('username', $username)->first();
-    
-    // ✅ Verify against DATABASE password
-    if ($admin && $this->adminModel->verifyPassword($password, $admin['password'])) {
-        session()->set([
-            'admin_logged_in' => true,
-            'admin_id' => $admin['id'],
-            'admin_username' => $admin['username'],
-            'admin_email' => $admin['email']
-        ]);
-        
-        if ($remember) {
-            session()->set('remember_me', true);
+    public function auth()
+    {
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+        $remember = $this->request->getPost('remember_me');
+
+        // Find admin by username
+        $admin = $this->adminModel->where('username', $username)->first();
+
+        // ✅ Verify against DATABASE password
+        if ($admin && $this->adminModel->verifyPassword($password, $admin['password'])) {
+            session()->set([
+                'admin_logged_in' => true,
+                'admin_id' => $admin['id'],
+                'admin_username' => $admin['username'],
+                'admin_email' => $admin['email']
+            ]);
+
+            if ($remember) {
+                session()->set('remember_me', true);
+            }
+
+            return redirect()->to('/admin');
         }
-        
-        return redirect()->to('/admin');
+
+        return redirect()
+            ->to('/admin/login')
+            ->with('error', 'Invalid Login Details')
+            ->withInput();
     }
-    
-    return redirect()
-        ->to('/admin/login')
-        ->with('error', 'Invalid Login Details')
-        ->withInput();
-}
 
     /*
     |-----------------------------------
@@ -714,7 +758,7 @@ public function updateLogo()
 
     public function forgotPassword()
     {
-        if(session()->get('admin_logged_in')) {
+        if (session()->get('admin_logged_in')) {
             return redirect()->to('/admin');
         }
         return view('admin/forgot_password');
@@ -726,35 +770,35 @@ public function updateLogo()
     |-----------------------------------
     */
 
-   public function sendOTP()   
-{
-    $email = $this->request->getPost('email');
-    
-    // Check if email exists in database
-    $admin = $this->adminModel->where('email', $email)->first();
-    
-    if (!$admin) {
-        return redirect()->back()
-                        ->with('error', 'Email not found in our records')
-                        ->withInput();
-    }
-    
-    // Generate OTP using model
-    $otp = $this->adminModel->generateOTP();
-    
-    // Save OTP to database
-    $this->adminModel->saveOTP($email, $otp);
-    
-    // Store email in session
-    session()->set('reset_email', $email);
-    
-    // Load email service
-    $emailService = \Config\Services::email();
-    
-    $emailService->setTo($email);
-    $emailService->setSubject('Password Reset OTP - FB Design Studio');
-    
-    $message = "
+    public function sendOTP()
+    {
+        $email = $this->request->getPost('email');
+
+        // Check if email exists in database
+        $admin = $this->adminModel->where('email', $email)->first();
+
+        if (!$admin) {
+            return redirect()->back()
+                ->with('error', 'Email not found in our records')
+                ->withInput();
+        }
+
+        // Generate OTP using model
+        $otp = $this->adminModel->generateOTP();
+
+        // Save OTP to database
+        $this->adminModel->saveOTP($email, $otp);
+
+        // Store email in session
+        session()->set('reset_email', $email);
+
+        // Load email service
+        $emailService = \Config\Services::email();
+
+        $emailService->setTo($email);
+        $emailService->setSubject('Password Reset OTP - FB Design Studio');
+
+        $message = "
     <html>
     <head>
         <style>
@@ -782,19 +826,19 @@ public function updateLogo()
     </body>
     </html>
     ";
-    
-    $emailService->setMessage($message);
-    $emailService->setMailType('html');
-    
-    if ($emailService->send()) {
-        return redirect()->to('/admin/verify-otp')
-                        ->with('success', 'OTP sent to your email. Please check your inbox.');
-    } else {
-        // If email fails, show OTP on screen (for testing)
-        return redirect()->to('/admin/verify-otp')
-                        ->with('success', '🔐 Your OTP is: ' . $otp . ' (Check console - Email not configured)');
+
+        $emailService->setMessage($message);
+        $emailService->setMailType('html');
+
+        if ($emailService->send()) {
+            return redirect()->to('/admin/verify-otp')
+                ->with('success', 'OTP sent to your email. Please check your inbox.');
+        } else {
+            // If email fails, show OTP on screen (for testing)
+            return redirect()->to('/admin/verify-otp')
+                ->with('success', '🔐 Your OTP is: ' . $otp . ' (Check console - Email not configured)');
+        }
     }
-}
     /*
     |-----------------------------------
     | VERIFY OTP FORM
@@ -803,15 +847,15 @@ public function updateLogo()
 
     public function verifyOTPForm()
     {
-        if(session()->get('admin_logged_in')) {
+        if (session()->get('admin_logged_in')) {
             return redirect()->to('/admin');
         }
-        
+
         if (!session()->get('reset_email')) {
             return redirect()->to('/admin/forgot-password')
-                            ->with('error', 'Please request password reset first');
+                ->with('error', 'Please request password reset first');
         }
-        
+
         return view('admin/verify_otp');
     }
 
@@ -825,23 +869,23 @@ public function updateLogo()
     {
         $otp = $this->request->getPost('otp');
         $email = session()->get('reset_email');
-        
+
         if (!$email) {
             return redirect()->to('/admin/forgot-password')
-                            ->with('error', 'Session expired. Please request again.');
+                ->with('error', 'Session expired. Please request again.');
         }
-        
+
         // Verify OTP using model
         $admin = $this->adminModel->verifyOTP($email, $otp);
-        
+
         if ($admin) {
             session()->set('otp_verified', true);
             return redirect()->to('/admin/reset-password')
-                            ->with('success', 'OTP verified! Please set your new password.');
+                ->with('success', 'OTP verified! Please set your new password.');
         }
-        
+
         return redirect()->back()
-                        ->with('error', 'Invalid or expired OTP. Please try again.');
+            ->with('error', 'Invalid or expired OTP. Please try again.');
     }
 
     /*
@@ -852,15 +896,15 @@ public function updateLogo()
 
     public function resetPasswordForm()
     {
-        if(session()->get('admin_logged_in')) {
+        if (session()->get('admin_logged_in')) {
             return redirect()->to('/admin');
         }
-        
+
         if (!session()->get('otp_verified') || !session()->get('reset_email')) {
             return redirect()->to('/admin/forgot-password')
-                            ->with('error', 'Unauthorized access. Please request password reset.');
+                ->with('error', 'Unauthorized access. Please request password reset.');
         }
-        
+
         return view('admin/reset_password');
     }
 
@@ -870,44 +914,44 @@ public function updateLogo()
     |-----------------------------------
     */
 
-public function updatePassword()
-{
-    $password = $this->request->getPost('password');
-    $confirmPassword = $this->request->getPost('confirm_password');
-    
-    if (!session()->get('otp_verified') || !session()->get('reset_email')) {
-        return redirect()->to('/admin/forgot-password')
-                        ->with('error', 'Session expired. Please request again.');
+    public function updatePassword()
+    {
+        $password = $this->request->getPost('password');
+        $confirmPassword = $this->request->getPost('confirm_password');
+
+        if (!session()->get('otp_verified') || !session()->get('reset_email')) {
+            return redirect()->to('/admin/forgot-password')
+                ->with('error', 'Session expired. Please request again.');
+        }
+
+        if (strlen($password) < 6) {
+            return redirect()->back()
+                ->with('error', 'Password must be at least 6 characters');
+        }
+
+        if ($password !== $confirmPassword) {
+            return redirect()->back()
+                ->with('error', 'Passwords do not match');
+        }
+
+        // ✅ FIXED: Save to DATABASE, not session
+        $email = session()->get('reset_email');
+        $admin = $this->adminModel->where('email', $email)->first();
+
+        if ($admin) {
+            // Update password in database (model will auto-hash it)
+            $this->adminModel->update($admin['id'], ['password' => $password]);
+        }
+
+        // Clear OTP from database
+        $this->adminModel->clearOTP($email);
+
+        // Clear sessions
+        session()->remove(['reset_otp', 'reset_email', 'otp_expires', 'otp_verified']);
+
+        return redirect()->to('/admin/login')
+            ->with('success', 'Password reset successful! Please login with your new password.');
     }
-    
-    if (strlen($password) < 6) {
-        return redirect()->back()
-                        ->with('error', 'Password must be at least 6 characters');
-    }
-    
-    if ($password !== $confirmPassword) {
-        return redirect()->back()
-                        ->with('error', 'Passwords do not match');
-    }
-    
-    // ✅ FIXED: Save to DATABASE, not session
-    $email = session()->get('reset_email');
-    $admin = $this->adminModel->where('email', $email)->first();
-    
-    if ($admin) {
-        // Update password in database (model will auto-hash it)
-        $this->adminModel->update($admin['id'], ['password' => $password]);
-    }
-    
-    // Clear OTP from database
-    $this->adminModel->clearOTP($email);
-    
-    // Clear sessions
-    session()->remove(['reset_otp', 'reset_email', 'otp_expires', 'otp_verified']);
-    
-    return redirect()->to('/admin/login')
-                    ->with('success', 'Password reset successful! Please login with your new password.');
-}
 
     /*
     |-----------------------------------
@@ -917,10 +961,10 @@ public function updatePassword()
 
     public function profile()
     {
-        if(!session()->get('admin_logged_in')) {
+        if (!session()->get('admin_logged_in')) {
             return redirect()->to('/admin/login');
         }
-        
+
         return view('admin/profile');
     }
 
@@ -931,312 +975,301 @@ public function updatePassword()
     */
 
     public function changePassword()
-{
-    if(!session()->get('admin_logged_in')) {
-        return redirect()->to('/admin/login');
+    {
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
+        $currentPassword = $this->request->getPost('current_password');
+        $newPassword = $this->request->getPost('new_password');
+        $confirmPassword = $this->request->getPost('confirm_password');
+
+        $adminId = session()->get('admin_id');
+        $admin = $this->adminModel->find($adminId);
+
+        // Verify current password
+        if (!$this->adminModel->verifyPassword($currentPassword, $admin['password'])) {
+            return redirect()->back()
+                ->with('error', 'Current password is incorrect');
+        }
+
+        if (strlen($newPassword) < 6) {
+            return redirect()->back()
+                ->with('error', 'New password must be at least 6 characters');
+        }
+
+        if ($newPassword !== $confirmPassword) {
+            return redirect()->back()
+                ->with('error', 'New passwords do not match');
+        }
+
+        // ✅ Save new password to DATABASE
+        $this->adminModel->update($adminId, ['password' => $newPassword]);
+
+        return redirect()->to('/admin')
+            ->with('success', 'Password changed successfully!');
     }
-    
-    $currentPassword = $this->request->getPost('current_password');
-    $newPassword = $this->request->getPost('new_password');
-    $confirmPassword = $this->request->getPost('confirm_password');
-    
-    $adminId = session()->get('admin_id');
-    $admin = $this->adminModel->find($adminId);
-    
-    // Verify current password
-    if (!$this->adminModel->verifyPassword($currentPassword, $admin['password'])) {
-        return redirect()->back()
-                        ->with('error', 'Current password is incorrect');
-    }
-    
-    if (strlen($newPassword) < 6) {
-        return redirect()->back()
-                        ->with('error', 'New password must be at least 6 characters');
-    }
-    
-    if ($newPassword !== $confirmPassword) {
-        return redirect()->back()
-                        ->with('error', 'New passwords do not match');
-    }
-    
-    // ✅ Save new password to DATABASE
-    $this->adminModel->update($adminId, ['password' => $newPassword]);
-    
-    return redirect()->to('/admin')
-                    ->with('success', 'Password changed successfully!');
-}
-/*
+    /*
 |-----------------------------------
 | HOMEPAGE PROJECTS DASHBOARD
 |-----------------------------------
 */
 
-public function homeProjects()
-{
-    if(!session()->get('admin_logged_in'))
+    public function homeProjects()
     {
-        return redirect()->to('/admin/login');
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
+        helper('text');
+
+        $model =
+            new HomepageProjectModel();
+
+        $projects =
+            $model
+            ->orderBy(
+                'id',
+                'DESC'
+            )
+            ->findAll();
+
+        return view(
+            'admin/dashboard',
+            [
+                'projects' =>
+                $projects
+            ]
+        );
     }
-
-    helper('text');
-
-    $model =
-    new HomepageProjectModel();
-
-    $projects =
-    $model
-    ->orderBy(
-        'id',
-        'DESC'
-    )
-    ->findAll();
-
-    return view(
-        'admin/dashboard',
-        [
-            'projects' =>
-            $projects
-        ]
-    );
-}
-/*
+    /*
 |-----------------------------------
 | CREATE HOMEPAGE PROJECT
 |-----------------------------------
 */
 
-public function createHomeProject()
-{
-    if(!session()->get('admin_logged_in'))
+    public function createHomeProject()
     {
-        return redirect()->to('/admin/login');
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
+        return view(
+            'admin/create_home_project'
+        );
     }
 
-    return view(
-        'admin/create_home_project'
-    );
-}
-
-/*
+    /*
 |-----------------------------------
 | STORE HOMEPAGE PROJECT
 |-----------------------------------
 */
 
-public function storeHomeProject()
-{
-    if(!session()->get('admin_logged_in'))
+    public function storeHomeProject()
     {
-        return redirect()->to('/admin/login');
-    }
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
 
-    $model =
-    new HomepageProjectModel();
+        $model =
+            new HomepageProjectModel();
 
-    /*
+        /*
     |-----------------------------------
     | UPLOAD PATH
     |-----------------------------------
     */
 
-    $uploadPath =
-    FCPATH .
-    'uploads/homepage/';
+        $uploadPath =
+            FCPATH .
+            'uploads/homepage/';
 
-    if (! is_dir($uploadPath))
-    {
-        mkdir(
-            $uploadPath,
-            0777,
-            true
-        );
-    }
+        if (! is_dir($uploadPath)) {
+            mkdir(
+                $uploadPath,
+                0777,
+                true
+            );
+        }
 
-    /*
+        /*
     |-----------------------------------
     | STORE IMAGES
     |-----------------------------------
     */
 
-    $uploadedImages = [];
+        $uploadedImages = [];
 
-    $files =
-    $this->request->getFileMultiple(
-        'project_images'
-    );
+        $files =
+            $this->request->getFileMultiple(
+                'project_images'
+            );
 
-    if ($files)
-    {
-        foreach ($files as $file)
-        {
-            if (
-                $file->isValid()
-                &&
-                !$file->hasMoved()
-                &&
-                strpos(
-                    $file->getMimeType(),
-                    'image'
-                ) !== false
-            )
-            {
-                $newName =
-                $file->getRandomName();
+        if ($files) {
+            foreach ($files as $file) {
+                if (
+                    $file->isValid()
+                    &&
+                    !$file->hasMoved()
+                    &&
+                    strpos(
+                        $file->getMimeType(),
+                        'image'
+                    ) !== false
+                ) {
+                    $newName =
+                        $file->getRandomName();
 
-                $file->move(
-                    $uploadPath,
-                    $newName
-                );
+                    $file->move(
+                        $uploadPath,
+                        $newName
+                    );
 
-                $uploadedImages[] =
-                $newName;
+                    $uploadedImages[] =
+                        $newName;
+                }
             }
         }
-    }
 
-    /*
+        /*
     |-----------------------------------
     | THUMBNAIL
     |-----------------------------------
     */
 
-    $thumbnail =
-    ! empty($uploadedImages)
-    ? $uploadedImages[0]
-    : '';
+        $thumbnail =
+            ! empty($uploadedImages)
+            ? $uploadedImages[0]
+            : '';
 
-    /*
+        /*
     |-----------------------------------
     | INSERT
     |-----------------------------------
     */
 
-    $model->insert([
+        $model->insert([
 
-        'title' =>
-        $this->request->getPost(
-            'title'
-        ),
+            'title' =>
+            $this->request->getPost(
+                'title'
+            ),
 
-        'description' =>
-        $this->request->getPost(
-            'description'
-        ),
+            'description' =>
+            $this->request->getPost(
+                'description'
+            ),
 
-        'location' =>
-        $this->request->getPost(
-            'location'
-        ),
+            'location' =>
+            $this->request->getPost(
+                'location'
+            ),
 
-        'year' =>
-        $this->request->getPost(
-            'year'
-        ),
+            'year' =>
+            $this->request->getPost(
+                'year'
+            ),
 
-        'designer' =>
-        $this->request->getPost(
-            'designer'
-        ),
+            'designer' =>
+            $this->request->getPost(
+                'designer'
+            ),
 
-        'team' =>
-        $this->request->getPost(
-            'team'
-        ),
+            'team' =>
+            $this->request->getPost(
+                'team'
+            ),
 
-        'area' =>
-        $this->request->getPost(
-            'area'
-        ),
+            'area' =>
+            $this->request->getPost(
+                'area'
+            ),
 
-        'category' =>
-        $this->request->getPost(
-            'category'
-        ),
+            'category' =>
+            $this->request->getPost(
+                'category'
+            ),
 
-        'layout_type' =>
-        $this->request->getPost(
-            'layout_type'
-        ),
+            'layout_type' =>
+            $this->request->getPost(
+                'layout_type'
+            ),
 
-        'thumbnail' =>
-        $thumbnail,
+            'thumbnail' =>
+            $thumbnail,
 
-        'gallery' =>
-        json_encode(
-            $uploadedImages
-        )
+            'gallery' =>
+            json_encode(
+                $uploadedImages
+            )
 
-    ]);
+        ]);
 
-    return redirect()
-    ->to('/admin/home-projects')
-    ->with(
-        'success',
-        'Homepage Project Added Successfully'
-    );
-}
+        return redirect()
+            ->to('/admin/home-projects')
+            ->with(
+                'success',
+                'Homepage Project Added Successfully'
+            );
+    }
 
-/*
+    /*
 |-----------------------------------
 | DELETE HOMEPAGE PROJECT
 |-----------------------------------
 */
 
-public function deleteHomeProject(?int $id = null)
-{
-    if(!session()->get('admin_logged_in'))
+    public function deleteHomeProject(?int $id = null)
     {
-        return redirect()->to('/admin/login');
-    }
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
 
-    $model =
-    new HomepageProjectModel();
+        $model =
+            new HomepageProjectModel();
 
-    $project =
-    $model->find($id);
+        $project =
+            $model->find($id);
 
-    if(!$project)
-    {
-        return redirect()
-        ->to('/admin/home-projects');
-    }
+        if (!$project) {
+            return redirect()
+                ->to('/admin/home-projects');
+        }
 
-    /*
+        /*
     |-----------------------------------
     | DELETE GALLERY
     |-----------------------------------
     */
 
-    $gallery =
-    json_decode(
-        $project['gallery'],
-        true
-    ) ?? [];
+        $gallery =
+            json_decode(
+                $project['gallery'],
+                true
+            ) ?? [];
 
-    foreach($gallery as $image)
-    {
-        $path =
-        FCPATH .
-        'uploads/homepage/' .
-        $image;
+        foreach ($gallery as $image) {
+            $path =
+                FCPATH .
+                'uploads/homepage/' .
+                $image;
 
-        if(file_exists($path))
-        {
-            unlink($path);
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
+
+        $model->delete($id);
+
+        return redirect()
+            ->to('/admin/home-projects')
+            ->with(
+                'success',
+                'Homepage Project Deleted'
+            );
     }
 
-    $model->delete($id);
-
-    return redirect()
-    ->to('/admin/home-projects')
-    ->with(
-        'success',
-        'Homepage Project Deleted'
-    );
-}
-
-/*
+    /*
 |-----------------------------------
 | LOGOUT
 |-----------------------------------

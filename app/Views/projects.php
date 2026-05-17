@@ -2,105 +2,191 @@
 
 <?= $this->section('content') ?>
 
+<?php helper('text'); ?>
+
 <section class="projects-page">
 
-<!-- BG VIDEO -->
+    <!-- BACKGROUND VIDEO -->
 
-<video autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline class="bg-video">
 
-<source
-src="<?= base_url('assets/videos/hero.mp4') ?>"
-type="video/mp4"
->
+        <source
+        src="<?= base_url('assets/videos/hero.mp4') ?>"
+        type="video/mp4"
+        >
 
-</video>
+    </video>
 
-<div class="projects-overlay"></div>
+    <div class="projects-overlay"></div>
 
-<div class="projects-container">
+    <div class="projects-container">
 
-<!-- TITLE -->
+        <!-- HEADER -->
 
-<div class="projects-header">
+        <div class="projects-header">
 
-<h1>
-Selected Projects
-</h1>
+            <span class="mini-title">
+                FB DESIGN STUDIO
+            </span>
 
-<p>
-Minimal luxury architecture and cinematic interiors.
-</p>
+            <h1>
+                Selected<br>Projects
+            </h1>
 
-</div>
+            <p>
+                Minimal luxury architecture and cinematic interiors crafted with timeless spatial experiences.
+            </p>
 
-<!-- GRID -->
+        </div>
 
-<div class="projects-grid">
+        <!-- GRID -->
 
-<?php foreach($projects ?? [] as $project): ?>
+        <div class="projects-grid">
 
-<?php
+            <?php foreach(($projects ?? []) as $index => $project): ?>
 
-$gallery =
-json_decode(
-$project['gallery'] ?? '[]',
-true
-);
+            <?php
 
-$mainImage =
-isset($gallery[0])
-? $gallery[0]
-: '';
+            $gallery =
+            json_decode(
+                $project['gallery'] ?? '[]',
+                true
+            );
 
-?>
+            $mainImage = '';
 
-<div class="project-card">
+            if(isset($gallery[0]))
+            {
+                if(is_array($gallery[0]))
+                {
+                    $mainImage =
+                    $gallery[0]['file'] ?? '';
+                }
+                else
+                {
+                    $mainImage =
+                    $gallery[0];
+                }
+            }
 
-<div
-class="main-project-image"
+            $extension =
+            pathinfo(
+                $mainImage,
+                PATHINFO_EXTENSION
+            );
 
-onclick='openViewer(
+            $isVideo =
+            in_array(
+                strtolower($extension),
+                ['mp4','mov','webm','ogg']
+            );
 
-<?= json_encode(
-array_map(
-fn($img)=>
-base_url(
-"uploads/projects/" .
-basename($img)
-),
-$gallery
-)
-) ?>
+            ?>
 
-)'
->
+            <div class="project-card">
 
-<img
-src="<?= base_url('uploads/projects/' . basename($mainImage)) ?>"
-alt=""
->
+                <!-- NUMBER -->
 
-</div>
+                <div class="project-number">
 
-<div class="project-info">
+                    <?= str_pad((string)($index + 1),2,'0',STR_PAD_LEFT) ?>
 
-<h3>
-<?= esc((string)$project['title']) ?>
-</h3>
+                </div>
 
-<span>
-<?= esc((string)$project['location']) ?>
-</span>
+                <!-- IMAGE -->
 
-</div>
+                <div
+                class="main-project-image"
+                onclick='openViewer(
+                <?= json_encode($gallery) ?>
+                )'
+                >
 
-</div>
+                    <?php if($isVideo): ?>
 
-<?php endforeach; ?>
+                    <video
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    >
 
-</div>
+                        <source
+                        src="<?= base_url('uploads/' . $mainImage) ?>"
+                        type="video/mp4"
+                        >
 
-</div>
+                    </video>
+
+                    <?php else: ?>
+
+                    <img
+                    src="<?= base_url('uploads/' . $mainImage) ?>"
+                    alt=""
+                    >
+
+                    <?php endif; ?>
+
+                    <div class="project-gradient"></div>
+
+                </div>
+
+                <!-- CONTENT -->
+
+                <div class="project-info">
+
+                    <div class="project-top">
+
+                        <span class="project-location">
+
+                            <?= esc((string)$project['location']) ?>
+
+                        </span>
+
+                        <span class="project-year">
+
+                            <?= esc((string)($project['year'] ?? '2026')) ?>
+
+                        </span>
+
+                    </div>
+
+                    <h3>
+
+                        <?= esc((string)$project['title']) ?>
+
+                    </h3>
+
+                    <p>
+
+                        <?= character_limiter(
+                            (string)$project['description'],
+                            140
+                        ) ?>
+
+                    </p>
+
+                    <div class="project-footer">
+
+                        <div class="view-project">
+
+                            View Project
+
+                            <i class="ri-arrow-right-up-line"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -111,59 +197,61 @@ class="image-viewer"
 id="imageViewer"
 >
 
-<span
-class="close-viewer"
-onclick="closeViewer()"
->
-&times;
-</span>
+    <span
+    class="close-viewer"
+    onclick="closeViewer()"
+    >
+        &times;
+    </span>
 
-<div class="image-counter">
+    <div class="image-counter">
 
-<span id="currentImage">
-1
-</span>
+        <span id="currentImage">
+            1
+        </span>
 
-/
+        /
 
-<span id="totalImages">
-1
-</span>
+        <span id="totalImages">
+            1
+        </span>
 
-</div>
+    </div>
 
-<div
-class="nav-arrow left-arrow"
-onclick="prevImage()"
->
+    <div
+    class="nav-arrow left-arrow"
+    onclick="prevImage()"
+    >
 
-<i class="ri-arrow-left-s-line"></i>
+        <i class="ri-arrow-left-s-line"></i>
 
-</div>
+    </div>
 
-<div
-class="nav-arrow right-arrow"
-onclick="nextImage()"
->
+    <div
+    class="nav-arrow right-arrow"
+    onclick="nextImage()"
+    >
 
-<i class="ri-arrow-right-s-line"></i>
+        <i class="ri-arrow-right-s-line"></i>
 
-</div>
+    </div>
 
-<img
-id="viewerImage"
-src=""
->
+    <img
+    id="viewerImage"
+    src=""
+    >
 
-<div
-class="viewer-thumbnails"
-id="viewerThumbnails"
->
-</div>
+    <div
+    class="viewer-thumbnails"
+    id="viewerThumbnails"
+    >
+    </div>
 
 </div>
 
 <style>
+
+/* PAGE */
 
 .projects-page{
     position:relative;
@@ -177,9 +265,9 @@ id="viewerThumbnails"
     background:#f4f1ec;
 }
 
-/* VIDEO BG */
+/* BG VIDEO */
 
-.projects-page video{
+.bg-video{
     position:absolute;
 
     inset:0;
@@ -190,22 +278,23 @@ id="viewerThumbnails"
     object-fit:cover;
 
     filter:
-    blur(10px)
-    brightness(0.45);
+    blur(12px)
+    brightness(0.3);
 
-    transform:scale(1.08);
+    transform:scale(1.1);
 }
 
 /* OVERLAY */
 
 .projects-overlay{
     position:absolute;
+
     inset:0;
 
     background:
-    rgba(244,241,236,0.62);
+    rgba(244,241,236,0.72);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(14px);
 }
 
 /* CONTAINER */
@@ -219,33 +308,58 @@ id="viewerThumbnails"
 /* HEADER */
 
 .projects-header{
-    margin-bottom:80px;
+    margin-bottom:100px;
+
+    max-width:820px;
+}
+
+.mini-title{
+    display:inline-block;
+
+    margin-bottom:22px;
+
+    padding:10px 22px;
+
+    border-radius:100px;
+
+    background:
+    rgba(255,255,255,0.55);
+
+    backdrop-filter:blur(10px);
+
+    font-size:11px;
+
+    letter-spacing:0.3em;
+
+    text-transform:uppercase;
+
+    color:#444;
 }
 
 .projects-header h1{
-    font-size:96px;
+    font-size:120px;
+
+    line-height:0.9;
 
     font-weight:300;
 
-    color:#1a1a1a;
+    color:#111;
 
-    margin-bottom:18px;
+    margin-bottom:28px;
 
     font-family:
     'Cormorant Garamond',
     serif;
-
-    line-height:0.95;
 }
 
 .projects-header p{
+    font-size:16px;
+
+    line-height:2;
+
     color:#666;
 
-    font-size:14px;
-
-    letter-spacing:0.18em;
-
-    text-transform:uppercase;
+    max-width:620px;
 }
 
 /* GRID */
@@ -256,10 +370,12 @@ id="viewerThumbnails"
     grid-template-columns:
     repeat(
         auto-fit,
-        minmax(340px,1fr)
+        minmax(380px,1fr)
     );
 
-    gap:34px;
+    gap:42px;
+
+    align-items:start;
 }
 
 /* CARD */
@@ -267,34 +383,50 @@ id="viewerThumbnails"
 .project-card{
     position:relative;
 
-    cursor:pointer;
-
-    transition:0.5s;
-
-    background:
-    rgba(255,255,255,0.45);
-
-    border:
-    1px solid rgba(255,255,255,0.4);
-
-    border-radius:32px;
-
     overflow:hidden;
 
-    backdrop-filter:blur(24px);
+    border-radius:36px;
 
-    -webkit-backdrop-filter:blur(24px);
+    background:
+    rgba(255,255,255,0.52);
+
+    border:
+    1px solid rgba(255,255,255,0.45);
+
+    backdrop-filter:blur(30px);
 
     box-shadow:
-    0 15px 50px rgba(0,0,0,0.08);
+    0 30px 80px rgba(0,0,0,0.08);
+
+    transition:
+    0.8s cubic-bezier(.19,1,.22,1);
 }
 
 .project-card:hover{
     transform:
-    translateY(-10px);
+    translateY(-12px);
 
     box-shadow:
-    0 30px 80px rgba(0,0,0,0.12);
+    0 50px 120px rgba(0,0,0,0.12);
+}
+
+/* NUMBER */
+
+.project-number{
+    position:absolute;
+
+    top:24px;
+    left:24px;
+
+    z-index:20;
+
+    font-size:13px;
+
+    letter-spacing:0.35em;
+
+    color:white;
+
+    mix-blend-mode:difference;
 }
 
 /* IMAGE */
@@ -304,26 +436,15 @@ id="viewerThumbnails"
 
     width:100%;
 
-    height:280px;
+    height:420px;
 
     overflow:hidden;
+
+    cursor:pointer;
 }
 
-.main-project-image::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,0.45),
-        rgba(0,0,0,0.05)
-    );
-}
-
-.main-project-image img{
+.main-project-image img,
+.main-project-image video{
     width:100%;
     height:100%;
 
@@ -332,40 +453,121 @@ id="viewerThumbnails"
     transition:1.2s cubic-bezier(.19,1,.22,1);
 }
 
-.project-card:hover .main-project-image img{
+.project-card:hover img,
+.project-card:hover video{
     transform:scale(1.08);
+}
+
+/* GRADIENT */
+
+.project-gradient{
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.78),
+        rgba(0,0,0,0.08),
+        transparent
+    );
 }
 
 /* INFO */
 
 .project-info{
-    padding:28px;
+    padding:36px;
+}
+
+.project-top{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:22px;
+}
+
+.project-location,
+.project-year{
+    font-size:10px;
+
+    letter-spacing:0.32em;
+
+    text-transform:uppercase;
+
+    color:#777;
+
+    padding:10px 18px;
+
+    border-radius:100px;
+
+    background:
+    rgba(0,0,0,0.04);
+
+    backdrop-filter:blur(10px);
 }
 
 .project-info h3{
-    font-size:38px;
+    font-size:52px;
 
-    line-height:1;
+    line-height:0.92;
 
     font-weight:300;
 
-    color:#1a1a1a;
+    color:#111;
 
-    margin-bottom:14px;
+    margin-bottom:18px;
 
     font-family:
     'Cormorant Garamond',
     serif;
 }
 
-.project-info span{
+.project-info p{
+    color:#666;
+
+    line-height:2;
+
+    font-size:15px;
+
+    margin-top:18px;
+
+    max-width:90%;
+}
+
+/* FOOTER */
+
+.project-footer{
+    margin-top:30px;
+}
+
+.view-project{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
     font-size:11px;
 
-    letter-spacing:0.22em;
+    letter-spacing:0.25em;
 
     text-transform:uppercase;
 
-    color:#666;
+    color:#111;
+
+    transition:0.4s;
+}
+
+.project-card:hover .view-project{
+    transform:translateX(8px);
+}
+
+.view-project i{
+    font-size:18px;
 }
 
 /* VIEWER */
@@ -376,7 +578,7 @@ id="viewerThumbnails"
     inset:0;
 
     background:
-    rgba(244,241,236,0.72);
+    rgba(10,10,10,0.88);
 
     z-index:9999999;
 
@@ -391,9 +593,9 @@ id="viewerThumbnails"
 
     visibility:hidden;
 
-    transition:0.5s;
+    transition:0.6s;
 
-    backdrop-filter:blur(24px);
+    backdrop-filter:blur(30px);
 }
 
 .image-viewer.active{
@@ -402,19 +604,18 @@ id="viewerThumbnails"
     visibility:visible;
 }
 
-.image-viewer img{
-    width:82vw;
+.image-viewer img,
+.image-viewer video{
+    width:84vw;
 
-    height:74vh;
+    height:78vh;
 
     object-fit:cover;
 
-    border-radius:30px;
-
-    transition:0.8s;
+    border-radius:34px;
 
     box-shadow:
-    0 30px 80px rgba(0,0,0,0.18);
+    0 40px 120px rgba(0,0,0,0.45);
 }
 
 /* CLOSE */
@@ -431,9 +632,9 @@ id="viewerThumbnails"
     border-radius:50%;
 
     background:
-    rgba(255,255,255,0.5);
+    rgba(255,255,255,0.08);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(10px);
 
     display:flex;
     justify-content:center;
@@ -441,22 +642,17 @@ id="viewerThumbnails"
 
     font-size:42px;
 
-    color:#111;
+    color:white;
 
     cursor:pointer;
 
     transition:0.4s;
-
-    border:
-    1px solid rgba(0,0,0,0.05);
 }
 
 .close-viewer:hover{
     transform:
     rotate(90deg)
-    scale(1.06);
-
-    background:white;
+    scale(1.05);
 }
 
 /* COUNTER */
@@ -470,11 +666,9 @@ id="viewerThumbnails"
     transform:translateX(-50%);
 
     background:
-    rgba(255,255,255,0.45);
+    rgba(255,255,255,0.08);
 
-    backdrop-filter:blur(10px);
-
-    padding:14px 26px;
+    padding:14px 28px;
 
     border-radius:100px;
 
@@ -482,9 +676,7 @@ id="viewerThumbnails"
 
     letter-spacing:0.2em;
 
-    text-transform:uppercase;
-
-    color:#111;
+    color:white;
 }
 
 /* ARROWS */
@@ -502,9 +694,7 @@ id="viewerThumbnails"
     border-radius:50%;
 
     background:
-    rgba(255,255,255,0.45);
-
-    backdrop-filter:blur(12px);
+    rgba(255,255,255,0.08);
 
     display:flex;
     justify-content:center;
@@ -524,7 +714,7 @@ id="viewerThumbnails"
 .nav-arrow i{
     font-size:42px;
 
-    color:#111;
+    color:white;
 }
 
 .left-arrow{
@@ -535,12 +725,12 @@ id="viewerThumbnails"
     right:28px;
 }
 
-/* THUMBS */
+/* THUMBNAILS */
 
 .viewer-thumbnails{
     margin-top:24px;
 
-    width:82vw;
+    width:84vw;
 
     display:flex;
 
@@ -552,8 +742,8 @@ id="viewerThumbnails"
 }
 
 .viewer-thumbnails img{
-    width:150px;
-    height:90px;
+    width:170px;
+    height:110px;
 
     object-fit:cover;
 
@@ -563,17 +753,25 @@ id="viewerThumbnails"
 
     opacity:0.45;
 
-    transition:0.4s;
+    transition:0.5s;
 
     border:
     2px solid transparent;
+
+    transform:scale(0.96);
+}
+
+.viewer-thumbnails img:hover{
+    opacity:1;
+
+    transform:scale(1);
 }
 
 .viewer-thumbnails img.active-thumb{
     opacity:1;
 
     border:
-    2px solid #111;
+    2px solid white;
 }
 
 /* MOBILE */
@@ -585,7 +783,7 @@ id="viewerThumbnails"
 }
 
 .projects-header h1{
-    font-size:58px;
+    font-size:62px;
 }
 
 .projects-grid{
@@ -593,10 +791,15 @@ id="viewerThumbnails"
 }
 
 .project-info h3{
-    font-size:30px;
+    font-size:36px;
 }
 
-.image-viewer img{
+.main-project-image{
+    height:320px;
+}
+
+.image-viewer img,
+.image-viewer video{
     width:94vw;
     height:58vh;
 }
@@ -611,116 +814,6 @@ id="viewerThumbnails"
     height:54px;
 
     font-size:34px;
-}
-
-}
-/* COUNTER */
-
-.image-counter{
-    position:absolute;
-
-    top:34px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    background:
-    rgba(255,255,255,0.08);
-
-    padding:12px 24px;
-
-    border-radius:100px;
-
-    font-size:15px;
-
-    letter-spacing:0.15em;
-}
-
-/* ARROWS */
-
-.nav-arrow{
-    position:absolute;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:70px;
-    height:70px;
-
-    border-radius:50%;
-
-    background:
-    rgba(255,255,255,0.08);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    cursor:pointer;
-}
-
-.nav-arrow i{
-    font-size:42px;
-
-    color:white;
-}
-
-.left-arrow{
-    left:28px;
-}
-
-.right-arrow{
-    right:28px;
-}
-
-/* THUMBS */
-
-.viewer-thumbnails{
-    margin-top:24px;
-
-    width:82vw;
-
-    display:flex;
-
-    gap:14px;
-
-    overflow-x:auto;
-}
-
-.viewer-thumbnails img{
-    width:150px;
-    height:90px;
-
-    object-fit:cover;
-
-    border-radius:16px;
-
-    cursor:pointer;
-
-    opacity:0.5;
-}
-
-.viewer-thumbnails img.active-thumb{
-    opacity:1;
-
-    border:
-    2px solid white;
-}
-
-@media(max-width:768px){
-
-.projects-header h1{
-    font-size:52px;
-}
-
-.projects-grid{
-    grid-template-columns:1fr;
-}
-
-.image-viewer img{
-    width:94vw;
-    height:58vh;
 }
 
 }
@@ -763,10 +856,77 @@ function closeViewer()
 
 function updateViewer()
 {
+    let current =
+    currentGallery[currentIndex];
+
+    let filePath = '';
+
+    if(typeof current === 'object')
+    {
+        filePath =
+        current.file || '';
+    }
+    else
+    {
+        filePath =
+        current;
+    }
+
+    const extension =
+    filePath.split('.').pop().toLowerCase();
+
+    const isVideo =
+    ['mp4','mov','webm','ogg']
+    .includes(extension);
+
+    const viewer =
     document.getElementById(
     'viewerImage'
-    ).src =
-    currentGallery[currentIndex];
+    );
+
+    if(isVideo)
+    {
+
+        viewer.outerHTML =
+        `
+        <video
+        id="viewerImage"
+        controls
+        autoplay
+        style="
+        width:84vw;
+        height:78vh;
+        object-fit:cover;
+        border-radius:34px;
+        "
+        >
+        <source
+        src="/uploads/${filePath}"
+        type="video/mp4"
+        >
+        </video>
+        `;
+
+    }
+
+    else
+    {
+
+        viewer.outerHTML =
+        `
+        <img
+        id="viewerImage"
+        src="/uploads/${filePath}"
+        style="
+        width:84vw;
+        height:78vh;
+        object-fit:cover;
+        border-radius:34px;
+        "
+        >
+        `;
+
+    }
 
     document.getElementById(
     'currentImage'
@@ -781,11 +941,25 @@ function updateViewer()
     let thumbs = '';
 
     currentGallery.forEach(
-    (img,index)=>
+    (media,index)=>
     {
+
+        let thumbPath = '';
+
+        if(typeof media === 'object')
+        {
+            thumbPath =
+            media.file || '';
+        }
+        else
+        {
+            thumbPath =
+            media;
+        }
+
         thumbs += `
         <img
-        src="${img}"
+        src="/uploads/${thumbPath}"
 
         class="${
         index===currentIndex
@@ -803,7 +977,8 @@ function updateViewer()
 
     document.getElementById(
     'viewerThumbnails'
-    ).innerHTML = thumbs;
+    ).innerHTML =
+    thumbs;
 }
 
 function nextImage()

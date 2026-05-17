@@ -6,11 +6,53 @@ use CodeIgniter\Model;
 
 class ProjectModel extends Model
 {
-    protected $table = 'projects';
+    /*
+    |--------------------------------------------------------------------------
+    | TABLE
+    |--------------------------------------------------------------------------
+    */
 
-    protected $primaryKey = 'id';
+    protected $table =
+    'projects';
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRIMARY KEY
+    |--------------------------------------------------------------------------
+    */
+
+    protected $primaryKey =
+    'id';
+
+    /*
+    |--------------------------------------------------------------------------
+    | RETURN TYPE
+    |--------------------------------------------------------------------------
+    */
+
+    protected $returnType =
+    'array';
+
+    /*
+    |--------------------------------------------------------------------------
+    | AUTO INCREMENT
+    |--------------------------------------------------------------------------
+    */
+
+    protected $useAutoIncrement =
+    true;
+
+    /*
+    |--------------------------------------------------------------------------
+    | ALLOWED FIELDS
+    |--------------------------------------------------------------------------
+    */
 
     protected $allowedFields = [
+
+        /*
+        | BASIC
+        */
 
         'title',
 
@@ -18,11 +60,51 @@ class ProjectModel extends Model
 
         'location',
 
+        /*
+        | THUMBNAIL
+        */
+
         'image',
 
-        'gallery'
+        /*
+        | FULL MEDIA GALLERY
+        */
+
+        'gallery',
+
+        /*
+        | OPTIONAL FUTURE FIELDS
+        */
+
+        'project_media',
+
+        'project_videos',
+
+        'media_details',
+
+        /*
+        | TIMESTAMPS
+        */
+
+        'created_at',
+
+        'updated_at'
 
     ];
 
-    protected $useTimestamps = false;
+    /*
+    |--------------------------------------------------------------------------
+    | TIMESTAMPS
+    |--------------------------------------------------------------------------
+    */
+
+    protected $useTimestamps =
+    true;
+
+    protected $createdField =
+    'created_at';
+
+    protected $updatedField =
+    'updated_at';
+
 }

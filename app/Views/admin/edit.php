@@ -762,24 +762,90 @@ true
 : [];
 
 if(is_array($gallery)):
+foreach($gallery as $media):
 
-foreach($gallery as $image):
+/*
+|--------------------------------------------------------------------------
+| SUPPORT OLD + NEW GALLERY STRUCTURE
+|--------------------------------------------------------------------------
+*/
+
+$filePath = '';
+
+if(is_array($media))
+{
+    $filePath =
+    $media['file'] ?? '';
+}
+else
+{
+    $filePath =
+    $media;
+}
+
+/*
+|--------------------------------------------------------------------------
+| FILE EXTENSION
+|--------------------------------------------------------------------------
+*/
+
+$extension =
+pathinfo(
+    $filePath,
+    PATHINFO_EXTENSION
+);
+
+/*
+|--------------------------------------------------------------------------
+| VIDEO CHECK
+|--------------------------------------------------------------------------
+*/
+
+$isVideo =
+in_array(
+    strtolower($extension),
+    ['mp4','webm','mov','ogg']
+);
 
 ?>
 
 <div class="gallery-item">
 
+<?php if($isVideo): ?>
+
+<video
+controls
+muted
+playsinline
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+"
+>
+
+<source
+src="<?= base_url('uploads/' . $filePath) ?>"
+type="video/mp4"
+>
+
+</video>
+
+<?php else: ?>
+
 <img
-src="<?= base_url('uploads/projects/' . basename($image)) ?>"
+src="<?= base_url('uploads/' . $filePath) ?>"
 alt=""
 >
+
+<?php endif; ?>
 
 <!-- OVERLAY -->
 
 <div class="replace-overlay">
 
 <label
-for="replace<?= md5($image) ?>"
+for="replace<?= md5($filePath) ?>"
 class="replace-btn"
 >
 
@@ -791,9 +857,9 @@ Replace
 
 <input
 type="file"
-id="replace<?= md5($image) ?>"
-name="replace_images[<?= $image ?>]"
-accept="image/*"
+id="replace<?= md5($filePath) ?>"
+name="replace_images[<?= $filePath ?>]"
+accept="image/*,video/*"
 hidden
 >
 
@@ -802,10 +868,6 @@ hidden
 </div>
 
 <?php endforeach; endif; ?>
-
-</div>
-
-</div>
 
 <!-- ADD MORE -->
 
@@ -831,7 +893,7 @@ Drag & drop or click to upload new visuals
 type="file"
 name="project_files[]"
 multiple
-accept="image/*"
+accept="image/*,video/*"
 >
 
 </div>
