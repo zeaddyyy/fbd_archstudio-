@@ -6,10 +6,17 @@ use CodeIgniter\Model;
 
 class SettingModel extends Model
 {
-    protected $table = 'settings';
-    protected $primaryKey = 'id';
+    protected $table =
+    'settings';
+
+    protected $primaryKey =
+    'id';
 
     protected $allowedFields = [
+
         'site_logo'
+
     ];
+
+    protected $useTimestamps = true;
 }

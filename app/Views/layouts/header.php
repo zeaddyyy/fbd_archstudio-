@@ -132,25 +132,85 @@ body{
 /* LOGO IMAGE */
 
 .site-logo{
-    height:64px;
-
-    width:auto;
+    width:72px;
+    height:72px;
 
     object-fit:contain;
 
     display:block;
 
+    border-radius:50%;
+
+    padding:8px;
+
+    background:
+    rgba(255,255,255,0.06);
+
+    backdrop-filter:blur(18px);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
     transition:
     0.7s cubic-bezier(.19,1,.22,1);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.12);
 }
 
 /* HOVER */
 
 .logo:hover .site-logo{
     transform:
+    translateY(-4px)
     scale(1.04);
 
-    opacity:0.82;
+    background:
+    rgba(255,255,255,0.12);
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.18);
+}
+
+/* LOGO TEXT */
+
+.logo-text-wrap{
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    margin-left:16px;
+}
+
+/* TITLE */
+
+.logo-title{
+    font-size:18px;
+
+    font-weight:500;
+
+    letter-spacing:0.12em;
+
+    color:white;
+
+    line-height:1;
+}
+
+/* SUBTITLE */
+
+.logo-subtitle{
+    margin-top:8px;
+
+    font-size:10px;
+
+    letter-spacing:0.28em;
+
+    text-transform:uppercase;
+
+    color:
+    rgba(255,255,255,0.58);
 }
 
 /* NAVBAR */
@@ -423,7 +483,16 @@ body{
 }
 
 .site-logo{
-    height:54px;
+    width:58px;
+    height:58px;
+}
+
+.logo-title{
+    font-size:15px;
+}
+
+.logo-subtitle{
+    font-size:8px;
 }
 
 }
@@ -437,12 +506,25 @@ body{
 }
 
 .site-logo{
-    height:46px;
+    width:52px;
+    height:52px;
 }
 
 .contact-btn{
     width:170px;
     height:54px;
+}
+
+.logo-text-wrap{
+    margin-left:12px;
+}
+
+.logo-title{
+    font-size:13px;
+}
+
+.logo-subtitle{
+    display:none;
 }
 
 }
@@ -481,21 +563,23 @@ alt="Logo"
 class="site-logo"
 >
 
-<?php else: ?>
+<?php endif; ?>
 
-<span
-style="
-font-size:13px;
-letter-spacing:0.45em;
-font-weight:300;
-"
->
+<div class="logo-text-wrap">
 
-FB DESIGN STUDIO
+<h2 class="logo-title">
+
+FB Design Studio
+
+</h2>
+
+<span class="logo-subtitle">
+
+Architecture & Interiors
 
 </span>
 
-<?php endif; ?>
+</div>
 
 </a>
 

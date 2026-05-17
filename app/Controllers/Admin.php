@@ -6,7 +6,7 @@ use App\Models\ProjectModel;
 use App\Controllers\BaseController;
 use App\Models\SettingModel;
 use App\Models\AdminModel;  // ← ADDED
-
+use App\Models\HomepageProjectModel;
 class Admin extends BaseController
 {
     protected $adminModel;  // ← ADDED
@@ -560,53 +560,100 @@ class Admin extends BaseController
         );
     }
     
-    public function logo()
+public function logo()
+{
+    if(!session()->get('admin_logged_in'))
     {
-         if(!session()->get('admin_logged_in'))
-        {
-            return redirect()->to('/admin/login');
-        }
-        $model = new SettingModel();
+        return redirect()->to('/admin/login');
+    }
+    $model = new SettingModel();
 
-        $data['setting'] = $model->first();
+    $data['setting'] = $model->first();
 
-        return view('admin/logo', $data);
+    return view('admin/logo', $data);
+}
+
+public function updateLogo()
+{
+    if(!session()->get('admin_logged_in'))
+    {
+        return redirect()->to('/admin/login');
     }
 
-    public function updateLogo()
+    $settingModel =
+    new \App\Models\SettingModel();
+
+    $setting =
+    $settingModel->first();
+
+    $file =
+    $this->request->getFile(
+        'site_logo'
+    );
+
+    if($file && $file->isValid())
     {
-         if(!session()->get('admin_logged_in'))
+        $newName =
+        $file->getRandomName();
+
+        $file->move(
+            FCPATH . 'uploads/',
+            $newName
+        );
+
+        /* DELETE OLD LOGO */
+
+        if(
+            !empty($setting['site_logo']) &&
+            file_exists(
+                FCPATH .
+                'uploads/' .
+                $setting['site_logo']
+            )
+        )
         {
-            return redirect()->to('/admin/login');
-        }
-        $model = new SettingModel();
-
-        $file = $this->request->getFile('site_logo');
-
-        if ($file && $file->isValid() && !$file->hasMoved()) {
-
-            $newName = $file->getRandomName();
-            $file->move(FCPATH . 'uploads/', $newName);
-
-            $setting = $model->first();
-
-            if ($setting) {
-
-                // delete old logo (optional but recommended)
-                if (!empty($setting['site_logo']) && file_exists(FCPATH . 'uploads/' . $setting['site_logo'])) {
-                    unlink(FCPATH . 'uploads/' . $setting['site_logo']);
-                }
-
-                // update new logo
-                $model->update($setting['id'], [
-                    'site_logo' => $newName
-                ]);
-            }
+            unlink(
+                FCPATH .
+                'uploads/' .
+                $setting['site_logo']
+            );
         }
 
-        return redirect()->to('/admin/logo')
-                ->with('success', 'Logo updated successfully');
+        /* UPDATE DATABASE */
+
+        if($setting)
+        {
+            $settingModel->update(
+                $setting['id'],
+                [
+                    'site_logo' =>
+                    $newName
+                ]
+            );
+        }
+        else
+        {
+            $settingModel->insert([
+                'site_logo' =>
+                $newName
+            ]);
+        }
+
+        return redirect()
+        ->back()
+        ->with(
+            'success',
+            'Logo updated successfully'
+        );
     }
+
+    return redirect()
+    ->back()
+    ->with(
+        'error',
+        'Logo upload failed'
+    );
+}
 
     /*
     |-----------------------------------
@@ -918,12 +965,282 @@ public function updatePassword()
     return redirect()->to('/admin')
                     ->with('success', 'Password changed successfully!');
 }
+/*
+|-----------------------------------
+| HOMEPAGE PROJECTS DASHBOARD
+|-----------------------------------
+*/
+
+public function homeProjects()
+{
+    if(!session()->get('admin_logged_in'))
+    {
+        return redirect()->to('/admin/login');
+    }
+
+    helper('text');
+
+    $model =
+    new HomepageProjectModel();
+
+    $projects =
+    $model
+    ->orderBy(
+        'id',
+        'DESC'
+    )
+    ->findAll();
+
+    return view(
+        'admin/dashboard',
+        [
+            'projects' =>
+            $projects
+        ]
+    );
+}
+/*
+|-----------------------------------
+| CREATE HOMEPAGE PROJECT
+|-----------------------------------
+*/
+
+public function createHomeProject()
+{
+    if(!session()->get('admin_logged_in'))
+    {
+        return redirect()->to('/admin/login');
+    }
+
+    return view(
+        'admin/create_home_project'
+    );
+}
+
+/*
+|-----------------------------------
+| STORE HOMEPAGE PROJECT
+|-----------------------------------
+*/
+
+public function storeHomeProject()
+{
+    if(!session()->get('admin_logged_in'))
+    {
+        return redirect()->to('/admin/login');
+    }
+
+    $model =
+    new HomepageProjectModel();
 
     /*
     |-----------------------------------
-    | LOGOUT
+    | UPLOAD PATH
     |-----------------------------------
     */
+
+    $uploadPath =
+    FCPATH .
+    'uploads/homepage/';
+
+    if (! is_dir($uploadPath))
+    {
+        mkdir(
+            $uploadPath,
+            0777,
+            true
+        );
+    }
+
+    /*
+    |-----------------------------------
+    | STORE IMAGES
+    |-----------------------------------
+    */
+
+    $uploadedImages = [];
+
+    $files =
+    $this->request->getFileMultiple(
+        'project_images'
+    );
+
+    if ($files)
+    {
+        foreach ($files as $file)
+        {
+            if (
+                $file->isValid()
+                &&
+                !$file->hasMoved()
+                &&
+                strpos(
+                    $file->getMimeType(),
+                    'image'
+                ) !== false
+            )
+            {
+                $newName =
+                $file->getRandomName();
+
+                $file->move(
+                    $uploadPath,
+                    $newName
+                );
+
+                $uploadedImages[] =
+                $newName;
+            }
+        }
+    }
+
+    /*
+    |-----------------------------------
+    | THUMBNAIL
+    |-----------------------------------
+    */
+
+    $thumbnail =
+    ! empty($uploadedImages)
+    ? $uploadedImages[0]
+    : '';
+
+    /*
+    |-----------------------------------
+    | INSERT
+    |-----------------------------------
+    */
+
+    $model->insert([
+
+        'title' =>
+        $this->request->getPost(
+            'title'
+        ),
+
+        'description' =>
+        $this->request->getPost(
+            'description'
+        ),
+
+        'location' =>
+        $this->request->getPost(
+            'location'
+        ),
+
+        'year' =>
+        $this->request->getPost(
+            'year'
+        ),
+
+        'designer' =>
+        $this->request->getPost(
+            'designer'
+        ),
+
+        'team' =>
+        $this->request->getPost(
+            'team'
+        ),
+
+        'area' =>
+        $this->request->getPost(
+            'area'
+        ),
+
+        'category' =>
+        $this->request->getPost(
+            'category'
+        ),
+
+        'layout_type' =>
+        $this->request->getPost(
+            'layout_type'
+        ),
+
+        'thumbnail' =>
+        $thumbnail,
+
+        'gallery' =>
+        json_encode(
+            $uploadedImages
+        )
+
+    ]);
+
+    return redirect()
+    ->to('/admin/home-projects')
+    ->with(
+        'success',
+        'Homepage Project Added Successfully'
+    );
+}
+
+/*
+|-----------------------------------
+| DELETE HOMEPAGE PROJECT
+|-----------------------------------
+*/
+
+public function deleteHomeProject(?int $id = null)
+{
+    if(!session()->get('admin_logged_in'))
+    {
+        return redirect()->to('/admin/login');
+    }
+
+    $model =
+    new HomepageProjectModel();
+
+    $project =
+    $model->find($id);
+
+    if(!$project)
+    {
+        return redirect()
+        ->to('/admin/home-projects');
+    }
+
+    /*
+    |-----------------------------------
+    | DELETE GALLERY
+    |-----------------------------------
+    */
+
+    $gallery =
+    json_decode(
+        $project['gallery'],
+        true
+    ) ?? [];
+
+    foreach($gallery as $image)
+    {
+        $path =
+        FCPATH .
+        'uploads/homepage/' .
+        $image;
+
+        if(file_exists($path))
+        {
+            unlink($path);
+        }
+    }
+
+    $model->delete($id);
+
+    return redirect()
+    ->to('/admin/home-projects')
+    ->with(
+        'success',
+        'Homepage Project Deleted'
+    );
+}
+
+/*
+|-----------------------------------
+| LOGOUT
+|-----------------------------------
+*/
 
     public function logout()
     {

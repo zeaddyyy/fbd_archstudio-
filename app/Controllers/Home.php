@@ -3,18 +3,56 @@
 namespace App\Controllers;
 
 use App\Models\SettingModel;
-use App\Models\ProjectModel;
+use App\Models\HomepageProjectModel;
 
 class Home extends BaseController
 {
     public function index()
     {
-        $settingModel = new SettingModel();
-        $projectModel = new ProjectModel();
+        /*
+        |--------------------------------------------------------------------------
+        | MODELS
+        |--------------------------------------------------------------------------
+        */
 
-        $data['setting'] = $settingModel->first();
-        $data['projects'] = $projectModel->findAll();
+        $settingModel =
+        new SettingModel();
 
-        return view('home', $data);
+        $homepageProjectModel =
+        new HomepageProjectModel();
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATA
+        |--------------------------------------------------------------------------
+        */
+
+        $data['setting'] =
+        $settingModel->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | HOMEPAGE PROJECTS
+        |--------------------------------------------------------------------------
+        */
+
+        $data['projects'] =
+        $homepageProjectModel
+        ->orderBy(
+            'id',
+            'DESC'
+        )
+        ->findAll();
+
+        /*
+        |--------------------------------------------------------------------------
+        | VIEW
+        |--------------------------------------------------------------------------
+        */
+
+        return view(
+            'home',
+            $data
+        );
     }
 }
