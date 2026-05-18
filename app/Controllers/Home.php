@@ -56,6 +56,7 @@ class Home extends BaseController
         );
     }
 
+<<<<<<< HEAD
     /*
     |--------------------------------------------------------------------------
     | ACHIEVEMENTS PAGE
@@ -128,5 +129,15 @@ class Home extends BaseController
             'about',
             $data
         );
+=======
+    public function about()
+    {
+        return view('about');
+    }
+
+    public function achievements()
+    {
+        return view('achievements');
+>>>>>>> 41f5f4d (Redesigned nd video support)
     }
 }
