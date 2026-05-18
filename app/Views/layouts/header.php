@@ -596,12 +596,22 @@ HOME
 
 </a>
 
+
+
 <a
 href="/projects"
 class="nav-link"
 >
 
 PROJECTS
+
+</a>
+<a
+href="/about"
+class="nav-link"
+>
+
+ABOUT
 
 </a>
 
@@ -664,6 +674,15 @@ onclick="toggleMenu()"
 >
 
 Home
+
+</a>
+
+<a
+href="/about"
+onclick="toggleMenu()"
+>
+
+About
 
 </a>
 

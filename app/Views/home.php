@@ -64,6 +64,21 @@ Beyond Space
 
 </h1>
 
+<!-- SLOGAN SECTION -->
+<div class="hero-slogan">
+    <div class="achievement-badge">
+        <i class="ri-award-line"></i>
+        <span>15+ Years of Excellence</span>
+    </div>
+    <div class="slogan-text">
+        <span class="highlight">150+ Projects Delivered</span> 
+        <span class="divider">|</span>
+        <span>10 International Awards</span>
+        <span class="divider">|</span>
+        <span>98% Client Satisfaction</span>
+    </div>
+</div>
+
 <p>
 
 Crafting cinematic luxury interiors,
@@ -72,14 +87,27 @@ immersive spatial experiences.
 
 </p>
 
-<a
-href="#projects"
-class="hero-btn"
->
+<div class="hero-buttons">
+    <a
+    href="#projects"
+    class="hero-btn"
+    >
 
-VIEW PROJECTS
+    VIEW PROJECTS
 
-</a>
+    </a>
+    
+    <!-- ACHIEVEMENT BUTTON -->
+    <a
+    href="/achievements"
+    class="achievement-btn"
+    >
+
+    OUR ACHIEVEMENTS
+    <i class="ri-trophy-line"></i>
+
+    </a>
+</div>
 
 </div>
 
@@ -390,6 +418,7 @@ PROJECT DETAILS
 </div>
 
 </div>
+
 <!-- FLOATING SOCIAL -->
 
 <div class="floating-social">
@@ -431,6 +460,7 @@ WhatsApp
 </a>
 
 </div>
+
 <style>
 
 /* RESET */
@@ -507,55 +537,101 @@ body{
     flex-direction:column;
 
     justify-content:center;
+    
+    padding-top: 80px;
 }
 
-/* MINI */
-
+/* MINI - Bigger Font */
 .hero-mini{
-    font-size:11px;
-
-    letter-spacing:0.45em;
-
+    font-size:24px;
+    letter-spacing:0.35em;
     color:#666;
-
-    margin-bottom:30px;
+    margin-bottom:15px;
+    font-weight:600;
+    text-transform:uppercase;
 }
 
-/* TITLE */
-
+/* TITLE - Smaller Font */
 .hero-content h1{
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    font-size:9vw;
-
-    line-height:0.88;
-
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(42px, 5vw, 64px);
+    line-height:1.15;
     font-weight:300;
+    margin-bottom:25px;
+    letter-spacing:-0.02em;
+}
+
+/* SLOGAN STYLES */
+.hero-slogan {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.achievement-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0,0,0,0.05);
+    backdrop-filter: blur(10px);
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.achievement-badge i {
+    font-size: 14px;
+    color: #c9a03d;
+}
+
+.achievement-badge span {
+    color: #333;
+    font-weight: 500;
+}
+
+.slogan-text {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: #555;
+}
+
+.slogan-text .highlight {
+    color: #c9a03d;
+    font-weight: 600;
+}
+
+.slogan-text .divider {
+    color: #ccc;
 }
 
 /* TEXT */
 
 .hero-content p{
-    margin-top:36px;
-
+    margin-top: 20px;
     max-width:560px;
-
-    line-height:2;
-
+    line-height:1.8;
     color:#555;
-
-    font-size:16px;
+    font-size:15px;
 }
 
-/* BUTTON */
+/* BUTTON CONTAINER */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
 
+/* ORIGINAL BUTTON */
 .hero-btn{
-    margin-top:42px;
-
-    width:240px;
-    height:70px;
+    width:220px;
+    height:60px;
 
     display:flex;
     justify-content:center;
@@ -571,7 +647,7 @@ body{
 
     letter-spacing:0.28em;
 
-    font-size:11px;
+    font-size:10px;
 
     transition:0.5s;
 }
@@ -579,6 +655,52 @@ body{
 .hero-btn:hover{
     transform:
     translateY(-4px);
+}
+
+/* ACHIEVEMENT BUTTON */
+.achievement-btn{
+    width:240px;
+    height:60px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 10px;
+
+    text-decoration:none;
+
+    border-radius:100px;
+
+    background: transparent;
+
+    color:#111;
+
+    letter-spacing:0.28em;
+
+    font-size:10px;
+
+    font-weight: 600;
+
+    border: 1.5px solid #111;
+
+    transition: 0.5s;
+}
+
+.achievement-btn i {
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.achievement-btn:hover{
+    transform:
+    translateY(-4px);
+    
+    background: #111;
+    color: white;
+}
+
+.achievement-btn:hover i {
+    transform: scale(1.1);
 }
 
 /* SCROLL */
@@ -603,13 +725,13 @@ body{
 /* PROJECTS */
 
 .projects-section{
-    padding:120px 5%;
+    padding:100px 5%;
 }
 
 /* TOP */
 
 .section-top{
-    margin-bottom:60px;
+    margin-bottom:50px;
 }
 
 .section-mini{
@@ -619,7 +741,7 @@ body{
 
     color:#777;
 
-    margin-bottom:18px;
+    margin-bottom:15px;
 }
 
 .section-top h2{
@@ -627,7 +749,7 @@ body{
     'Cormorant Garamond',
     serif;
 
-    font-size:82px;
+    font-size:clamp(42px, 6vw, 72px);
 
     font-weight:300;
 }
@@ -696,7 +818,7 @@ body{
 
     align-items:flex-end;
 
-    padding:30px;
+    padding:25px;
 
     opacity:0;
 
@@ -710,18 +832,18 @@ body{
 .project-details h3{
     color:white;
 
-    font-size:28px;
+    font-size:24px;
 
     font-weight:300;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .project-details span{
     color:
     rgba(255,255,255,0.75);
 
-    font-size:11px;
+    font-size:10px;
 
     letter-spacing:0.25em;
 }
@@ -748,13 +870,13 @@ body{
 
     margin:auto;
 
-    padding:140px 0;
+    padding:100px 0;
 
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
-    gap:100px;
+    gap:80px;
 }
 
 .about-left h2{
@@ -762,7 +884,7 @@ body{
     'Cormorant Garamond',
     serif;
 
-    font-size:6vw;
+    font-size:clamp(36px, 5vw, 60px);
 
     line-height:0.95;
 
@@ -770,18 +892,18 @@ body{
 }
 
 .about-right p{
-    line-height:2.1;
+    line-height:2;
 
     color:#555;
 
-    font-size:17px;
+    font-size:16px;
 
-    margin-bottom:40px;
+    margin-bottom:35px;
 }
 
 .about-btn{
-    width:250px;
-    height:70px;
+    width:220px;
+    height:60px;
 
     display:flex;
 
@@ -798,7 +920,7 @@ body{
 
     letter-spacing:0.28em;
 
-    font-size:11px;
+    font-size:10px;
 
     transition:0.5s;
 }
@@ -934,7 +1056,7 @@ body{
 /* RIGHT */
 
 .lightbox-right{
-    padding:80px 50px;
+    padding:60px 40px;
 
     overflow-y:auto;
 }
@@ -954,13 +1076,13 @@ body{
     'Cormorant Garamond',
     serif;
 
-    font-size:68px;
+    font-size:clamp(36px, 5vw, 58px);
 
     font-weight:300;
 
-    line-height:0.95;
+    line-height:1;
 
-    margin-bottom:24px;
+    margin-bottom:20px;
 }
 
 /* LOCATION */
@@ -972,7 +1094,7 @@ body{
 
     gap:10px;
 
-    margin-bottom:30px;
+    margin-bottom:25px;
 
     color:#777;
 
@@ -989,9 +1111,9 @@ body{
     grid-template-columns:
     repeat(2,1fr);
 
-    gap:24px;
+    gap:20px;
 
-    margin-bottom:40px;
+    margin-bottom:35px;
 }
 
 .meta-item span{
@@ -1003,15 +1125,15 @@ body{
 
     color:#888;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .meta-item p{
-    font-size:15px;
+    font-size:14px;
 
     color:#111;
 
-    line-height:1.7;
+    line-height:1.6;
 }
 
 /* DESC */
@@ -1019,17 +1141,18 @@ body{
 .lightbox-right p{
     color:#555;
 
-    line-height:2;
+    line-height:1.9;
 
-    font-size:16px;
+    font-size:15px;
 }
+
 /* FLOATING SOCIAL */
 
 .floating-social{
     position:fixed;
 
-    right:30px;
-    bottom:30px;
+    right:25px;
+    bottom:25px;
 
     z-index:999999;
 
@@ -1037,7 +1160,7 @@ body{
 
     flex-direction:column;
 
-    gap:18px;
+    gap:15px;
 }
 
 /* BUTTON */
@@ -1045,8 +1168,8 @@ body{
 .social-btn{
     position:relative;
 
-    width:72px;
-    height:72px;
+    width:65px;
+    height:65px;
 
     border-radius:50%;
 
@@ -1099,7 +1222,7 @@ body{
 
     z-index:2;
 
-    font-size:32px;
+    font-size:28px;
 
     transition:0.5s;
 }
@@ -1157,7 +1280,7 @@ body{
 
     color:white;
 
-    padding:14px 22px;
+    padding:12px 20px;
 
     border-radius:100px;
 
@@ -1244,83 +1367,190 @@ body{
 
 }
 
-/* MOBILE */
-
-@media(max-width:768px){
-
-.floating-social{
-    right:18px;
-    bottom:18px;
-}
-
-.social-btn{
-    width:60px;
-    height:60px;
-}
-
-.social-btn i{
-    font-size:28px;
-}
-
-.social-tooltip{
-    display:none;
-}
-
-}
-/* MOBILE */
-
+/* RESPONSIVE */
 @media(max-width:992px){
-
-.projects-grid{
-    grid-template-columns:
-    repeat(2,1fr);
-}
-
-.lightbox-content{
-    grid-template-columns:1fr;
-
-    height:95vh;
-}
-
+    .projects-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+    
+    .lightbox-content{
+        grid-template-columns:1fr;
+        height:95vh;
+    }
 }
 
 @media(max-width:768px){
-
-.hero-content h1{
-    font-size:84px;
+    .hero-content{
+        padding-top: 100px;
+    }
+    
+    .hero-mini{
+        font-size:14px;
+        letter-spacing:0.3em;
+    }
+    
+    .hero-content h1{
+        font-size:clamp(36px, 8vw, 48px);
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-btn, .achievement-btn {
+        width: 100%;
+        max-width: 260px;
+    }
+    
+    .hero-slogan{
+        margin-top:15px;
+    }
+    
+    .slogan-text {
+        font-size: 9px;
+        gap: 6px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .slogan-text .divider {
+        display: none;
+    }
+    
+    .achievement-badge{
+        font-size:9px;
+        padding:4px 12px;
+    }
+    
+    .hero-content p{
+        font-size:13px;
+        line-height:1.6;
+    }
+    
+    .projects-grid{
+        grid-template-columns:1fr;
+    }
+    
+    .project-item.large,
+    .project-item.wide,
+    .project-item.tall{
+        grid-column:span 1;
+        grid-row:span 1;
+    }
+    
+    .about-section{
+        grid-template-columns:1fr;
+        gap:50px;
+        padding:60px 0;
+    }
+    
+    .about-left h2{
+        font-size:clamp(32px, 8vw, 48px);
+    }
+    
+    .about-right p{
+        font-size:14px;
+    }
+    
+    .lightbox-right h2{
+        font-size:clamp(28px, 6vw, 38px);
+    }
+    
+    .popup-meta{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+    
+    .lightbox-right{
+        padding:30px 25px;
+    }
+    
+    .floating-social{
+        right:15px;
+        bottom:15px;
+    }
+    
+    .social-btn{
+        width:55px;
+        height:55px;
+    }
+    
+    .social-btn i{
+        font-size:24px;
+    }
+    
+    .social-tooltip{
+        display:none;
+    }
 }
 
-.section-top h2{
-    font-size:56px;
+@media(max-width:480px){
+    .hero-content{
+        padding-top: 80px;
+    }
+    
+    .hero-mini{
+        font-size:12px;
+        letter-spacing:0.25em;
+    }
+    
+    .hero-content h1{
+        font-size:clamp(32px, 7vw, 42px);
+    }
+    
+    .hero-btn, .achievement-btn, .about-btn{
+        height:50px;
+        font-size:9px;
+    }
+    
+    .hero-btn{
+        width:180px;
+    }
+    
+    .achievement-btn{
+        width:200px;
+    }
+    
+    .section-top h2{
+        font-size:clamp(32px, 7vw, 42px);
+    }
+    
+    .project-details h3{
+        font-size:20px;
+    }
 }
 
-.projects-grid{
-    grid-template-columns:1fr;
+/* Laptop Screen Fix - No Overlap */
+@media(min-width:769px) and (max-width:1366px){
+    .hero-content{
+        padding-top: 100px;
+    }
+    
+    .hero-mini{
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .hero-content h1{
+        font-size: clamp(48px, 4.5vw, 58px);
+        margin-bottom: 20px;
+    }
 }
 
-.project-item.large,
-.project-item.wide,
-.project-item.tall{
-    grid-column:span 1;
-    grid-row:span 1;
-}
-
-.about-section{
-    grid-template-columns:1fr;
-}
-
-.about-left h2{
-    font-size:60px;
-}
-
-.lightbox-right h2{
-    font-size:44px;
-}
-
-.popup-meta{
-    grid-template-columns:1fr;
-}
-
+/* Large Desktop */
+@media(min-width:1367px){
+    .hero-content{
+        padding-top: 80px;
+    }
+    
+    .hero-mini{
+        font-size: 18px;
+    }
+    
+    .hero-content h1{
+        font-size: clamp(52px, 4.5vw, 64px);
+    }
 }
 
 </style>
@@ -1355,30 +1585,40 @@ gsap.from(
 gsap.from(
 '.hero-content h1',
 {
-    y:120,
+    y:100,
     opacity:0,
-    duration:1.8,
+    duration:1.5,
     delay:0.2,
     ease:'power4.out'
 }
 );
 
 gsap.from(
-'.hero-content p',
-{
-    y:60,
-    opacity:0,
-    duration:1.3,
-    delay:0.5
-}
-);
-
-gsap.from(
-'.hero-btn',
+'.hero-slogan',
 {
     y:40,
     opacity:0,
     duration:1.2,
+    delay:0.4
+}
+);
+
+gsap.from(
+'.hero-content p',
+{
+    y:40,
+    opacity:0,
+    duration:1.2,
+    delay:0.6
+}
+);
+
+gsap.from(
+'.hero-buttons',
+{
+    y:30,
+    opacity:0,
+    duration:1,
     delay:0.8
 }
 );
@@ -1401,7 +1641,7 @@ gsap.utils.toArray(
         opacity:1,
         y:0,
 
-        duration:1.4,
+        duration:1.2,
 
         delay:i * 0.05,
 
