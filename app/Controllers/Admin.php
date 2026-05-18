@@ -152,7 +152,7 @@ class Admin extends BaseController
 
         if ($files) {
 
-            foreach ($files as $file) {
+            foreach ($files as $index => $file) {
 
                 if (
                     $file
@@ -240,16 +240,40 @@ class Admin extends BaseController
                 |---------------------------
                 */
 
-                    $uploadedImages[] = [
+                    $mediaTitles =
+$this->request->getPost(
+'media_titles'
+) ?? [];
 
-                        'file' =>
-                        'projects/' .
-                            $newName,
+$mediaDescriptions =
+$this->request->getPost(
+'media_descriptions'
+) ?? [];
 
-                        'type' =>
-                        $type
+/*
+|--------------------------------------------------------------------------
+| SAVE MEDIA
+|--------------------------------------------------------------------------
+*/
 
-                    ];
+$uploadedImages[] = [
+
+    'file' =>
+    'projects/' .
+    $newName,
+
+    'type' =>
+    $type,
+
+    'title' =>
+    $mediaTitles[$index]
+    ?? 'Project Media',
+
+    'description' =>
+    $mediaDescriptions[$index]
+    ?? ''
+
+];
                 }
             }
         }
@@ -548,7 +572,7 @@ class Admin extends BaseController
             'uploads/projects/';
 
         if ($files) {
-            foreach ($files as $file) {
+            foreach ($files as $index => $file) {
                 if (
                     $file->isValid()
                     &&

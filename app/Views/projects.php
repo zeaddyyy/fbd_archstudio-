@@ -240,13 +240,26 @@ id="imageViewer"
     id="viewerImage"
     src=""
     >
+<div
+class="viewer-info"
+id="viewerInfo"
+>
 
-    <div
-    class="viewer-thumbnails"
-    id="viewerThumbnails"
-    >
-    </div>
+    <h3 id="viewerTitle">
+        Project Media
+    </h3>
 
+    <p id="viewerDescription">
+        Description
+    </p>
+
+</div>
+
+<div
+class="viewer-thumbnails"
+id="viewerThumbnails"
+>
+</div>
 </div>
 
 <style>
@@ -773,6 +786,52 @@ id="imageViewer"
     border:
     2px solid white;
 }
+/* VIEWER INFO */
+
+.viewer-info{
+    width:84vw;
+
+    margin-top:28px;
+
+    margin-bottom:24px;
+
+    padding:28px 34px;
+
+    border-radius:28px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(20px);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    color:white;
+}
+
+.viewer-info h3{
+    font-size:42px;
+
+    font-weight:300;
+
+    margin-bottom:12px;
+
+    font-family:
+    'Cormorant Garamond',
+    serif;
+}
+
+.viewer-info p{
+    font-size:15px;
+
+    line-height:2;
+
+    color:
+    rgba(255,255,255,0.72);
+
+    max-width:900px;
+}
 
 /* MOBILE */
 
@@ -861,19 +920,48 @@ function updateViewer()
 
     let filePath = '';
 
+    let mediaTitle =
+    'Project Media';
+
+    let mediaDescription =
+    'Luxury architectural presentation.';
+
+    /*
+    |--------------------------------------------------------------------------
+    | MEDIA OBJECT
+    |--------------------------------------------------------------------------
+    */
+
     if(typeof current === 'object')
     {
         filePath =
         current.file || '';
-    }
-    else
-    {
-        filePath =
-        current;
+
+        mediaTitle =
+        current.title ||
+        'Project Media';
+
+        mediaDescription =
+        current.description ||
+        'Luxury architectural presentation.';
     }
 
+    else
+    {
+        filePath = current;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | TYPE
+    |--------------------------------------------------------------------------
+    */
+
     const extension =
-    filePath.split('.').pop().toLowerCase();
+    filePath
+    .split('.')
+    .pop()
+    .toLowerCase();
 
     const isVideo =
     ['mp4','mov','webm','ogg']
@@ -883,6 +971,12 @@ function updateViewer()
     document.getElementById(
     'viewerImage'
     );
+
+    /*
+    |--------------------------------------------------------------------------
+    | VIDEO
+    |--------------------------------------------------------------------------
+    */
 
     if(isVideo)
     {
@@ -909,6 +1003,12 @@ function updateViewer()
 
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | IMAGE
+    |--------------------------------------------------------------------------
+    */
+
     else
     {
 
@@ -928,6 +1028,12 @@ function updateViewer()
 
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | COUNTER
+    |--------------------------------------------------------------------------
+    */
+
     document.getElementById(
     'currentImage'
     ).innerText =
@@ -937,6 +1043,28 @@ function updateViewer()
     'totalImages'
     ).innerText =
     currentGallery.length;
+
+    /*
+    |--------------------------------------------------------------------------
+    | INFO
+    |--------------------------------------------------------------------------
+    */
+
+    document.getElementById(
+    'viewerTitle'
+    ).innerText =
+    mediaTitle;
+
+    document.getElementById(
+    'viewerDescription'
+    ).innerText =
+    mediaDescription;
+
+    /*
+    |--------------------------------------------------------------------------
+    | THUMBNAILS
+    |--------------------------------------------------------------------------
+    */
 
     let thumbs = '';
 
@@ -980,7 +1108,7 @@ function updateViewer()
     ).innerHTML =
     thumbs;
 }
-
+    
 function nextImage()
 {
     currentIndex++;

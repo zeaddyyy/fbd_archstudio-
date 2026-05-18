@@ -93,7 +93,7 @@ immersive spatial experiences.
     class="hero-btn"
     >
 
-    VIEW PROJECTS
+    VIEW HIGHLIGHTS
 
     </a>
     

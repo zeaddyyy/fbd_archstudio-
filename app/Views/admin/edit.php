@@ -1,3 +1,18 @@
+<?php
+
+// Ensure $project is defined, fallback to empty array if not passed
+$project = $project ?? [];
+
+$gallery =
+isset($project['gallery'])
+? json_decode(
+$project['gallery'],
+true
+)
+: [];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +26,7 @@ content="width=device-width, initial-scale=1.0"
 >
 
 <title>
-Edit Project
+Luxury Project Editor
 </title>
 
 <link
@@ -34,10 +49,6 @@ rel="stylesheet"
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
     background:#f5f1ea;
 
@@ -49,15 +60,16 @@ body{
 
     overflow-x:hidden;
 
-    padding:50px 0;
+    padding:60px 0;
 }
 
-/* BG */
+/* BACKGROUND */
 
 body::before{
     content:"";
 
     position:fixed;
+
     inset:0;
 
     background:
@@ -66,22 +78,22 @@ body::before{
         rgba(0,0,0,0.04),
         transparent 35%
     ),
+
     radial-gradient(
         circle at bottom right,
         rgba(201,169,110,0.14),
         transparent 35%
     );
 
-    pointer-events:none;
-
     z-index:-1;
 }
 
 /* CONTAINER */
 
-.form-container{
-    width:92%;
-    max-width:980px;
+.editor-container{
+    width:94%;
+
+    max-width:1500px;
 
     margin:auto;
 
@@ -91,47 +103,26 @@ body::before{
     border:
     1px solid rgba(255,255,255,0.5);
 
-    backdrop-filter:
-    blur(26px);
+    backdrop-filter:blur(30px);
 
-    border-radius:40px;
+    border-radius:42px;
 
-    padding:55px;
+    padding:60px;
 
     box-shadow:
-    0 25px 70px rgba(0,0,0,0.05);
-
-    position:relative;
-
-    overflow:hidden;
+    0 30px 80px rgba(0,0,0,0.06);
 }
 
-/* SHINE */
+/* TOP */
 
-.form-container::before{
-    content:"";
+.top-bar{
+    display:flex;
 
-    position:absolute;
-    inset:0;
+    justify-content:space-between;
 
-    background:
-    linear-gradient(
-        135deg,
-        rgba(255,255,255,0.35),
-        transparent
-    );
+    align-items:center;
 
-    pointer-events:none;
-}
-
-/* HEADER */
-
-.form-header{
     margin-bottom:50px;
-}
-
-.top-nav{
-    margin-bottom:34px;
 }
 
 /* BACK */
@@ -141,38 +132,31 @@ body::before{
 
     align-items:center;
 
-    gap:10px;
+    gap:12px;
 
     text-decoration:none;
 
-    background:
-    rgba(255,255,255,0.65);
+    height:58px;
 
-    border:
-    1px solid rgba(0,0,0,0.05);
-
-    height:52px;
-
-    padding:0 24px;
+    padding:0 28px;
 
     border-radius:100px;
+
+    background:
+    rgba(255,255,255,0.72);
 
     color:#111;
 
     font-size:11px;
 
-    letter-spacing:0.24em;
+    letter-spacing:0.25em;
 
     text-transform:uppercase;
 
-    transition:
-    0.6s cubic-bezier(.19,1,.22,1);
+    border:
+    1px solid rgba(0,0,0,0.05);
 
-    backdrop-filter:blur(20px);
-}
-
-.back-btn i{
-    font-size:18px;
+    transition:0.5s;
 }
 
 .back-btn:hover{
@@ -182,15 +166,16 @@ body::before{
     background:#111;
 
     color:white;
-
-    box-shadow:
-    0 20px 40px rgba(0,0,0,0.12);
 }
 
 /* HEADER */
 
-.form-header span{
-    font-size:12px;
+.page-heading span{
+    display:block;
+
+    margin-bottom:14px;
+
+    font-size:11px;
 
     letter-spacing:0.35em;
 
@@ -199,36 +184,51 @@ body::before{
     text-transform:uppercase;
 }
 
-.form-header h1{
-    font-size:74px;
+.page-heading h1{
+    font-size:90px;
 
     line-height:0.9;
 
-    font-weight:400;
+    font-weight:300;
 
     font-family:
     'Cormorant Garamond',
     serif;
 
-    color:#111;
-
-    margin-top:10px;
+    margin-bottom:20px;
 }
 
-.form-header p{
-    margin-top:20px;
+.page-heading p{
+    max-width:720px;
+
+    line-height:2;
 
     color:#666;
-
-    line-height:1.9;
-
-    max-width:620px;
 }
 
-/* GROUP */
+/* FORM */
+
+.editor-form{
+    margin-top:70px;
+}
+
+/* GRID */
+
+.form-grid{
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:34px;
+
+    margin-bottom:34px;
+}
+
+/* INPUT */
 
 .input-group{
-    margin-bottom:34px;
+    margin-bottom:30px;
 }
 
 .input-group label{
@@ -236,7 +236,7 @@ body::before{
 
     margin-bottom:14px;
 
-    font-size:12px;
+    font-size:11px;
 
     letter-spacing:0.24em;
 
@@ -245,8 +245,6 @@ body::before{
     color:#666;
 }
 
-/* INPUT */
-
 .input-wrap{
     position:relative;
 }
@@ -254,14 +252,12 @@ body::before{
 .input-wrap i{
     position:absolute;
 
-    top:50%;
-    left:22px;
-
-    transform:translateY(-50%);
-
-    font-size:20px;
+    left:24px;
+    top:24px;
 
     color:#999;
+
+    font-size:20px;
 }
 
 input,
@@ -272,21 +268,19 @@ textarea{
 
     outline:none;
 
+    border-radius:26px;
+
     background:
-    rgba(255,255,255,0.6);
+    rgba(255,255,255,0.75);
 
     border:
     1px solid rgba(0,0,0,0.05);
 
-    border-radius:24px;
-
-    padding:22px 24px 22px 62px;
+    padding:24px 24px 24px 64px;
 
     font-size:15px;
 
     font-family:'Outfit',sans-serif;
-
-    color:#111;
 
     transition:0.4s;
 }
@@ -295,20 +289,15 @@ textarea{
     min-height:220px;
 
     resize:none;
-
-    padding-top:28px;
 }
 
 input:focus,
 textarea:focus{
-    border-color:
-    rgba(0,0,0,0.18);
-
     transform:
     translateY(-2px);
 
     box-shadow:
-    0 12px 35px rgba(0,0,0,0.05);
+    0 15px 40px rgba(0,0,0,0.05);
 }
 
 /* GALLERY */
@@ -319,35 +308,56 @@ textarea:focus{
     grid-template-columns:
     repeat(
         auto-fit,
-        minmax(160px,1fr)
+        minmax(400px,1fr)
     );
 
-    gap:18px;
+    gap:34px;
+
+    margin-top:20px;
 }
 
-/* ITEM */
+/* CARD */
 
 .gallery-item{
-    position:relative;
-
     overflow:hidden;
 
-    border-radius:26px;
+    border-radius:36px;
 
-    background:white;
+    background:
+    rgba(255,255,255,0.82);
 
-    aspect-ratio:1/1;
+    border:
+    1px solid rgba(0,0,0,0.05);
 
-    cursor:pointer;
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,0.05);
 
     transition:
     0.8s cubic-bezier(.19,1,.22,1);
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.05);
 }
 
-.gallery-item img{
+.gallery-item:hover{
+    transform:
+    translateY(-10px);
+
+    box-shadow:
+    0 35px 90px rgba(0,0,0,0.12);
+}
+
+/* THUMB */
+
+.gallery-thumb{
+    position:relative;
+
+    height:340px;
+
+    overflow:hidden;
+}
+
+.gallery-thumb img,
+.gallery-thumb video{
     width:100%;
     height:100%;
 
@@ -357,39 +367,12 @@ textarea:focus{
     1.2s cubic-bezier(.19,1,.22,1);
 }
 
-.gallery-item::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,0.25),
-        transparent
-    );
-
-    opacity:0;
-
-    transition:0.5s;
+.gallery-item:hover img,
+.gallery-item:hover video{
+    transform:scale(1.06);
 }
 
-.gallery-item:hover{
-    transform:
-    translateY(-6px);
-}
-
-.gallery-item:hover img{
-    transform:
-    scale(1.08);
-}
-
-.gallery-item:hover::after{
-    opacity:1;
-}
-
-/* REPLACE OVERLAY */
+/* OVERLAY */
 
 .replace-overlay{
     position:absolute;
@@ -407,15 +390,13 @@ textarea:focus{
     opacity:0;
 
     transition:0.5s;
-
-    z-index:10;
 }
 
 .gallery-item:hover .replace-overlay{
     opacity:1;
 }
 
-/* REPLACE BUTTON */
+/* BUTTON */
 
 .replace-btn{
     display:flex;
@@ -441,81 +422,90 @@ textarea:focus{
     text-transform:uppercase;
 
     transition:0.4s;
-
-    font-weight:500;
-}
-
-.replace-btn i{
-    font-size:18px;
 }
 
 .replace-btn:hover{
-    transform:
-    scale(1.05);
+    transform:scale(1.05);
 
     background:#111;
 
     color:white;
 }
 
-/* FILE */
+/* DETAILS */
 
-.file-upload{
+.media-details{
+    padding:28px;
+}
+
+.media-details input,
+.media-details textarea{
+    padding-left:24px;
+
+    background:
+    rgba(245,241,234,0.6);
+
+    margin-bottom:16px;
+}
+
+.media-details textarea{
+    min-height:140px;
+}
+
+/* UPLOAD */
+
+.upload-box{
     position:relative;
 
     border:
     2px dashed rgba(0,0,0,0.08);
 
-    border-radius:30px;
+    border-radius:34px;
 
-    background:
-    rgba(255,255,255,0.45);
-
-    padding:55px 30px;
+    padding:70px 30px;
 
     text-align:center;
+
+    background:
+    rgba(255,255,255,0.55);
 
     overflow:hidden;
 
     transition:0.4s;
 }
 
-.file-upload:hover{
-    border-color:#111;
-
+.upload-box:hover{
     transform:
-    translateY(-3px);
+    translateY(-4px);
+
+    border-color:#111;
 }
 
-.file-upload i{
-    font-size:60px;
-
-    color:#111;
+.upload-box i{
+    font-size:70px;
 
     margin-bottom:18px;
 
     display:block;
 }
 
-.file-upload h3{
-    font-size:24px;
+.upload-box h3{
+    font-size:34px;
 
-    font-weight:400;
+    font-weight:300;
 
     font-family:
     'Cormorant Garamond',
     serif;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 }
 
-.file-upload p{
+.upload-box p{
     color:#777;
-
-    font-size:14px;
 }
 
-.file-upload input{
+.upload-box input{
     position:absolute;
 
     inset:0;
@@ -525,12 +515,47 @@ textarea:focus{
     cursor:pointer;
 }
 
-/* BUTTON */
+/* NEW MEDIA */
+
+#newMediaInputs{
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(340px,1fr)
+    );
+
+    gap:24px;
+
+    margin-top:40px;
+}
+
+/* NEW CARD */
+
+.new-media-card{
+    background:white;
+
+    border-radius:28px;
+
+    padding:24px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.05);
+}
+
+.new-media-card h4{
+    margin-bottom:18px;
+
+    font-size:18px;
+}
+
+/* SUBMIT */
 
 .submit-btn{
     width:100%;
 
-    height:74px;
+    height:78px;
 
     border:none;
 
@@ -548,73 +573,53 @@ textarea:focus{
 
     cursor:pointer;
 
-    transition:
-    0.7s cubic-bezier(.19,1,.22,1);
+    margin-top:50px;
 
-    position:relative;
-
-    overflow:hidden;
-}
-
-.submit-btn::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:-120%;
-
-    width:100%;
-    height:100%;
-
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.2),
-        transparent
-    );
-
-    transition:0.8s;
-}
-
-.submit-btn:hover::before{
-    left:120%;
+    transition:0.5s;
 }
 
 .submit-btn:hover{
     transform:
-    translateY(-5px);
-
-    background:#1f1f1f;
+    translateY(-6px);
 
     box-shadow:
-    0 25px 60px rgba(0,0,0,0.15);
+    0 30px 60px rgba(0,0,0,0.14);
 }
 
 /* MOBILE */
 
-@media(max-width:768px){
+@media(max-width:1024px){
 
-.form-container{
-    padding:34px 24px;
+.form-grid{
+    grid-template-columns:1fr;
 }
 
-.form-header h1{
+.gallery{
+    grid-template-columns:1fr;
+}
+
+.page-heading h1{
+    font-size:62px;
+}
+
+}
+
+@media(max-width:768px){
+
+.editor-container{
+    padding:34px 22px;
+}
+
+.page-heading h1{
     font-size:52px;
 }
 
 .gallery{
-    grid-template-columns:
-    repeat(
-        2,
-        1fr
-    );
+    grid-template-columns:1fr;
 }
 
-input,
-textarea{
-    padding-left:58px;
+.gallery-thumb{
+    height:260px;
 }
 
 }
@@ -625,13 +630,9 @@ textarea{
 
 <body>
 
-<div class="form-container">
+<div class="editor-container">
 
-<!-- HEADER -->
-
-<div class="form-header">
-
-<div class="top-nav">
+<div class="top-bar">
 
 <a
 href="/admin"
@@ -640,41 +641,37 @@ class="back-btn"
 
 <i class="ri-arrow-left-line"></i>
 
-Back to Dashboard
+Dashboard
 
 </a>
 
 </div>
+
+<div class="page-heading">
 
 <span>
 FB DESIGN STUDIO
 </span>
 
 <h1>
-
-Edit
-Project
-
+Edit Project
 </h1>
 
 <p>
-
-Update project information, manage gallery visuals
-and refine the architecture showcase experience.
-
+Manage cinematic project visuals, luxury presentation media,
+architectural storytelling and immersive gallery experiences.
 </p>
 
 </div>
 
-<!-- FORM -->
-
 <form
-action="/admin/update/<?= isset($project['id']) ? esc((string)$project['id']) : '' ?>"
+action="/admin/update/<?= esc((string)$project['id']) ?>"
 method="POST"
 enctype="multipart/form-data"
+class="editor-form"
 >
 
-<!-- TITLE -->
+<div class="form-grid">
 
 <div class="input-group">
 
@@ -689,36 +686,13 @@ Project Title
 <input
 type="text"
 name="title"
-value="<?= isset($project['title']) ? esc((string)$project['title']) : '' ?>"
+value="<?= esc((string)$project['title']) ?>"
 required
 >
 
 </div>
 
 </div>
-
-<!-- DESCRIPTION -->
-
-<div class="input-group">
-
-<label>
-Description
-</label>
-
-<div class="input-wrap">
-
-<i class="ri-file-text-line"></i>
-
-<textarea
-name="description"
-required
-><?= isset($project['description']) ? esc((string)$project['description']) : '' ?></textarea>
-
-</div>
-
-</div>
-
-<!-- LOCATION -->
 
 <div class="input-group">
 
@@ -733,7 +707,7 @@ Location
 <input
 type="text"
 name="location"
-value="<?= isset($project['location']) ? esc((string)$project['location']) : '' ?>"
+value="<?= esc((string)$project['location']) ?>"
 required
 >
 
@@ -741,75 +715,75 @@ required
 
 </div>
 
-<!-- GALLERY -->
+</div>
 
 <div class="input-group">
 
 <label>
-Current Gallery
+Description
 </label>
+
+<div class="input-wrap">
+
+<i class="ri-file-text-line"></i>
+
+<textarea
+name="description"
+required
+><?= esc((string)$project['description']) ?></textarea>
+
+</div>
+
+</div>
+
+<!-- GALLERY -->
 
 <div class="gallery">
 
+<?php if(is_array($gallery)): ?>
+<?php foreach($gallery as $media): ?>
+
 <?php
 
-$gallery =
-isset($project['gallery'])
-? json_decode(
-$project['gallery'],
-true
-)
-: [];
-
-if(is_array($gallery)):
-foreach($gallery as $media):
-
-/*
-|--------------------------------------------------------------------------
-| SUPPORT OLD + NEW GALLERY STRUCTURE
-|--------------------------------------------------------------------------
-*/
-
 $filePath = '';
+
+$mediaTitle = '';
+
+$mediaDescription = '';
 
 if(is_array($media))
 {
     $filePath =
     $media['file'] ?? '';
+
+    $mediaTitle =
+    $media['title'] ?? '';
+
+    $mediaDescription =
+    $media['description'] ?? '';
 }
 else
 {
-    $filePath =
-    $media;
+    $filePath = $media;
 }
-
-/*
-|--------------------------------------------------------------------------
-| FILE EXTENSION
-|--------------------------------------------------------------------------
-*/
 
 $extension =
 pathinfo(
-    $filePath,
-    PATHINFO_EXTENSION
+$filePath,
+PATHINFO_EXTENSION
 );
-
-/*
-|--------------------------------------------------------------------------
-| VIDEO CHECK
-|--------------------------------------------------------------------------
-*/
 
 $isVideo =
 in_array(
-    strtolower($extension),
-    ['mp4','webm','mov','ogg']
+strtolower($extension),
+['mp4','webm','mov','ogg']
 );
 
 ?>
 
 <div class="gallery-item">
+
+<div class="gallery-thumb">
 
 <?php if($isVideo): ?>
 
@@ -817,11 +791,6 @@ in_array(
 controls
 muted
 playsinline
-style="
-width:100%;
-height:100%;
-object-fit:cover;
-"
 >
 
 <source
@@ -840,8 +809,6 @@ alt=""
 
 <?php endif; ?>
 
-<!-- OVERLAY -->
-
 <div class="replace-overlay">
 
 <label
@@ -851,7 +818,7 @@ class="replace-btn"
 
 <i class="ri-image-edit-line"></i>
 
-Replace
+Replace Media
 
 </label>
 
@@ -867,40 +834,73 @@ hidden
 
 </div>
 
-<?php endforeach; endif; ?>
-
-<!-- ADD MORE -->
-
-<div class="input-group">
-
-<label>
-Add More Images
-</label>
-
-<div class="file-upload">
-
-<i class="ri-image-add-line"></i>
-
-<h3>
-Upload More Images
-</h3>
-
-<p>
-Drag & drop or click to upload new visuals
-</p>
+<div class="media-details">
 
 <input
-type="file"
-name="project_files[]"
-multiple
-accept="image/*,video/*"
+type="text"
+name="existing_media_titles[]"
+value="<?= esc($mediaTitle) ?>"
+placeholder="Media Title"
+>
+
+<textarea
+name="existing_media_descriptions[]"
+placeholder="Media Description"
+><?= esc($mediaDescription) ?></textarea>
+
+<input
+type="hidden"
+name="existing_media_files[]"
+value="<?= esc($filePath) ?>"
+>
+
+<input
+type="hidden"
+name="existing_media_types[]"
+value="<?= $isVideo ? 'video' : 'image' ?>"
 >
 
 </div>
 
 </div>
 
-<!-- BUTTON -->
+<?php endforeach; ?>
+<?php endif; ?>
+
+</div>
+
+<!-- UPLOAD -->
+
+<div
+class="upload-box"
+style="margin-top:50px;"
+>
+
+<i class="ri-gallery-upload-line"></i>
+
+<h3>
+Upload Cinematic Media
+</h3>
+
+<p>
+Add more architecture visuals, walkthroughs and immersive media.
+</p>
+
+<input
+type="file"
+name="project_files[]"
+id="projectFiles"
+multiple
+accept="image/*,video/*"
+>
+
+</div>
+
+<!-- NEW MEDIA DETAILS -->
+
+<div id="newMediaInputs"></div>
+
+<!-- SUBMIT -->
 
 <button
 type="submit"
@@ -914,6 +914,75 @@ Update Project
 </form>
 
 </div>
+
+<script>
+
+const projectFiles =
+document.getElementById(
+'projectFiles'
+);
+
+const newMediaInputs =
+document.getElementById(
+'newMediaInputs'
+);
+
+projectFiles.addEventListener(
+'change',
+function(e)
+{
+
+newMediaInputs.innerHTML = '';
+
+Array
+.from(e.target.files)
+.forEach((file,index)=>
+{
+
+const wrapper =
+document.createElement('div');
+
+wrapper.classList.add(
+'new-media-card'
+);
+
+wrapper.innerHTML =
+`
+<h4>
+${file.name}
+</h4>
+
+<input
+type="text"
+name="media_titles[]"
+placeholder="Media Title"
+
+style="
+margin-bottom:14px;
+padding-left:24px;
+"
+>
+
+<textarea
+name="media_descriptions[]"
+placeholder="Media Description"
+
+style="
+min-height:140px;
+padding-left:24px;
+"
+></textarea>
+`;
+
+newMediaInputs.appendChild(
+wrapper
+);
+
+});
+
+});
+
+</script>
 
 </body>
 

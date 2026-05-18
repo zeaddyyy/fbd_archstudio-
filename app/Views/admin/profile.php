@@ -71,10 +71,10 @@
         <div class="card">
             <h2>Change Password</h2>
             <?php if(session()->getFlashdata('error')): ?>
-                <div class="alert alert-error"><?= session()->getFlashdata('error') ?></div>
+                <div class="alert alert-error"><?= esc(session()->getFlashdata('error')) ?></div>
             <?php endif; ?>
             <?php if(session()->getFlashdata('success')): ?>
-                <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+                <div class="alert alert-success"><?= esc(session()->getFlashdata('success')) ?></div>
             <?php endif; ?>
             <form method="post" action="<?= base_url('admin/change-password') ?>">
                 <?= csrf_field() ?>

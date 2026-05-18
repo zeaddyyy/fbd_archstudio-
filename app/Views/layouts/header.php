@@ -616,15 +616,6 @@ ABOUT
 </a>
 
 <a
-href="/about"
-class="nav-link"
->
-
-ABOUT
-
-</a>
-
-<a
 href="/achievements"
 class="nav-link"
 >

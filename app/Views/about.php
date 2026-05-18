@@ -4,35 +4,23 @@
 
 <section class="about-page">
 
-    <!-- BACKGROUND VIDEO -->
+    <!-- BG VIDEO -->
 
-    <video
-    class="bg-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    >
+    <video autoplay muted loop playsinline>
 
         <source
-        src="<?= base_url('assets/videos/hero.mp4') ?>"
-        type="video/mp4">
+            src="<?= base_url('assets/videos/hero.mp4') ?>"
+            type="video/mp4">
 
     </video>
-
-    <!-- OVERLAY -->
 
     <div class="about-overlay"></div>
 
     <div class="about-container">
 
-        <!-- HEADER -->
+        <!-- TITLE -->
 
         <div class="about-header">
-
-            <span class="mini-label">
-                FB DESIGN STUDIO
-            </span>
 
             <h1>
                 About Studio
@@ -44,11 +32,9 @@
 
         </div>
 
-        <!-- STORY -->
+        <!-- STUDIO STORY -->
 
         <div class="studio-story">
-
-            <!-- TEXT -->
 
             <div class="story-text">
 
@@ -57,65 +43,59 @@
                 </h2>
 
                 <p>
-                    FB Design Studio is a multidisciplinary architecture and interior design practice founded with a vision to create spaces that transcend the ordinary.
+                    FB Design Studio is a multidisciplinary architecture and interior design practice founded with a vision to create spaces that transcend the ordinary. We believe that great design is not just about aesthetics—it's about creating emotional connections, telling stories through spaces, and crafting environments that inspire and elevate the human experience.
                 </p>
 
                 <p>
-                    We believe architecture is not only about structures — it is about emotion, storytelling, atmosphere, and timeless spatial experiences.
-                </p>
-
-                <p>
-                    Every project is approached with cinematic attention to detail, balancing luxury, minimalism, warmth, and material sensitivity.
+                    Our approach combines material sensitivity, spatial composition, and elevated aesthetics to produce timeless architecture that resonates with its inhabitants. Every project, whether residential, commercial, or cultural, is approached with the same level of dedication, creativity, and attention to detail.
                 </p>
 
             </div>
 
-            <!-- VIDEO -->
-
             <div class="story-image">
 
-                <div class="founder-video-container">
+               <div class="founder-video-container">
 
-                    <video
-                    class="founder-video"
-                    id="founderVideo"
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    >
+    <video
+    class="founder-video"
+    id="founderVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    >
 
-                        <source
-                        src="<?= base_url('assets/videos/founder.mp4') ?>"
-                        type="video/mp4">
+        <source
+        src="<?= base_url('assets/videos/founder.mp4') ?>"
+        type="video/mp4">
 
-                    </video>
+    </video>
 
-                    <!-- CONTROLS -->
+    <!-- CONTROLS -->
 
-                    <div class="founder-video-controls">
+    <div class="founder-video-controls">
 
-                        <button
-                        onclick="toggleFounderPlay()"
-                        id="playBtn"
-                        >
+        <button
+        onclick="toggleFounderPlay()"
+        id="playBtn"
+        >
 
-                            <i class="ri-pause-line"></i>
+            <i class="ri-pause-line"></i>
 
-                        </button>
+        </button>
 
-                        <button
-                        onclick="toggleFounderMute()"
-                        id="muteBtn"
-                        >
+        <button
+        onclick="toggleFounderMute()"
+        id="muteBtn"
+        >
 
-                            <i class="ri-volume-mute-line"></i>
+            <i class="ri-volume-mute-line"></i>
 
-                        </button>
+        </button>
 
-                    </div>
+    </div>
 
-                </div>
+</div>
 
             </div>
 
@@ -140,7 +120,7 @@
                     </h4>
 
                     <p>
-                        Carefully curated textures and materials that create warmth and timeless elegance.
+                        We carefully select and craft materials to create spaces that feel authentic, warm, and deeply connected to their environment.
                     </p>
 
                 </div>
@@ -154,7 +134,7 @@
                     </h4>
 
                     <p>
-                        Harmonious spaces designed with movement, light, depth, and emotional balance.
+                        Our designs focus on the harmony between spaces, light, and movement to create seamless and intuitive experiences.
                     </p>
 
                 </div>
@@ -168,7 +148,7 @@
                     </h4>
 
                     <p>
-                        Luxury minimalism blended with cinematic visual storytelling and refined architecture.
+                        We pursue timeless elegance that transcends trends, creating spaces that remain beautiful and relevant for years to come.
                     </p>
 
                 </div>
@@ -176,8 +156,7 @@
             </div>
 
         </div>
-
-        <!-- FOUNDER -->
+        <!-- FOUNDER SECTION -->
 
         <div class="founder-section">
 
@@ -187,42 +166,23 @@
 
             <div class="founder-card">
 
-                <!-- LEFT -->
-
                 <div class="founder-image-wrap">
 
-                    <!-- VIDEO -->
-
-                    <video
-                    class="founder-card-video"
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    >
-
-                        <source
-                        src="<?= base_url('assets/videos/founder.mp4') ?>"
-                        type="video/mp4">
-
-                    </video>
-
-                    <!-- IMAGE -->
+                    <div class="founder-glow"></div>
 
                     <img
-                    src="<?= base_url('assets/images/founder.png') ?>"
-                    alt="Founder"
-                    class="founder-overlay-image"
-                    >
+                        src="<?= base_url('assets/images/founder.png') ?>"
+                        alt="Founder"
+                        class="founder-image">
 
                 </div>
-
-                <!-- RIGHT -->
 
                 <div class="founder-content">
 
                     <span class="founder-label">
+
                         FB DESIGN STUDIO
+
                     </span>
 
                     <h2>
@@ -237,25 +197,131 @@
 
                     <p>
 
-                        Founded with a passion for timeless architecture and immersive interiors, FB Design Studio reflects a design language rooted in elegance, spatial harmony, luxury minimalism, and cinematic storytelling.
+                        Founded with a passion for timeless
+                        architecture and immersive interiors,
+                        FB Design Studio reflects a design
+                        language rooted in elegance,
+                        material sensitivity, spatial harmony,
+                        and cinematic storytelling.
+
+                        Every project is approached as a
+                        living experience — balancing luxury,
+                        minimalism, and emotional connection
+                        through architecture.
 
                     </p>
 
-                    <div class="founder-social">
+             <div class="founder-social">
 
-                        <a href="#">
-                            <i class="ri-instagram-line"></i>
-                        </a>
+    <!-- INSTAGRAM -->
 
-                        <a href="#">
-                            <i class="ri-linkedin-line"></i>
-                        </a>
+    <a
+    href="https://www.instagram.com/fbdesign.studio"
+    target="_blank"
+    aria-label="Instagram"
+    >
 
-                        <a href="#">
-                            <i class="ri-global-line"></i>
-                        </a>
+        <i class="ri-instagram-line"></i>
+
+    </a>
+
+    <!-- LINKEDIN -->
+
+    <a
+    href="https://linkedin.com"
+    target="_blank"
+    aria-label="LinkedIn"
+    >
+
+        <i class="ri-linkedin-line"></i>
+
+    </a>
+
+    <!-- WEBSITE -->
+
+    <a
+    href="https://fbdesign.studio"
+    target="_blank"
+    aria-label="Website"
+    >
+
+        <i class="ri-global-line"></i>
+
+    </a>
+
+</div>
 
                     </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- VALUES -->
+
+        <div class="values-section">
+
+            <h3>
+                Core Values
+            </h3>
+
+            <div class="values-grid">
+
+                <div class="value-card">
+
+                    <i class="ri-heart-line"></i>
+
+                    <h4>
+                        Passion
+                    </h4>
+
+                    <p>
+                        We pour our hearts into every project, driven by a genuine love for design and creation.
+                    </p>
+
+                </div>
+
+                <div class="value-card">
+
+                    <i class="ri-lightbulb-line"></i>
+
+                    <h4>
+                        Innovation
+                    </h4>
+
+                    <p>
+                        We constantly explore new ideas, materials, and techniques to push the boundaries of design.
+                    </p>
+
+                </div>
+
+                <div class="value-card">
+
+                    <i class="ri-hand-heart-line"></i>
+
+                    <h4>
+                        Integrity
+                    </h4>
+
+                    <p>
+                        We build trust through honest communication, transparency, and delivering on our promises.
+                    </p>
+
+                </div>
+
+                <div class="value-card">
+
+                    <i class="ri-group-line"></i>
+
+                    <h4>
+                        Collaboration
+                    </h4>
+
+                    <p>
+                        We believe the best results come from working closely with clients, artisans, and craftsmen.
+                    </p>
 
                 </div>
 
@@ -268,193 +334,360 @@
 </section>
 
 <style>
+    .about-page {
+        position: relative;
 
-/* PAGE */
+        min-height: 100vh;
 
-.about-page{
-    position:relative;
+        padding: 140px 6% 100px;
 
-    min-height:100vh;
+        overflow: hidden;
 
-    padding:140px 6% 120px;
+        background: #f4f1ec;
+    }
 
-    overflow:hidden;
+    /* VIDEO BG */
 
-    background:#f4f1ec;
+    .about-page > video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        blur(10px)
+        brightness(0.45);
+
+    transform: scale(1.08);
 }
 
-/* BG VIDEO */
+    /* OVERLAY */
 
-.bg-video{
-    position:absolute;
+    .about-overlay {
+        position: absolute;
+        inset: 0;
 
-    inset:0;
+        background:
+            rgba(244, 241, 236, 0.62);
+
+        backdrop-filter: blur(12px);
+    }
+
+    /* CONTAINER */
+
+    .about-container {
+        position: relative;
+
+        z-index: 2;
+    }
+
+    /* HEADER */
+
+    .about-header {
+        margin-bottom: 80px;
+    }
+
+    .about-header h1 {
+        font-size: 96px;
+
+        font-weight: 300;
+
+        color: #1a1a1a;
+
+        margin-bottom: 18px;
+
+        font-family:
+            'Cormorant Garamond',
+            serif;
+
+        line-height: 0.95;
+    }
+
+    .about-header p {
+        color: #666;
+
+        font-size: 14px;
+
+        letter-spacing: 0.18em;
+
+        text-transform: uppercase;
+    }
+
+    /* STUDIO STORY */
+
+    .studio-story {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 60px;
+
+        margin-bottom: 100px;
+    }
+
+    .story-text h2 {
+        font-size: 48px;
+
+        font-weight: 300;
+
+        color: #1a1a1a;
+
+        margin-bottom: 30px;
+
+        font-family:
+            'Cormorant Garamond',
+            serif;
+    }
+
+    .story-text p {
+        font-size: 16px;
+
+        line-height: 1.9;
+
+        color: #555;
+
+        margin-bottom: 25px;
+    }
+
+    .story-image {
+        border-radius: 28px;
+
+        overflow: hidden;
+
+        height: 450px;
+    }
+
+    .story-image img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        transition: 1.2s cubic-bezier(.19, 1, .22, 1);
+    }
+
+    .story-image:hover img {
+        transform: scale(1.05);
+    }
+
+    /* PHILOSOPHY SECTION */
+
+    .philosophy-section {
+        margin-bottom: 100px;
+    }
+
+    .philosophy-section h3 {
+        font-size: 42px;
+
+        font-weight: 300;
+
+        color: #1a1a1a;
+
+        margin-bottom: 50px;
+
+        font-family:
+            'Cormorant Garamond',
+            serif;
+
+        text-align: center;
+    }
+
+    .philosophy-grid {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 34px;
+    }
+
+    .philosophy-card {
+        background:
+            rgba(255, 255, 255, 0.45);
+
+        border:
+            1px solid rgba(255, 255, 255, 0.4);
+
+        border-radius: 28px;
+
+        padding: 40px 30px;
+
+        text-align: center;
+
+        backdrop-filter: blur(24px);
+
+        transition: 0.5s;
+    }
+
+    .philosophy-card:hover {
+        transform:
+            translateY(-10px);
+
+        box-shadow:
+            0 30px 80px rgba(0, 0, 0, 0.12);
+    }
+
+    .philosophy-card i {
+        font-size: 54px;
+
+        color: #c9a03d;
+
+        margin-bottom: 25px;
+
+        display: inline-block;
+    }
+
+    .philosophy-card h4 {
+        font-size: 24px;
+
+        font-weight: 500;
+
+        color: #1a1a1a;
+
+        margin-bottom: 20px;
+
+        font-family:
+            'Cormorant Garamond',
+            serif;
+    }
+
+    .philosophy-card p {
+        font-size: 14px;
+
+        line-height: 1.7;
+
+        color: #666;
+    }
+
+
+    /* FOUNDER SECTION */
+
+    .founder-section {
+        margin-bottom: 120px;
+    }
+
+    .founder-section h3 {
+        font-size: 46px;
+
+        font-weight: 300;
+
+        color: #1a1a1a;
+
+        margin-bottom: 60px;
+
+        text-align: center;
+
+        font-family:
+            'Cormorant Garamond',
+            serif;
+    }
+
+    /* CARD */
+
+    .founder-card {
+        position: relative;
+
+        display: grid;
+
+        grid-template-columns:
+            460px 1fr;
+
+        gap: 70px;
+
+        align-items: center;
+
+        padding: 50px;
+
+        border-radius: 40px;
+
+        overflow: hidden;
+
+        background:
+            rgba(255, 255, 255, 0.45);
+
+        border:
+            1px solid rgba(255, 255, 255, 0.5);
+
+        backdrop-filter: blur(28px);
+
+        box-shadow:
+            0 30px 90px rgba(0, 0, 0, 0.08);
+    }
+
+    /* IMAGE */
+
+    .founder-image-wrap {
+        position: relative;
+
+        height: 620px;
+
+        border-radius: 34px;
+
+        overflow: hidden;
+    }
+
+    .founder-glow {
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            radial-gradient(circle at center,
+                rgba(201, 160, 61, 0.25),
+                transparent 70%);
+
+        z-index: 2;
+
+        pointer-events: none;
+    }
+.founder-video{
+    position:relative;
 
     width:100%;
     height:100%;
 
     object-fit:cover;
 
-    filter:
-    blur(12px)
-    brightness(0.4);
+    border-radius:34px;
 
-    transform:scale(1.08);
+    display:block;
+
+    z-index:1;
+
+    transition:
+    1.2s cubic-bezier(.19,1,.22,1);
 }
-
-/* OVERLAY */
-
-.about-overlay{
-    position:absolute;
-
-    inset:0;
-
-    background:
-    rgba(244,241,236,0.72);
-
-    backdrop-filter:blur(14px);
-}
-
-/* CONTAINER */
-
-.about-container{
+.founder-image-wrap{
     position:relative;
 
-    z-index:2;
-}
+    width:100%;
 
-/* HEADER */
+    min-height:620px;
 
-.about-header{
-    margin-bottom:100px;
-}
-
-.mini-label{
-    display:inline-block;
-
-    margin-bottom:20px;
-
-    font-size:11px;
-
-    letter-spacing:0.35em;
-
-    text-transform:uppercase;
-
-    color:#777;
-}
-
-.about-header h1{
-    font-size:110px;
-
-    line-height:0.9;
-
-    font-weight:300;
-
-    margin-bottom:20px;
-
-    color:#111;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
-
-.about-header p{
-    font-size:15px;
-
-    letter-spacing:0.2em;
-
-    text-transform:uppercase;
-
-    color:#666;
-}
-
-/* STORY */
-
-.studio-story{
-    display:grid;
-
-    grid-template-columns:
-    1fr 1fr;
-
-    gap:80px;
-
-    align-items:center;
-
-    margin-bottom:120px;
-}
-
-/* TEXT */
-
-.story-text h2{
-    font-size:58px;
-
-    line-height:0.95;
-
-    font-weight:300;
-
-    margin-bottom:30px;
-
-    color:#111;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
-
-.story-text p{
-    font-size:15px;
-
-    line-height:2;
-
-    color:#555;
-
-    margin-bottom:22px;
-}
-
-/* STORY VIDEO */
-
-.story-image{
-    position:relative;
-
-    height:720px;
-
-    border-radius:40px;
+    border-radius:34px;
 
     overflow:hidden;
 
     background:#e9e4dc;
-}
 
-/* VIDEO */
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:24px;
+}
+/* VIDEO CONTAINER */
 
 .founder-video-container{
     position:relative;
 
     width:100%;
     height:100%;
-}
-
-.founder-video{
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-
-    background:#e9e4dc;
-
-    border-radius:40px;
-
-    transition:
-    1.2s cubic-bezier(.19,1,.22,1);
-}
-
-.story-image:hover .founder-video{
-    transform:scale(1.02);
 }
 
 /* CONTROLS */
@@ -472,6 +705,8 @@
     z-index:20;
 }
 
+/* BUTTON */
+
 .founder-video-controls button{
     width:58px;
     height:58px;
@@ -481,9 +716,11 @@
     border-radius:50%;
 
     background:
-    rgba(255,255,255,0.14);
+    rgba(255,255,255,0.12);
 
     backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
 
     border:
     1px solid rgba(255,255,255,0.15);
@@ -497,7 +734,11 @@
 
     cursor:pointer;
 
-    transition:0.4s;
+    transition:
+    0.45s cubic-bezier(.19,1,.22,1);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.18);
 }
 
 .founder-video-controls button:hover{
@@ -506,382 +747,314 @@
     scale(1.06);
 
     background:
-    rgba(255,255,255,0.24);
+    rgba(255,255,255,0.2);
 }
 
 .founder-video-controls i{
     font-size:24px;
 }
 
-/* PHILOSOPHY */
-
-.philosophy-section{
-    margin-bottom:120px;
-}
-
-.philosophy-section h3{
-    text-align:center;
-
-    font-size:52px;
-
-    font-weight:300;
-
-    margin-bottom:60px;
-
-    color:#111;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
-
-.philosophy-grid{
-    display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap:34px;
-}
-
-.philosophy-card{
-    padding:42px 34px;
-
-    border-radius:34px;
-
-    background:
-    rgba(255,255,255,0.45);
-
-    border:
-    1px solid rgba(255,255,255,0.45);
-
-    backdrop-filter:blur(26px);
-
-    transition:0.5s;
-}
-
-.philosophy-card:hover{
-    transform:
-    translateY(-10px);
-
-    box-shadow:
-    0 30px 80px rgba(0,0,0,0.08);
-}
-
-.philosophy-card i{
-    font-size:54px;
-
-    color:#c9a03d;
-
-    margin-bottom:24px;
-
-    display:inline-block;
-}
-
-.philosophy-card h4{
-    font-size:30px;
-
-    margin-bottom:18px;
-
-    color:#111;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
-
-.philosophy-card p{
-    font-size:14px;
-
-    line-height:1.9;
-
-    color:#666;
-}
-
-/* FOUNDER */
-
-.founder-section{
-    margin-bottom:40px;
-}
-
-.founder-section h3{
-    text-align:center;
-
-    font-size:58px;
-
-    margin-bottom:70px;
-
-    font-weight:300;
-
-    color:#111;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
-
-/* CARD */
-
-.founder-card{
-    display:grid;
-
-    grid-template-columns:
-    460px 1fr;
-
-    gap:80px;
-
-    align-items:center;
-
-    padding:50px;
-
-    border-radius:42px;
-
-    background:
-    rgba(255,255,255,0.45);
-
-    border:
-    1px solid rgba(255,255,255,0.5);
-
-    backdrop-filter:blur(30px);
-
-    box-shadow:
-    0 30px 90px rgba(0,0,0,0.08);
-}
-
-/* IMAGE WRAP */
-
-.founder-image-wrap{
-    position:relative;
-
-    width:100%;
-
-    height:720px;
-
-    border-radius:36px;
-
-    overflow:hidden;
-
-    background:#000;
-}
-
-/* VIDEO */
-
-.founder-card-video{
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    z-index:1;
-
-    transition:1.2s;
-}
-
-/* IMAGE */
-
-.founder-overlay-image{
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    z-index:2;
-
-    mix-blend-mode:lighten;
-
-    opacity:0.92;
-
-    pointer-events:none;
-
-    transition:1.2s;
-}
-
-/* HOVER */
-
-.founder-image-wrap:hover .founder-card-video{
-    transform:scale(1.04);
-}
-
-.founder-image-wrap:hover .founder-overlay-image{
-    transform:scale(1.02);
-}
-
 /* CONTENT */
 
-.founder-label{
-    display:inline-block;
+    .founder-content {
+        position: relative;
 
-    margin-bottom:22px;
+        z-index: 3;
+    }
 
-    font-size:11px;
+    .founder-label {
+        display: inline-block;
 
-    letter-spacing:0.35em;
+        margin-bottom: 20px;
 
-    text-transform:uppercase;
+        font-size: 10px;
 
-    color:#888;
-}
+        letter-spacing: 0.35em;
 
-.founder-content h2{
-    font-size:92px;
+        text-transform: uppercase;
 
-    line-height:0.88;
+        color: #888;
+    }
 
-    margin-bottom:28px;
+    .founder-content h2 {
+        font-size: 86px;
 
-    font-weight:300;
+        line-height: 0.9;
 
-    color:#111;
+        font-weight: 300;
 
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
+        margin-bottom: 24px;
 
-.founder-role{
-    display:inline-flex;
+        color: #111;
 
-    align-items:center;
+        font-family:
+            'Cormorant Garamond',
+            serif;
+    }
 
-    padding:12px 24px;
+    .founder-role {
+        display: inline-flex;
 
-    border-radius:100px;
+        align-items: center;
 
-    background:
-    rgba(0,0,0,0.05);
+        padding: 12px 24px;
 
-    font-size:11px;
+        border-radius: 100px;
 
-    letter-spacing:0.24em;
+        background:
+            rgba(0, 0, 0, 0.04);
 
-    text-transform:uppercase;
+        font-size: 11px;
 
-    color:#444;
+        letter-spacing: 0.24em;
 
-    margin-bottom:34px;
-}
+        text-transform: uppercase;
 
-.founder-content p{
-    font-size:15px;
+        color: #444;
 
-    line-height:2.1;
+        margin-bottom: 32px;
+    }
 
-    color:#555;
+    .founder-content p {
+        font-size: 15px;
 
-    margin-bottom:38px;
+        line-height: 2.1;
 
-    max-width:620px;
-}
+        color: #555;
 
-/* SOCIAL */
+        max-width: 620px;
 
-.founder-social{
-    display:flex;
+        margin-bottom: 36px;
+    }
 
-    gap:16px;
-}
+    /* SOCIAL */
 
-.founder-social a{
-    width:58px;
-    height:58px;
+    .founder-social {
+        display: flex;
 
-    border-radius:50%;
+        gap: 16px;
+    }
 
-    background:
-    rgba(255,255,255,0.45);
+    .founder-social a {
+        width: 58px;
+        height: 58px;
 
-    border:
-    1px solid rgba(0,0,0,0.05);
+        border-radius: 50%;
 
-    display:flex;
+        background:
+            rgba(255, 255, 255, 0.45);
 
-    justify-content:center;
-    align-items:center;
+        border:
+            1px solid rgba(0, 0, 0, 0.05);
 
-    text-decoration:none;
+        display: flex;
 
-    color:#111;
+        justify-content: center;
+        align-items: center;
 
-    transition:0.4s;
-}
+        text-decoration: none;
 
-.founder-social a:hover{
-    transform:
-    translateY(-6px);
+        color: #111;
 
-    background:#111;
+        transition: 0.4s;
+    }
 
-    color:white;
-}
+    .founder-social a:hover {
+        transform:
+            translateY(-6px);
 
-.founder-social i{
-    font-size:22px;
-}
+        background: #111;
 
-/* MOBILE */
+        color: white;
+    }
 
-@media(max-width:1024px){
+    .founder-social i {
+        font-size: 22px;
+    }
 
-.studio-story{
-    grid-template-columns:1fr;
-}
 
-.philosophy-grid{
-    grid-template-columns:1fr 1fr;
-}
 
-.founder-card{
-    grid-template-columns:1fr;
-}
 
-.founder-content h2{
-    font-size:62px;
-}
+    /* VALUES SECTION */
 
-}
+    .values-section {
+        margin-bottom: 0;
+    }
 
-@media(max-width:768px){
+    .values-section h3 {
+        font-size: 42px;
 
-.about-page{
-    padding:120px 20px 80px;
-}
+        font-weight: 300;
 
-.about-header h1{
-    font-size:64px;
-}
+        color: #1a1a1a;
 
-.story-image{
-    height:540px;
-}
+        margin-bottom: 50px;
 
-.philosophy-grid{
-    grid-template-columns:1fr;
-}
+        font-family:
+            'Cormorant Garamond',
+            serif;
 
-.founder-card{
-    padding:30px;
-}
+        text-align: center;
+    }
 
-.founder-image-wrap{
-    height:560px;
-}
+    .values-grid {
+        display: grid;
 
-.founder-content h2{
-    font-size:52px;
-}
+        grid-template-columns: repeat(4, 1fr);
 
-}
+        gap: 30px;
+    }
 
+    .value-card {
+        background:
+            rgba(255, 255, 255, 0.45);
+
+        border:
+            1px solid rgba(255, 255, 255, 0.4);
+
+        border-radius: 28px;
+
+        padding: 35px 25px;
+
+        text-align: center;
+
+        backdrop-filter: blur(24px);
+
+        transition: 0.5s;
+    }
+
+    .value-card:hover {
+        transform:
+            translateY(-8px);
+
+        box-shadow:
+            0 30px 80px rgba(0, 0, 0, 0.12);
+    }
+
+    .value-card i {
+        font-size: 48px;
+
+        color: #c9a03d;
+
+        margin-bottom: 20px;
+
+        display: inline-block;
+    }
+
+    .value-card h4 {
+        font-size: 22px;
+
+        font-weight: 500;
+
+        color: #1a1a1a;
+
+        margin-bottom: 15px;
+
+        font-family:
+            'Cormorant Garamond',
+            serif;
+    }
+
+    .value-card p {
+        font-size: 13px;
+
+        line-height: 1.7;
+
+        color: #666;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:1024px) {
+        .philosophy-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .values-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .founder-card {
+            grid-template-columns: 1fr;
+
+            gap: 40px;
+
+            padding: 30px;
+        }
+
+        .founder-image-wrap {
+            height: 420px;
+        }
+
+        .founder-content h2 {
+            font-size: 54px;
+        }
+
+    }
+
+    @media(max-width:768px) {
+
+        .about-page {
+            padding: 120px 20px 80px;
+        }
+
+        .about-header h1 {
+            font-size: 58px;
+        }
+
+        .studio-story {
+            grid-template-columns: 1fr;
+
+            gap: 40px;
+        }
+
+        .story-text h2 {
+            font-size: 38px;
+        }
+
+        .story-image {
+            height: 350px;
+        }
+
+        .philosophy-section h3 {
+            font-size: 34px;
+        }
+
+        .philosophy-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .team-section h3 {
+            font-size: 34px;
+        }
+
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .team-image {
+            width: 160px;
+            height: 160px;
+        }
+
+        .values-section h3 {
+            font-size: 34px;
+        }
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .philosophy-card {
+            padding: 30px 25px;
+        }
+
+        .value-card {
+            padding: 30px 25px;
+        }
+
+    }
 </style>
-
 <script>
 
 const founderVideo =
@@ -899,7 +1072,11 @@ document.getElementById(
 'muteBtn'
 );
 
-/* PLAY / PAUSE */
+/*
+|--------------------------------------------------------------------------
+| PLAY / PAUSE
+|--------------------------------------------------------------------------
+*/
 
 function toggleFounderPlay()
 {
@@ -919,7 +1096,11 @@ function toggleFounderPlay()
     }
 }
 
-/* MUTE / UNMUTE */
+/*
+|--------------------------------------------------------------------------
+| MUTE / UNMUTE
+|--------------------------------------------------------------------------
+*/
 
 function toggleFounderMute()
 {
@@ -939,5 +1120,4 @@ function toggleFounderMute()
 }
 
 </script>
-
 <?= $this->endSection() ?>
