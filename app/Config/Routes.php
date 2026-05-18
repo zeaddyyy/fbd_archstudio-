@@ -19,32 +19,6 @@ $routes->get(
 
 /*
 |--------------------------------------------------------------------------
-| ABOUT
-|--------------------------------------------------------------------------
-*/
-
-$routes->get('/about', 'Home::about');
-
-/*
-|--------------------------------------------------------------------------
-| ACHIEVEMENTS
-|--------------------------------------------------------------------------
-*/
-
-$routes->get('/achievements', 'Home::achievements');
-
-/*
-|--------------------------------------------------------------------------
-| PROJECTS
-|--------------------------------------------------------------------------
-*/
-$routes->get('/about', 'Home::about');
-
-
-
-$routes->get('/achievements', 'Home::achievements');
-/*
-|--------------------------------------------------------------------------
 | ABOUT PAGE
 |--------------------------------------------------------------------------
 */
@@ -64,6 +38,12 @@ $routes->get(
     '/achievements',
     'Home::achievements'
 );
+
+/*
+|--------------------------------------------------------------------------
+| PROJECTS
+|--------------------------------------------------------------------------
+*/
 
 $routes->get(
     '/projects',
@@ -139,6 +119,16 @@ $routes->post(
 );
 
 $routes->get(
+    '/admin/home-projects/edit/(:num)',
+    'Admin::editHomeProject/$1'
+);
+
+$routes->post(
+    '/admin/home-projects/update/(:num)',
+    'Admin::updateHomeProject/$1'
+);
+
+$routes->get(
     '/admin/home-projects/delete/(:num)',
     'Admin::deleteHomeProject/$1'
 );
@@ -200,6 +190,11 @@ $routes->get(
     'Admin::create'
 );
 
+$routes->post(
+    '/admin/store',
+    'Admin::store'
+);
+
 $routes->get(
     '/admin/edit/(:num)',
     'Admin::edit/$1'
@@ -208,11 +203,6 @@ $routes->get(
 $routes->post(
     '/admin/update/(:num)',
     'Admin::update/$1'
-);
-
-$routes->post(
-    '/admin/store',
-    'Admin::store'
 );
 
 $routes->get(
@@ -227,11 +217,11 @@ $routes->get(
 */
 
 $routes->get(
-    'admin/logo',
+    '/admin/logo',
     'Admin::logo'
 );
 
 $routes->post(
-    'admin/logo/update',
+    '/admin/logo/update',
     'Admin::updateLogo'
 );

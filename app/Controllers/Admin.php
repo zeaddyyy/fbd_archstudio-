@@ -77,20 +77,20 @@ class Admin extends BaseController
     | STORE PROJECT
     |-----------------------------------*/
 
-    public function store()
-    {
-        if (!session()->get('admin_logged_in')) {
-            return redirect()->to('/admin/login');
-        }
+public function store()
+{
+    if (!session()->get('admin_logged_in')) {
+        return redirect()->to('/admin/login');
+    }
 
-        $model =
-            new ProjectModel();
+    $model =
+        new ProjectModel();
 
-        /*
-    |-----------------------------------
-    | FORM DATA
-    |-----------------------------------
-    */
+    /*
+|-----------------------------------
+| FORM DATA
+|-----------------------------------
+*/
 
         $title =
             $this->request->getPost(
@@ -504,135 +504,264 @@ $uploadedImages[] = [
     | UPDATE PROJECT
     |-----------------------------------
     */
+public function update($id)
+{
+    if (!session()->get('admin_logged_in')) {
+        return redirect()->to('/admin/login');
+    }
 
-    public function update($id)
-    {
-        if (!session()->get('admin_logged_in')) {
-            return redirect()->to('/admin/login');
-        }
-        $model =
-            new ProjectModel();
+    $model =
+        new ProjectModel();
 
-        /*
-        |-----------------------------------
-        | FIND PROJECT
-        |-----------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | FIND PROJECT
+    |--------------------------------------------------------------------------
+    */
 
-        $project =
-            $model->find($id);
+    $project =
+        $model->find($id);
 
-        if (!$project) {
-            return redirect()->to('/admin');
-        }
+    if (!$project) {
+        return redirect()->to('/admin');
+    }
 
-        /*
-        |-----------------------------------
-        | FORM DATA
-        |-----------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | FORM DATA
+    |--------------------------------------------------------------------------
+    */
 
-        $title =
-            $this->request->getPost('title');
+    $title =
+        $this->request->getPost('title');
 
-        $description =
-            $this->request->getPost('description');
+    $description =
+        $this->request->getPost('description');
 
-        $location =
-            $this->request->getPost('location');
+    $location =
+        $this->request->getPost('location');
 
-        /*
-        |-----------------------------------
-        | OLD IMAGE
-        |-----------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | EXISTING GALLERY
+    |--------------------------------------------------------------------------
+    */
 
-        $mainImage =
-            $project['image'];
+    $gallery =
+        json_decode(
+            $project['gallery'],
+            true
+        ) ?? [];
 
-        $gallery =
-            json_decode(
-                $project['gallery'],
-                true
-            ) ?? [];
+    /*
+    |--------------------------------------------------------------------------
+    | MAIN IMAGE
+    |--------------------------------------------------------------------------
+    */
 
-        /*
-        |-----------------------------------
-        | NEW FILES
-        |-----------------------------------
-        */
+    $mainImage =
+        $project['image'];
 
-        $files =
-            $this->request->getFileMultiple(
-                'project_files'
-            );
+    /*
+    |--------------------------------------------------------------------------
+    | UPLOAD PATH
+    |--------------------------------------------------------------------------
+    */
 
-        $uploadPath =
-            FCPATH .
-            'uploads/projects/';
+    $uploadPath =
+        FCPATH .
+        'uploads/projects/';
 
-        if ($files) {
-            foreach ($files as $index => $file) {
-                if (
-                    $file->isValid()
-                    &&
-                    ! $file->hasMoved()
-                ) {
-                    $newName =
-                        $file->getRandomName();
+    if (!is_dir($uploadPath)) {
 
-                    $file->move(
-                        $uploadPath,
-                        $newName
+        mkdir(
+            $uploadPath,
+            0777,
+            true
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | NEW FILES
+    |--------------------------------------------------------------------------
+    */
+
+    $files =
+        $this->request->getFileMultiple(
+            'project_files'
+        );
+
+    /*
+    |--------------------------------------------------------------------------
+    | MEDIA TITLES
+    |--------------------------------------------------------------------------
+    */
+
+    $mediaTitles =
+        $this->request->getPost(
+            'media_titles'
+        ) ?? [];
+
+    /*
+    |--------------------------------------------------------------------------
+    | MEDIA DESCRIPTIONS
+    |--------------------------------------------------------------------------
+    */
+
+    $mediaDescriptions =
+        $this->request->getPost(
+            'media_descriptions'
+        ) ?? [];
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROCESS FILES
+    |--------------------------------------------------------------------------
+    */
+
+    if ($files) {
+
+        foreach ($files as $index => $file) {
+
+            if (
+                $file &&
+                $file->isValid() &&
+                !$file->hasMoved()
+            ) {
+
+                /*
+                |--------------------------------------------------------------------------
+                | EXTENSION
+                |--------------------------------------------------------------------------
+                */
+
+                $extension =
+                    strtolower(
+                        $file->getExtension()
                     );
 
-                    $gallery[] =
-                        'projects/' .
-                        $newName;
-                }
+                /*
+                |--------------------------------------------------------------------------
+                | RANDOM NAME
+                |--------------------------------------------------------------------------
+                */
+
+                $newName =
+                    $file->getRandomName();
+
+                /*
+                |--------------------------------------------------------------------------
+                | MOVE FILE
+                |--------------------------------------------------------------------------
+                */
+
+                $file->move(
+                    $uploadPath,
+                    $newName
+                );
+
+                /*
+                |--------------------------------------------------------------------------
+                | MEDIA TYPE
+                |--------------------------------------------------------------------------
+                */
+
+                $type =
+                    in_array(
+                        $extension,
+                        [
+                            'mp4',
+                            'mov',
+                            'webm',
+                            'ogg'
+                        ]
+                    )
+                    ? 'video'
+                    : 'image';
+
+                /*
+                |--------------------------------------------------------------------------
+                | SAVE MEDIA
+                |--------------------------------------------------------------------------
+                */
+
+                $gallery[] = [
+
+                    'file' =>
+                    'projects/' .
+                    $newName,
+
+                    'type' =>
+                    $type,
+
+                    'title' =>
+                    $mediaTitles[$index]
+                    ?? 'Project Media',
+
+                    'description' =>
+                    $mediaDescriptions[$index]
+                    ?? ''
+
+                ];
             }
-
-            /*
-            |-----------------------------------
-            | NEW THUMBNAIL
-            |-----------------------------------
-            */
-
-            $mainImage =
-                $gallery[0];
         }
+    }
 
-        /*
-        |-----------------------------------
-        | UPDATE DATABASE
-        |-----------------------------------
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | MAIN THUMBNAIL
+    |--------------------------------------------------------------------------
+    */
 
-        $model->update($id, [
+    if (
+        isset($gallery[0]['file'])
+    ) {
 
-            'title' =>
-            $title,
+        $mainImage =
+            $gallery[0]['file'];
+    }
 
-            'description' =>
-            $description,
+    /*
+    |--------------------------------------------------------------------------
+    | UPDATE DATABASE
+    |--------------------------------------------------------------------------
+    */
 
-            'location' =>
-            $location,
+    $model->update($id, [
 
-            'image' =>
-            $mainImage,
+        'title' =>
+        $title,
 
-            'gallery' =>
-            json_encode($gallery)
+        'description' =>
+        $description,
 
-        ]);
+        'location' =>
+        $location,
 
-        return redirect()
-            ->to('/admin')
-            ->with(
-                'success',
-                'Project updated successfully!'
-            );
+        'image' =>
+        $mainImage,
+
+        'gallery' =>
+        json_encode(
+            $gallery,
+            JSON_UNESCAPED_SLASHES
+        )
+
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | REDIRECT
+    |--------------------------------------------------------------------------
+    */
+
+    return redirect()
+        ->to('/admin')
+        ->with(
+            'success',
+            'Project Updated Successfully'
+        );
     }
 
     public function logo()

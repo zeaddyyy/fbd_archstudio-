@@ -3,1431 +3,1406 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>
-FB Design Studio | Admin Dashboard
-</title>
+    <title>
+        FB Design Studio | Admin Dashboard
+    </title>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@200;300;400;500;600&display=swap"
-rel="stylesheet"
->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Outfit:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
 
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css"
->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
 
-<style>
+    <style>
+        /* RESET */
 
-/* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-html{
-    scroll-behavior:smooth;
-}
+        body {
+            background: #f4f1ec;
 
-body{
-    background:#f4f1ec;
+            font-family: 'Outfit', sans-serif;
 
-    font-family:'Outfit',sans-serif;
+            overflow-x: hidden;
 
-    overflow-x:hidden;
+            color: #111;
 
-    color:#111;
+            position: relative;
+        }
 
-    position:relative;
-}
+        /* BACKGROUND */
 
-/* BACKGROUND */
+        body::before {
+            content: "";
 
-body::before{
-    content:"";
+            position: fixed;
 
-    position:fixed;
+            inset: 0;
 
-    inset:0;
+            background:
+                radial-gradient(circle at top left,
+                    rgba(0, 0, 0, 0.02),
+                    transparent 35%),
 
-    background:
-    radial-gradient(
-        circle at top left,
-        rgba(0,0,0,0.02),
-        transparent 35%
-    ),
+                radial-gradient(circle at bottom right,
+                    rgba(201, 169, 110, 0.08),
+                    transparent 35%);
 
-    radial-gradient(
-        circle at bottom right,
-        rgba(201,169,110,0.08),
-        transparent 35%
-    );
+            pointer-events: none;
 
-    pointer-events:none;
+            z-index: -2;
+        }
 
-    z-index:-2;
-}
+        /* GRAIN */
 
-/* GRAIN */
+        .grain {
+            position: fixed;
 
-.grain{
-    position:fixed;
+            inset: 0;
 
-    inset:0;
+            pointer-events: none;
 
-    pointer-events:none;
+            opacity: 0.03;
 
-    opacity:0.03;
+            z-index: 999999;
 
-    z-index:999999;
+            background-image:
+                radial-gradient(rgba(0, 0, 0, 0.04) 1px,
+                    transparent 1px);
 
-background-image:
-radial-gradient(
-rgba(0,0,0,0.04) 1px,
-transparent 1px
-);
+            background-size: 4px 4px;
+        }
 
-background-size:4px 4px;
-}
+        /* HEADER */
 
-/* HEADER */
+        .admin-header {
+            position: fixed;
 
-.admin-header{
-    position:fixed;
+            top: 0;
+            left: 0;
 
-    top:0;
-    left:0;
+            width: 100%;
 
-    width:100%;
+            z-index: 999999;
 
-    z-index:999999;
+            padding: 26px 5%;
 
-    padding:26px 5%;
+            display: flex;
 
-    display:flex;
+            justify-content: space-between;
 
-    justify-content:space-between;
+            align-items: center;
 
-    align-items:center;
+            transition: 0.7s cubic-bezier(.19, 1, .22, 1);
 
-    transition:0.7s cubic-bezier(.19,1,.22,1);
+            background:
+                rgba(244, 241, 236, 0.55);
 
-    background:
-    rgba(244,241,236,0.55);
+            backdrop-filter: blur(18px);
 
-    backdrop-filter:blur(18px);
+            border-bottom:
+                1px solid rgba(0, 0, 0, 0.05);
+        }
 
-    border-bottom:
-    1px solid rgba(0,0,0,0.05);
-}
+        .admin-header.scrolled {
+            background:
+                rgba(244, 241, 236, 0.84);
 
-.admin-header.scrolled{
-    background:
-    rgba(244,241,236,0.84);
+            padding: 20px 5%;
 
-    padding:20px 5%;
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.04);
+        }
 
-    box-shadow:
-    0 10px 40px rgba(0,0,0,0.04);
-}
+        /* LOGO */
 
-/* LOGO */
+        .admin-logo {
+            display: flex;
 
-.admin-logo{
-    display:flex;
+            flex-direction: column;
+        }
 
-    flex-direction:column;
-}
+        .admin-logo span {
+            font-size: 11px;
 
-.admin-logo span{
-    font-size:11px;
+            letter-spacing: 0.45em;
 
-    letter-spacing:0.45em;
+            color: #777;
+        }
 
-    color:#777;
-}
+        .admin-logo h1 {
+            font-size: 26px;
 
-.admin-logo h1{
-    font-size:26px;
+            font-family: 'Cormorant Garamond', serif;
 
-    font-family:'Cormorant Garamond',serif;
+            font-weight: 400;
 
-    font-weight:400;
+            color: #1a1a1a;
+        }
 
-    color:#1a1a1a;
-}
+        /* ACTIONS */
 
-/* ACTIONS */
+        .header-actions {
+            display: flex;
 
-.header-actions{
-    display:flex;
+            gap: 16px;
 
-    gap:16px;
+            align-items: center;
+        }
 
-    align-items:center;
-}
+        .action-btn-top {
+            height: 54px;
 
-.action-btn-top{
-    height:54px;
+            padding: 0 28px;
 
-    padding:0 28px;
+            border-radius: 100px;
 
-    border-radius:100px;
+            border: none;
 
-    border:none;
+            display: flex;
 
-    display:flex;
+            align-items: center;
 
-    align-items:center;
+            justify-content: center;
 
-    justify-content:center;
+            gap: 10px;
 
-    gap:10px;
+            cursor: pointer;
 
-    cursor:pointer;
+            text-decoration: none;
 
-    text-decoration:none;
+            font-size: 10px;
 
-    font-size:10px;
+            letter-spacing: 0.28em;
 
-    letter-spacing:0.28em;
+            text-transform: uppercase;
 
-    text-transform:uppercase;
+            transition: 0.5s;
 
-    transition:0.5s;
+            position: relative;
 
-    position:relative;
+            overflow: hidden;
+        }
 
-    overflow:hidden;
-}
+        .action-btn-top::before {
+            content: "";
 
-.action-btn-top::before{
-    content:"";
+            position: absolute;
 
-    position:absolute;
+            top: 0;
+            left: -120%;
 
-    top:0;
-    left:-120%;
+            width: 100%;
+            height: 100%;
 
-    width:100%;
-    height:100%;
+            background:
+                linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
 
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.3),
-        transparent
-    );
+            transition: 0.8s;
+        }
 
-    transition:0.8s;
-}
+        .action-btn-top:hover::before {
+            left: 120%;
+        }
 
-.action-btn-top:hover::before{
-    left:120%;
-}
+        .primary-btn {
+            background: #111;
+            color: white;
+        }
 
-.primary-btn{
-    background:#111;
-    color:white;
-}
+        .primary-btn:hover {
+            transform: translateY(-3px);
+        }
 
-.primary-btn:hover{
-    transform:translateY(-3px);
-}
+        .light-btn {
+            background:
+                rgba(255, 255, 255, 0.7);
 
-.light-btn{
-    background:
-    rgba(255,255,255,0.7);
+            color: #111;
 
-    color:#111;
+            border:
+                1px solid rgba(0, 0, 0, 0.05);
+        }
 
-    border:
-    1px solid rgba(0,0,0,0.05);
-}
+        .light-btn:hover {
+            transform: translateY(-3px);
+        }
 
-.light-btn:hover{
-    transform:translateY(-3px);
-}
+        .logout-btn {
+            background: #d94b4b;
+            color: white;
+        }
 
-.logout-btn{
-    background:#d94b4b;
-    color:white;
-}
+        .logout-btn:hover {
+            background: #c03939;
 
-.logout-btn:hover{
-    background:#c03939;
+            transform: translateY(-3px);
+        }
 
-    transform:translateY(-3px);
-}
+        /* MENU */
 
-/* MENU */
+        .menu-btn {
+            width: 54px;
+            height: 54px;
 
-.menu-btn{
-    width:54px;
-    height:54px;
+            border-radius: 50%;
 
-    border-radius:50%;
+            display: none;
 
-    display:none;
+            justify-content: center;
 
-    justify-content:center;
+            align-items: center;
 
-    align-items:center;
+            cursor: pointer;
 
-    cursor:pointer;
+            border:
+                1px solid rgba(0, 0, 0, 0.08);
 
-    border:
-    1px solid rgba(0,0,0,0.08);
+            backdrop-filter: blur(14px);
 
-    backdrop-filter:blur(14px);
+            background:
+                rgba(255, 255, 255, 0.6);
 
-    background:
-    rgba(255,255,255,0.6);
+            transition: all 0.5s ease;
 
-    transition:all 0.5s ease;
+            z-index: 1000000;
+        }
 
-    z-index:1000000;
-}
+        .menu-btn i {
+            color: #111;
 
-.menu-btn i{
-    color:#111;
+            font-size: 22px;
+        }
 
-    font-size:22px;
-}
+        /* SIDEBAR */
 
-/* SIDEBAR */
+        .sidebar {
+            position: fixed;
 
-.sidebar{
-    position:fixed;
+            top: 0;
+            left: 0;
 
-    top:0;
-    left:0;
+            width: 280px;
+            height: 100vh;
 
-    width:280px;
-    height:100vh;
+            background:
+                rgba(245, 242, 236, 0.98);
 
-    background:
-    rgba(245,242,236,0.98);
+            backdrop-filter: blur(24px);
 
-    backdrop-filter:blur(24px);
+            z-index: 100000;
 
-    z-index:100000;
+            transform: translateX(-100%);
 
-    transform:translateX(-100%);
+            transition:
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-    transition:
-    transform 0.5s cubic-bezier(0.4,0,0.2,1);
+            display: flex;
 
-    display:flex;
+            flex-direction: column;
 
-    flex-direction:column;
+            justify-content: center;
 
-    justify-content:center;
+            align-items: flex-start;
 
-    align-items:flex-start;
+            padding: 80px 30px;
 
-    padding:80px 30px;
+            gap: 25px;
 
-    gap:25px;
+            border-right:
+                1px solid rgba(0, 0, 0, 0.06);
+        }
 
-    border-right:
-    1px solid rgba(0,0,0,0.06);
-}
+        .sidebar.active {
+            transform: translateX(0);
+        }
 
-.sidebar.active{
-    transform:translateX(0);
-}
+        .sidebar a {
+            text-decoration: none;
 
-.sidebar a{
-    text-decoration:none;
+            color: #111;
 
-    color:#111;
+            font-size: 24px;
 
-    font-size:24px;
+            font-family: 'Cormorant Garamond', serif;
 
-    font-family:'Cormorant Garamond',serif;
+            font-weight: 300;
 
-    font-weight:300;
+            transition: 0.3s;
+        }
 
-    transition:0.3s;
-}
+        .sidebar a:hover {
+            transform: translateX(8px);
 
-.sidebar a:hover{
-    transform:translateX(8px);
+            opacity: 0.6;
+        }
 
-    opacity:0.6;
-}
+        /* OVERLAY */
 
-/* OVERLAY */
+        .overlay {
+            position: fixed;
 
-.overlay{
-    position:fixed;
+            top: 0;
+            left: 0;
 
-    top:0;
-    left:0;
+            width: 100%;
+            height: 100%;
 
-    width:100%;
-    height:100%;
+            background:
+                rgba(0, 0, 0, 0.3);
 
-    background:
-    rgba(0,0,0,0.3);
+            z-index: 99999;
 
-    z-index:99999;
+            opacity: 0;
 
-    opacity:0;
+            visibility: hidden;
 
-    visibility:hidden;
+            transition: 0.3s;
+        }
 
-    transition:0.3s;
-}
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-.overlay.active{
-    opacity:1;
-    visibility:visible;
-}
+        /* CONTAINER */
 
-/* CONTAINER */
+        .container {
+            width: 92%;
 
-.container{
-    width:92%;
+            max-width: 1600px;
 
-    max-width:1600px;
+            margin: auto;
 
-    margin:auto;
+            padding-top: 150px;
 
-    padding-top:150px;
+            padding-bottom: 100px;
+        }
 
-    padding-bottom:100px;
-}
+        /* HERO */
 
-/* HERO */
+        .dashboard-hero {
+            width: 100%;
 
-.dashboard-hero{
-    width:100%;
+            display: flex;
 
-    display:flex;
+            justify-content: space-between;
 
-    justify-content:space-between;
+            align-items: flex-end;
 
-    align-items:flex-end;
+            gap: 40px;
 
-    gap:40px;
+            margin-bottom: 70px;
+        }
 
-    margin-bottom:70px;
-}
+        /* HERO LEFT */
 
-/* HERO LEFT */
+        .hero-content {
+            max-width: 760px;
+        }
 
-.hero-content{
-    max-width:760px;
-}
+        .hero-label {
+            display: inline-block;
 
-.hero-label{
-    display:inline-block;
+            margin-bottom: 20px;
 
-    margin-bottom:20px;
+            font-size: 11px;
 
-    font-size:11px;
+            letter-spacing: 0.35em;
 
-    letter-spacing:0.35em;
+            color: #777;
+        }
 
-    color:#777;
-}
+        .hero-content h1 {
+            font-size: 92px;
 
-.hero-content h1{
-    font-size:92px;
+            line-height: 0.92;
 
-    line-height:0.92;
+            font-weight: 300;
 
-    font-weight:300;
+            font-family: 'Cormorant Garamond', serif;
 
-    font-family:'Cormorant Garamond',serif;
+            letter-spacing: -0.05em;
 
-    letter-spacing:-0.05em;
+            margin-bottom: 24px;
 
-    margin-bottom:24px;
+            color: #111;
+        }
 
-    color:#111;
-}
+        .hero-content p {
+            max-width: 620px;
 
-.hero-content p{
-    max-width:620px;
+            line-height: 2;
 
-    line-height:2;
+            color: #666;
 
-    color:#666;
+            font-size: 15px;
+        }
 
-    font-size:15px;
-}
+        /* HERO RIGHT */
 
-/* HERO RIGHT */
+        .hero-stats {
+            display: flex;
 
-.hero-stats{
-    display:flex;
+            gap: 18px;
+        }
 
-    gap:18px;
-}
+        /* HERO CARD */
 
-/* HERO CARD */
+        .hero-card {
+            min-width: 220px;
 
-.hero-card{
-    min-width:220px;
+            padding: 34px;
 
-    padding:34px;
+            border-radius: 32px;
 
-    border-radius:32px;
+            background:
+                rgba(255, 255, 255, 0.65);
 
-    background:
-    rgba(255,255,255,0.65);
+            backdrop-filter: blur(24px);
 
-    backdrop-filter:blur(24px);
+            border:
+                1px solid rgba(0, 0, 0, 0.05);
 
-    border:
-    1px solid rgba(0,0,0,0.05);
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.04);
+        }
 
-    box-shadow:
-    0 20px 50px rgba(0,0,0,0.04);
-}
+        .hero-card h2 {
+            font-size: 64px;
 
-.hero-card h2{
-    font-size:64px;
+            font-weight: 300;
 
-    font-weight:300;
+            font-family: 'Cormorant Garamond', serif;
 
-    font-family:'Cormorant Garamond',serif;
+            margin-bottom: 12px;
+        }
 
-    margin-bottom:12px;
-}
+        .hero-card span {
+            font-size: 10px;
 
-.hero-card span{
-    font-size:10px;
+            letter-spacing: 0.22em;
 
-    letter-spacing:0.22em;
+            color: #777;
+        }
 
-    color:#777;
-}
+        /* LIVE CARD */
 
-/* LIVE CARD */
+        .live-card {
+            display: flex;
 
-.live-card{
-    display:flex;
+            flex-direction: column;
 
-    flex-direction:column;
+            justify-content: center;
+        }
 
-    justify-content:center;
-}
+        .live-dot {
+            width: 12px;
+            height: 12px;
 
-.live-dot{
-    width:12px;
-    height:12px;
+            border-radius: 50%;
 
-    border-radius:50%;
+            background: #2ecc71;
 
-    background:#2ecc71;
+            margin-bottom: 18px;
 
-    margin-bottom:18px;
+            animation: pulse 1.5s infinite;
+        }
 
-    animation:pulse 1.5s infinite;
-}
+        .live-card h3 {
+            font-size: 18px;
 
-.live-card h3{
-    font-size:18px;
+            letter-spacing: 0.08em;
 
-    letter-spacing:0.08em;
+            margin-bottom: 8px;
+        }
 
-    margin-bottom:8px;
-}
+        .live-card p {
+            font-size: 13px;
 
-.live-card p{
-    font-size:13px;
+            color: #777;
+        }
 
-    color:#777;
-}
+        @keyframes pulse {
 
-@keyframes pulse{
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
 
-0%{
-    transform:scale(1);
-    opacity:1;
-}
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
 
-50%{
-    transform:scale(1.5);
-    opacity:0.5;
-}
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
 
-100%{
-    transform:scale(1);
-    opacity:1;
-}
+        }
 
-}
+        /* PROJECT GRID */
 
-/* PROJECT GRID */
+        .projects-grid {
+            display: grid;
 
-.projects-grid{
-    display:grid;
+            grid-template-columns:
+                repeat(auto-fill,
+                    minmax(380px, 1fr));
 
-    grid-template-columns:
-    repeat(
-        auto-fill,
-        minmax(380px,1fr)
-    );
+            gap: 34px;
+        }
 
-    gap:34px;
-}
+        /* CARD */
 
-/* CARD */
+        .project-card {
+            position: relative;
 
-.project-card{
-    position:relative;
+            background:
+                rgba(255, 255, 255, 0.72);
 
-    background:
-    rgba(255,255,255,0.72);
+            backdrop-filter: blur(18px);
 
-    backdrop-filter:blur(18px);
+            border:
+                1px solid rgba(0, 0, 0, 0.05);
 
-    border:
-    1px solid rgba(0,0,0,0.05);
+            border-radius: 34px;
 
-    border-radius:34px;
+            overflow: hidden;
 
-    overflow:hidden;
+            transition:
+                0.5s cubic-bezier(.19, 1, .22, 1);
+        }
 
-    transition:
-    0.5s cubic-bezier(.19,1,.22,1);
-}
+        .project-card:hover {
+            transform: translateY(-8px);
 
-.project-card:hover{
-    transform:translateY(-8px);
+            border-color:
+                rgba(0, 0, 0, 0.1);
 
-    border-color:
-    rgba(0,0,0,0.1);
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.08);
+        }
 
-    box-shadow:
-    0 25px 50px rgba(0,0,0,0.08);
-}
+        .project-card::after {
+            content: '';
 
-.project-card::after{
-    content:'';
+            position: absolute;
 
-    position:absolute;
+            inset: 0;
 
-    inset:0;
+            background:
+                linear-gradient(to top,
+                    rgba(0, 0, 0, 0.10),
+                    transparent 40%);
 
-    background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,0.10),
-        transparent 40%
-    );
+            opacity: 0;
 
-    opacity:0;
+            transition: 0.5s;
 
-    transition:0.5s;
+            pointer-events: none;
+        }
 
-    pointer-events:none;
-}
+        .project-card:hover::after {
+            opacity: 1;
+        }
 
-.project-card:hover::after{
-    opacity:1;
-}
+        /* STATUS */
 
-/* STATUS */
+        .project-status {
+            position: absolute;
 
-.project-status{
-    position:absolute;
+            top: 20px;
+            right: 20px;
 
-    top:20px;
-    right:20px;
+            z-index: 10;
 
-    z-index:10;
+            padding: 10px 18px;
 
-    padding:10px 18px;
+            border-radius: 100px;
 
-    border-radius:100px;
+            background:
+                rgba(255, 255, 255, 0.7);
 
-    background:
-    rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
 
-    backdrop-filter:blur(12px);
+            font-size: 10px;
 
-    font-size:10px;
+            letter-spacing: 0.22em;
 
-    letter-spacing:0.22em;
+            border:
+                1px solid rgba(0, 0, 0, 0.05);
+        }
 
-    border:
-    1px solid rgba(0,0,0,0.05);
-}
+        /* IMAGE */
 
-/* IMAGE */
+        .card-image {
+            width: 100%;
+            height: 320px;
 
-.card-image{
-    width:100%;
-    height:320px;
+            overflow: hidden;
+        }
 
-    overflow:hidden;
-}
+        .card-image img {
+            width: 100%;
+            height: 100%;
 
-.card-image img{
-    width:100%;
-    height:100%;
+            object-fit: cover;
 
-    object-fit:cover;
+            transition: 1.2s cubic-bezier(.19, 1, .22, 1);
+        }
 
-    transition:1.2s cubic-bezier(.19,1,.22,1);
-}
+        .project-card:hover .card-image img {
+            transform: scale(1.06);
+        }
 
-.project-card:hover .card-image img{
-    transform:scale(1.06);
-}
+        /* CONTENT */
 
-/* CONTENT */
+        .card-content {
+            padding: 30px;
+        }
 
-.card-content{
-    padding:30px;
-}
+        .card-content h2 {
+            font-family: 'Cormorant Garamond', serif;
 
-.card-content h2{
-    font-family:'Cormorant Garamond',serif;
+            font-size: 38px;
 
-    font-size:38px;
+            font-weight: 300;
 
-    font-weight:300;
+            color: #1a1a1a;
 
-    color:#1a1a1a;
+            margin-bottom: 12px;
+        }
 
-    margin-bottom:12px;
-}
+        .location {
+            color: #777;
 
-.location{
-    color:#777;
+            font-size: 10px;
 
-    font-size:10px;
+            letter-spacing: 0.18em;
 
-    letter-spacing:0.18em;
+            text-transform: uppercase;
 
-    text-transform:uppercase;
+            margin-bottom: 16px;
 
-    margin-bottom:16px;
+            display: flex;
 
-    display:flex;
+            align-items: center;
 
-    align-items:center;
+            gap: 6px;
+        }
 
-    gap:6px;
-}
+        .description {
+            color: #555;
 
-.description{
-    color:#555;
+            line-height: 1.8;
 
-    line-height:1.8;
+            font-size: 14px;
 
-    font-size:14px;
+            margin-bottom: 22px;
+        }
 
-    margin-bottom:22px;
-}
+        /* GALLERY */
 
-/* GALLERY */
+        .gallery-preview {
+            display: flex;
 
-.gallery-preview{
-    display:flex;
+            gap: 10px;
 
-    gap:10px;
+            overflow-x: auto;
 
-    overflow-x:auto;
+            padding-bottom: 8px;
 
-    padding-bottom:8px;
+            margin-bottom: 22px;
+        }
 
-    margin-bottom:22px;
-}
+        .gallery-preview img {
+            width: 90px;
+            height: 90px;
 
-.gallery-preview img{
-    width:90px;
-    height:90px;
+            object-fit: cover;
 
-    object-fit:cover;
+            border-radius: 18px;
 
-    border-radius:18px;
+            border:
+                1px solid rgba(0, 0, 0, 0.05);
 
-    border:
-    1px solid rgba(0,0,0,0.05);
+            flex-shrink: 0;
 
-    flex-shrink:0;
+            transition: 0.3s;
+        }
 
-    transition:0.3s;
-}
+        .gallery-preview img:hover {
+            transform:
+                translateY(-4px) scale(1.04);
+        }
 
-.gallery-preview img:hover{
-    transform:
-    translateY(-4px)
-    scale(1.04);
-}
+        /* ACTIONS */
 
-/* ACTIONS */
+        .card-actions {
+            display: grid;
 
-.card-actions{
-    display:grid;
+            grid-template-columns:
+                repeat(2, 1fr);
 
-    grid-template-columns:
-    repeat(2,1fr);
+            gap: 12px;
 
-    gap:12px;
+            margin-top: 20px;
+        }
 
-    margin-top:20px;
-}
+        .action-btn {
+            padding: 14px;
 
-.action-btn{
-    padding:14px;
+            text-align: center;
 
-    text-align:center;
+            text-decoration: none;
 
-    text-decoration:none;
+            font-size: 10px;
 
-    font-size:10px;
+            letter-spacing: 0.18em;
 
-    letter-spacing:0.18em;
+            text-transform: uppercase;
 
-    text-transform:uppercase;
+            border-radius: 100px;
 
-    border-radius:100px;
+            transition: 0.4s;
 
-    transition:0.4s;
+            background:
+                rgba(0, 0, 0, 0.04);
 
-    background:
-    rgba(0,0,0,0.04);
+            color: #111;
 
-    color:#111;
+            border:
+                1px solid rgba(0, 0, 0, 0.05);
 
-    border:
-    1px solid rgba(0,0,0,0.05);
+            position: relative;
 
-    position:relative;
+            overflow: hidden;
+        }
 
-    overflow:hidden;
-}
+        .action-btn::before {
+            content: '';
 
-.action-btn::before{
-    content:'';
+            position: absolute;
 
-    position:absolute;
+            top: 0;
+            left: -120%;
 
-    top:0;
-    left:-120%;
+            width: 100%;
+            height: 100%;
 
-    width:100%;
-    height:100%;
+            background:
+                linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.3),
+                    transparent);
 
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.3),
-        transparent
-    );
+            transition: 0.7s;
+        }
 
-    transition:0.7s;
-}
+        .action-btn:hover::before {
+            left: 120%;
+        }
 
-.action-btn:hover::before{
-    left:120%;
-}
+        .edit-btn:hover {
+            background: #111;
 
-.edit-btn:hover{
-    background:#111;
+            color: white;
 
-    color:white;
+            transform: translateY(-3px);
+        }
 
-    transform:translateY(-3px);
-}
+        .delete-btn {
+            color: #d94b4b;
 
-.delete-btn{
-    color:#d94b4b;
+            border-color:
+                rgba(217, 75, 75, 0.15);
 
-    border-color:
-    rgba(217,75,75,0.15);
+            background:
+                rgba(217, 75, 75, 0.05);
+        }
 
-    background:
-    rgba(217,75,75,0.05);
-}
+        .delete-btn:hover {
+            background:
+                rgba(217, 75, 75, 0.12);
 
-.delete-btn:hover{
-    background:
-    rgba(217,75,75,0.12);
+            transform: translateY(-3px);
+        }
 
-    transform:translateY(-3px);
-}
+        /* EMPTY */
 
-/* EMPTY */
+        .empty-state {
+            text-align: center;
 
-.empty-state{
-    text-align:center;
+            padding: 120px 20px;
 
-    padding:120px 20px;
+            background:
+                rgba(255, 255, 255, 0.5);
 
-    background:
-    rgba(255,255,255,0.5);
+            border-radius: 30px;
 
-    border-radius:30px;
+            border:
+                1px solid rgba(0, 0, 0, 0.05);
+        }
 
-    border:
-    1px solid rgba(0,0,0,0.05);
-}
+        .empty-state i {
+            font-size: 70px;
 
-.empty-state i{
-    font-size:70px;
+            color: #111;
 
-    color:#111;
+            margin-bottom: 20px;
 
-    margin-bottom:20px;
+            opacity: 0.4;
+        }
 
-    opacity:0.4;
-}
+        .empty-state h2 {
+            font-family: 'Cormorant Garamond', serif;
 
-.empty-state h2{
-    font-family:'Cormorant Garamond',serif;
+            font-size: 48px;
 
-    font-size:48px;
+            font-weight: 300;
 
-    font-weight:300;
+            color: #1a1a1a;
 
-    color:#1a1a1a;
+            margin-bottom: 12px;
+        }
 
-    margin-bottom:12px;
-}
+        .empty-state p {
+            color: #777;
 
-.empty-state p{
-    color:#777;
+            font-size: 14px;
+        }
 
-    font-size:14px;
-}
+        /* RESPONSIVE */
 
-/* RESPONSIVE */
+        @media(max-width:900px) {
 
-@media(max-width:900px){
+            .header-actions {
+                display: none;
+            }
 
-.header-actions{
-    display:none;
-}
+            .menu-btn {
+                display: flex;
+            }
 
-.menu-btn{
-    display:flex;
-}
+            .container {
+                padding-top: 120px;
+            }
 
-.container{
-    padding-top:120px;
-}
+            .dashboard-hero {
+                flex-direction: column;
 
-.dashboard-hero{
-    flex-direction:column;
+                align-items: flex-start;
+            }
 
-    align-items:flex-start;
-}
+            .hero-content h1 {
+                font-size: 58px;
+            }
 
-.hero-content h1{
-    font-size:58px;
-}
+            .hero-stats {
+                width: 100%;
 
-.hero-stats{
-    width:100%;
+                flex-direction: column;
+            }
 
-    flex-direction:column;
-}
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
 
-.projects-grid{
-    grid-template-columns:1fr;
-}
-
-}
-
-</style>
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="grain"></div>
+    <div class="grain"></div>
 
-<div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
 
-<!-- SIDEBAR -->
+    <!-- SIDEBAR -->
 
-<div class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
 
-<a href="/admin/create">
+        <a href="/admin/create">
 
-Add Project
+            Add Project
 
-</a>
+        </a>
 
-<a href="/admin/home-projects/create">
+        <a href="/admin/home-projects/create">
 
-Homepage CMS
+            Homepage CMS
 
-</a>
+        </a>
 
-<a href="/admin/logo">
+        <a href="/admin/logo">
 
-Change Logo
+            Change Logo
 
-</a>
+        </a>
 
-<a href="/admin/logout" style="color:#d94b4b;">
+        <a href="/admin/logout" style="color:#d94b4b;">
 
-Logout
+            Logout
 
-</a>
+        </a>
 
-</div>
+    </div>
 
-<!-- HEADER -->
+    <!-- HEADER -->
 
-<header class="admin-header" id="adminHeader">
+    <header class="admin-header" id="adminHeader">
 
-<div class="admin-logo">
+        <div class="admin-logo">
 
-<span>
+            <span>
 
-FB DESIGN STUDIO
+                FB DESIGN STUDIO
 
-</span>
+            </span>
 
-<h1>
+            <h1>
 
-Admin Panel
+                Admin Panel
 
-</h1>
+            </h1>
 
-</div>
+        </div>
 
-<div class="header-actions">
+        <div class="header-actions">
 
-<a
-href="/admin/create"
-class="action-btn-top primary-btn"
->
+            <a
+                href="/admin/create"
+                class="action-btn-top primary-btn">
 
-<i class="ri-add-line"></i>
+                <i class="ri-add-line"></i>
 
-Add Project
+                Add Project
 
-</a>
-<a href="/admin/logo"
-class="action-btn-top light-btn"
->
+            </a>
+            <a href="/admin/logo"
+                class="action-btn-top light-btn">
 
-<i class="ri-image-line"></i>
+                <i class="ri-image-line"></i>
 
-Change Logo
+                Change Logo
 
-</a>
+            </a>
 
-<a
-href="/admin/home-projects/create"
-class="action-btn-top light-btn"
->
+            <a
+                href="/admin/home-projects/create"
+                class="action-btn-top light-btn">
 
-<i class="ri-layout-grid-line"></i>
+                <i class="ri-layout-grid-line"></i>
 
-Homepage CMS
+                Homepage CMS
 
-</a>
+            </a>
+            <a
+                href="/admin/home-projects"
+                class="action-btn-top">
 
-<a
-href="/admin/logout"
-class="action-btn-top logout-btn"
->
+                <i class="ri-layout-grid-line"></i>
 
-<i class="ri-logout-box-line"></i>
+                Homepage Projects
 
-Logout
+            </a>
 
-</a>
+            <a
+                href="/admin/logout"
+                class="action-btn-top logout-btn">
 
-</div>
+                <i class="ri-logout-box-line"></i>
 
-<div class="menu-btn" id="menuBtn">
+                Logout
 
-<i class="ri-menu-3-line"></i>
+            </a>
 
-</div>
+        </div>
 
-</header>
+        <div class="menu-btn" id="menuBtn">
 
-<!-- MAIN -->
+            <i class="ri-menu-3-line"></i>
 
-<div class="container">
+        </div>
 
-<!-- HERO -->
+    </header>
 
-<div class="dashboard-hero">
+    <!-- MAIN -->
 
-<div class="hero-content">
+    <div class="container">
 
-<span class="hero-label">
+        <!-- HERO -->
 
-FB DESIGN STUDIO CMS
+        <div class="dashboard-hero">
 
-</span>
+            <div class="hero-content">
 
-<h1>
+                <span class="hero-label">
 
-Creative Control Center
+                    FB DESIGN STUDIO CMS
 
-</h1>
+                </span>
 
-<p>
+                <h1>
 
-Manage architecture projects,
-homepage galleries, branding assets
-and studio content from one premium
-dashboard experience.
+                    Creative Control Center
 
-</p>
+                </h1>
 
-</div>
+                <p>
 
-<div class="hero-stats">
+                    Manage architecture projects,
+                    homepage galleries, branding assets
+                    and studio content from one premium
+                    dashboard experience.
 
-<div class="hero-card">
+                </p>
 
-<h2>
+            </div>
 
-<?= count($projects ?? []) ?>
+            <div class="hero-stats">
 
-</h2>
+                <div class="hero-card">
 
-<span>
+                    <h2>
 
-TOTAL PROJECTS
+                        <?= count($projects ?? []) ?>
 
-</span>
+                    </h2>
 
-</div>
+                    <span>
 
-<div class="hero-card live-card">
+                        TOTAL PROJECTS
 
-<div class="live-dot"></div>
+                    </span>
 
-<h3>
+                </div>
 
-SYSTEM ACTIVE
+                <div class="hero-card live-card">
 
-</h3>
+                    <div class="live-dot"></div>
 
-<p>
+                    <h3>
 
-All services operational
+                        SYSTEM ACTIVE
 
-</p>
+                    </h3>
 
-</div>
+                    <p>
 
-</div>
+                        All services operational
 
-</div>
+                    </p>
 
-<!-- PROJECTS -->
+                </div>
 
-<?php if(!empty($projects)): ?>
+            </div>
 
-<div class="projects-grid">
+        </div>
 
-<?php foreach($projects as $project): ?>
+        <!-- PROJECTS -->
 
-<div class="project-card">
+        <?php if (!empty($projects)): ?>
 
-<div class="project-status">
+            <div class="projects-grid">
 
-LIVE
+                <?php foreach ($projects as $project): ?>
 
-</div>
+                    <div class="project-card">
 
-<?php if(!empty($project['image'])): ?>
+                        <div class="project-status">
 
-<div class="card-image">
+                            LIVE
 
-<img
-src="<?= base_url('uploads/projects/' . basename($project['image'])) ?>"
-alt=""
->
+                        </div>
 
-</div>
+                        <?php if (!empty($project['image'])): ?>
 
-<?php endif; ?>
+                            <div class="card-image">
 
-<div class="card-content">
+                                <img
+                                    src="<?= base_url('uploads/projects/' . basename($project['image'])) ?>"
+                                    alt="">
 
-<h2>
+                            </div>
 
-<?= esc((string)$project['title']) ?>
+                        <?php endif; ?>
 
-</h2>
+                        <div class="card-content">
 
-<div class="location">
+                            <h2>
 
-<i class="ri-map-pin-line"></i>
+                                <?= esc((string)$project['title']) ?>
 
-<?= esc((string)$project['location']) ?>
+                            </h2>
 
-</div>
+                            <div class="location">
 
-<p class="description">
+                                <i class="ri-map-pin-line"></i>
 
-<?= esc((string)$project['description']) ?>
+                                <?= esc((string)$project['location']) ?>
 
-</p>
-<?php if(!empty($project['gallery'])): ?>
+                            </div>
 
-<div class="gallery-preview">
+                            <p class="description">
 
-<?php
+                                <?= esc((string)$project['description']) ?>
 
-$gallery =
-json_decode(
-    $project['gallery'],
-    true
-);
+                            </p>
+                            <?php if (!empty($project['gallery'])): ?>
 
-if(is_array($gallery)):
+                                <div class="gallery-preview">
 
-foreach($gallery as $media):
+                                    <?php
 
-/*
+                                    $gallery =
+                                        json_decode(
+                                            $project['gallery'],
+                                            true
+                                        );
+
+                                    if (is_array($gallery)):
+
+                                        foreach ($gallery as $media):
+
+                                            /*
 |--------------------------------------------------------------------------
 | SUPPORT OLD + NEW GALLERY STRUCTURE
 |--------------------------------------------------------------------------
 */
 
-$filePath = '';
+                                            $filePath = '';
 
-if(is_array($media))
-{
-    $filePath =
-    $media['file'] ?? '';
-}
-else
-{
-    $filePath =
-    $media;
-}
+                                            if (is_array($media)) {
+                                                $filePath =
+                                                    $media['file'] ?? '';
+                                            } else {
+                                                $filePath =
+                                                    $media;
+                                            }
 
-/*
+                                            /*
 |--------------------------------------------------------------------------
 | FILE EXTENSION
 |--------------------------------------------------------------------------
 */
 
-$extension =
-pathinfo(
-    $filePath,
-    PATHINFO_EXTENSION
-);
+                                            $extension =
+                                                pathinfo(
+                                                    $filePath,
+                                                    PATHINFO_EXTENSION
+                                                );
 
-/*
+                                            /*
 |--------------------------------------------------------------------------
 | VIDEO CHECK
 |--------------------------------------------------------------------------
 */
 
-$isVideo =
-in_array(
-    strtolower($extension),
-    ['mp4','webm','mov','ogg']
-);
+                                            $isVideo =
+                                                in_array(
+                                                    strtolower($extension),
+                                                    ['mp4', 'webm', 'mov', 'ogg']
+                                                );
 
-?>
+                                    ?>
 
-<?php if($isVideo): ?>
+                                            <?php if ($isVideo): ?>
 
-<video
-controls
-muted
-playsinline
-style="
+                                                <video
+                                                    controls
+                                                    muted
+                                                    playsinline
+                                                    style="
 width:90px;
 height:90px;
 object-fit:cover;
 border-radius:18px;
 flex-shrink:0;
 background:#000;
-"
->
+">
 
-<source
-src="<?= base_url('uploads/projects/' . basename($filePath)) ?>"
-type="video/mp4"
->
+                                                    <source
+                                                        src="<?= base_url('uploads/projects/' . basename($filePath)) ?>"
+                                                        type="video/mp4">
 
-</video>
+                                                </video>
 
-<?php else: ?>
+                                            <?php else: ?>
 
-<img
-src="<?= base_url('uploads/projects/' . basename($filePath)) ?>"
-alt=""
->
+                                                <img
+                                                    src="<?= base_url('uploads/projects/' . basename($filePath)) ?>"
+                                                    alt="">
 
-<?php endif; ?>
+                                            <?php endif; ?>
 
-<?php endforeach; endif; ?>
+                                    <?php endforeach;
+                                    endif; ?>
 
-</div>
+                                </div>
 
-<?php endif; ?>
+                            <?php endif; ?>
 
-<div class="card-actions">
+                            <div class="card-actions">
 
-<a
-href="/admin/edit/<?= $project['id'] ?>"
-class="action-btn edit-btn"
->
+                                <a
+                                    href="/admin/edit/<?= $project['id'] ?>"
+                                    class="action-btn edit-btn">
 
-Edit
+                                    Edit
 
-</a>
+                                </a>
 
-<a
-href="/admin/delete/<?= $project['id'] ?>"
-class="action-btn delete-btn"
-onclick="return confirm('Delete this project?')"
->
+                                <a
+                                    href="/admin/delete/<?= $project['id'] ?>"
+                                    class="action-btn delete-btn"
+                                    onclick="return confirm('Delete this project?')">
 
-Delete
+                                    Delete
 
-</a>
+                                </a>
 
-</div>
+                            </div>
 
-</div>
+                        </div>
 
-</div>
+                    </div>
 
-<?php endforeach; ?>
+                <?php endforeach; ?>
 
-</div>
+            </div>
 
-<?php else: ?>
+        <?php else: ?>
 
-<div class="empty-state">
+            <div class="empty-state">
 
-<i class="ri-gallery-line"></i>
+                <i class="ri-gallery-line"></i>
 
-<h2>
+                <h2>
 
-No Projects Found
+                    No Projects Found
 
-</h2>
+                </h2>
 
-<p>
+                <p>
 
-Upload your first architecture project
+                    Upload your first architecture project
 
-</p>
+                </p>
 
-</div>
+            </div>
 
-<?php endif; ?>
+        <?php endif; ?>
 
-</div>
+    </div>
 
-<script>
+    <script>
+        const menuBtn =
+            document.getElementById(
+                'menuBtn'
+            );
 
-const menuBtn =
-document.getElementById(
-'menuBtn'
-);
+        const sidebar =
+            document.getElementById(
+                'sidebar'
+            );
 
-const sidebar =
-document.getElementById(
-'sidebar'
-);
+        const overlay =
+            document.getElementById(
+                'overlay'
+            );
 
-const overlay =
-document.getElementById(
-'overlay'
-);
+        function closeSidebar() {
 
-function closeSidebar(){
+            sidebar.classList.remove(
+                'active'
+            );
 
-sidebar.classList.remove(
-'active'
-);
+            overlay.classList.remove(
+                'active'
+            );
 
-overlay.classList.remove(
-'active'
-);
+            document.body.style.overflow =
+                '';
 
-document.body.style.overflow =
-'';
+        }
 
-}
+        function openSidebar() {
 
-function openSidebar(){
+            sidebar.classList.add(
+                'active'
+            );
 
-sidebar.classList.add(
-'active'
-);
+            overlay.classList.add(
+                'active'
+            );
 
-overlay.classList.add(
-'active'
-);
+            document.body.style.overflow =
+                'hidden';
 
-document.body.style.overflow =
-'hidden';
+        }
 
-}
+        menuBtn.onclick = () => {
 
-menuBtn.onclick = () => {
+            if (
+                sidebar.classList.contains(
+                    'active'
+                )
+            ) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
 
-if(
-sidebar.classList.contains(
-'active'
-)
-){
-closeSidebar();
-}else{
-openSidebar();
-}
+        };
 
-};
+        overlay.onclick =
+            closeSidebar;
 
-overlay.onclick =
-closeSidebar;
+        window.addEventListener(
+            'scroll',
+            function() {
 
-window.addEventListener(
-'scroll',
-function(){
+                const header =
+                    document.getElementById(
+                        'adminHeader'
+                    );
 
-const header =
-document.getElementById(
-'adminHeader'
-);
+                if (window.scrollY > 40) {
+                    header.classList.add(
+                        'scrolled'
+                    );
+                } else {
+                    header.classList.remove(
+                        'scrolled'
+                    );
+                }
 
-if(window.scrollY > 40){
-header.classList.add(
-'scrolled'
-);
-}else{
-header.classList.remove(
-'scrolled'
-);
-}
-
-}
-);
-
-</script>
+            }
+        );
+    </script>
 
 </body>
 
