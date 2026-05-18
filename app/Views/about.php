@@ -4,358 +4,35 @@
 
 <section class="about-page">
 
-<<<<<<< HEAD
-<!-- BG VIDEO -->
-
-<video autoplay muted loop playsinline>
-
-<source
-src="<?= base_url('assets/videos/hero.mp4') ?>"
-type="video/mp4"
->
-
-</video>
-
-<div class="about-overlay"></div>
-
-<div class="about-container">
-
-<!-- TITLE -->
-
-<div class="about-header">
-
-<h1>
-About Studio
-</h1>
-
-<p>
-Architecture beyond space.
-</p>
-
-</div>
-
-<!-- STUDIO STORY -->
-
-<div class="studio-story">
-
-<div class="story-text">
-
-<h2>
-FB Design Studio
-</h2>
-
-<p>
-FB Design Studio is a multidisciplinary architecture and interior design practice founded with a vision to create spaces that transcend the ordinary. We believe that great design is not just about aesthetics—it's about creating emotional connections, telling stories through spaces, and crafting environments that inspire and elevate the human experience.
-</p>
-
-<p>
-Our approach combines material sensitivity, spatial composition, and elevated aesthetics to produce timeless architecture that resonates with its inhabitants. Every project, whether residential, commercial, or cultural, is approached with the same level of dedication, creativity, and attention to detail.
-</p>
-
-</div>
-
-<div class="story-image">
-
-<img
-src="<?= base_url('assets/images/studio.jpg') ?>"
-alt="FB Design Studio"
->
-
-</div>
-
-</div>
-
-<!-- PHILOSOPHY -->
-
-<div class="philosophy-section">
-
-<h3>
-Our Philosophy
-</h3>
-
-<div class="philosophy-grid">
-
-<div class="philosophy-card">
-
-<i class="ri-leaf-line"></i>
-
-<h4>
-Material Sensitivity
-</h4>
-
-<p>
-We carefully select and craft materials to create spaces that feel authentic, warm, and deeply connected to their environment.
-</p>
-
-</div>
-
-<div class="philosophy-card">
-
-<i class="ri-pen-nib-line"></i>
-
-<h4>
-Spatial Composition
-</h4>
-
-<p>
-Our designs focus on the harmony between spaces, light, and movement to create seamless and intuitive experiences.
-</p>
-
-</div>
-
-<div class="philosophy-card">
-
-<i class="ri-crown-line"></i>
-
-<h4>
-Elevated Aesthetics
-</h4>
-
-<p>
-We pursue timeless elegance that transcends trends, creating spaces that remain beautiful and relevant for years to come.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- TEAM SECTION -->
-
-<div class="team-section">
-
-<h3>
-Meet Our Team
-</h3>
-
-<div class="team-grid">
-
-<div class="team-card">
-
-<div class="team-image">
-
-<img
-src="https://randomuser.me/api/portraits/men/32.jpg"
-alt="Faiyaz Bhayji"
->
-
-</div>
-
-<h4>
-Faiyaz Bhayji
-</h4>
-
-<span class="team-role">
-FOUNDER & PRINCIPAL DESIGNER
-</span>
-
-<div class="team-social">
-
-<a href="#">
-<i class="ri-linkedin-line"></i>
-</a>
-
-<a href="#">
-<i class="ri-instagram-line"></i>
-</a>
-
-</div>
-
-</div>
-
-<div class="team-card">
-
-<div class="team-image">
-
-<img
-src="https://randomuser.me/api/portraits/women/68.jpg"
-alt="Priya Sharma"
->
-
-</div>
-
-<h4>
-Priya Sharma
-</h4>
-
-<span class="team-role">
-SENIOR ARCHITECT
-</span>
-
-<div class="team-social">
-
-<a href="#">
-<i class="ri-linkedin-line"></i>
-</a>
-
-<a href="#">
-<i class="ri-instagram-line"></i>
-</a>
-
-</div>
-
-</div>
-
-<div class="team-card">
-
-<div class="team-image">
-
-<img
-src="https://randomuser.me/api/portraits/men/45.jpg"
-alt="Rajiv Mehta"
->
-
-</div>
-
-<h4>
-Rajiv Mehta
-</h4>
-
-<span class="team-role">
-INTERIOR DESIGN DIRECTOR
-</span>
-
-<div class="team-social">
-
-<a href="#">
-<i class="ri-linkedin-line"></i>
-</a>
-
-<a href="#">
-<i class="ri-instagram-line"></i>
-</a>
-
-</div>
-
-</div>
-
-<div class="team-card">
-
-<div class="team-image">
-
-<img
-src="https://randomuser.me/api/portraits/women/89.jpg"
-alt="Anita Desai"
->
-
-</div>
-
-<h4>
-Anita Desai
-</h4>
-
-<span class="team-role">
-PROJECT MANAGER
-</span>
-
-<div class="team-social">
-
-<a href="#">
-<i class="ri-linkedin-line"></i>
-</a>
-
-<a href="#">
-<i class="ri-instagram-line"></i>
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- VALUES -->
-
-<div class="values-section">
-
-<h3>
-Core Values
-</h3>
-
-<div class="values-grid">
-
-<div class="value-card">
-
-<i class="ri-heart-line"></i>
-
-<h4>
-Passion
-</h4>
-
-<p>
-We pour our hearts into every project, driven by a genuine love for design and creation.
-</p>
-
-</div>
-
-<div class="value-card">
-
-<i class="ri-lightbulb-line"></i>
-
-<h4>
-Innovation
-</h4>
-
-<p>
-We constantly explore new ideas, materials, and techniques to push the boundaries of design.
-</p>
-
-</div>
-
-<div class="value-card">
-
-<i class="ri-hand-heart-line"></i>
-
-<h4>
-Integrity
-</h4>
-
-<p>
-We build trust through honest communication, transparency, and delivering on our promises.
-</p>
-
-</div>
-
-<div class="value-card">
-
-<i class="ri-group-line"></i>
-
-<h4>
-Collaboration
-</h4>
-
-<p>
-We believe the best results come from working closely with clients, artisans, and craftsmen.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-=======
-    <!-- BG VIDEO -->
-
-    <video autoplay muted loop playsinline>
+    <!-- BACKGROUND VIDEO -->
+
+    <video
+    class="bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    >
 
         <source
-            src="<?= base_url('assets/videos/hero.mp4') ?>"
-            type="video/mp4">
+        src="<?= base_url('assets/videos/hero.mp4') ?>"
+        type="video/mp4">
 
     </video>
+
+    <!-- OVERLAY -->
 
     <div class="about-overlay"></div>
 
     <div class="about-container">
 
-        <!-- TITLE -->
+        <!-- HEADER -->
 
         <div class="about-header">
+
+            <span class="mini-label">
+                FB DESIGN STUDIO
+            </span>
 
             <h1>
                 About Studio
@@ -367,9 +44,11 @@ We believe the best results come from working closely with clients, artisans, an
 
         </div>
 
-        <!-- STUDIO STORY -->
+        <!-- STORY -->
 
         <div class="studio-story">
+
+            <!-- TEXT -->
 
             <div class="story-text">
 
@@ -378,59 +57,65 @@ We believe the best results come from working closely with clients, artisans, an
                 </h2>
 
                 <p>
-                    FB Design Studio is a multidisciplinary architecture and interior design practice founded with a vision to create spaces that transcend the ordinary. We believe that great design is not just about aesthetics—it's about creating emotional connections, telling stories through spaces, and crafting environments that inspire and elevate the human experience.
+                    FB Design Studio is a multidisciplinary architecture and interior design practice founded with a vision to create spaces that transcend the ordinary.
                 </p>
 
                 <p>
-                    Our approach combines material sensitivity, spatial composition, and elevated aesthetics to produce timeless architecture that resonates with its inhabitants. Every project, whether residential, commercial, or cultural, is approached with the same level of dedication, creativity, and attention to detail.
+                    We believe architecture is not only about structures — it is about emotion, storytelling, atmosphere, and timeless spatial experiences.
+                </p>
+
+                <p>
+                    Every project is approached with cinematic attention to detail, balancing luxury, minimalism, warmth, and material sensitivity.
                 </p>
 
             </div>
 
+            <!-- VIDEO -->
+
             <div class="story-image">
 
-               <div class="founder-video-container">
+                <div class="founder-video-container">
 
-    <video
-    class="founder-video"
-    id="founderVideo"
-    autoplay
-    muted
-    loop
-    playsinline
-    >
+                    <video
+                    class="founder-video"
+                    id="founderVideo"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    >
 
-        <source
-        src="<?= base_url('assets/videos/founder.mp4') ?>"
-        type="video/mp4">
+                        <source
+                        src="<?= base_url('assets/videos/founder.mp4') ?>"
+                        type="video/mp4">
 
-    </video>
+                    </video>
 
-    <!-- CONTROLS -->
+                    <!-- CONTROLS -->
 
-    <div class="founder-video-controls">
+                    <div class="founder-video-controls">
 
-        <button
-        onclick="toggleFounderPlay()"
-        id="playBtn"
-        >
+                        <button
+                        onclick="toggleFounderPlay()"
+                        id="playBtn"
+                        >
 
-            <i class="ri-pause-line"></i>
+                            <i class="ri-pause-line"></i>
 
-        </button>
+                        </button>
 
-        <button
-        onclick="toggleFounderMute()"
-        id="muteBtn"
-        >
+                        <button
+                        onclick="toggleFounderMute()"
+                        id="muteBtn"
+                        >
 
-            <i class="ri-volume-mute-line"></i>
+                            <i class="ri-volume-mute-line"></i>
 
-        </button>
+                        </button>
 
-    </div>
+                    </div>
 
-</div>
+                </div>
 
             </div>
 
@@ -455,7 +140,7 @@ We believe the best results come from working closely with clients, artisans, an
                     </h4>
 
                     <p>
-                        We carefully select and craft materials to create spaces that feel authentic, warm, and deeply connected to their environment.
+                        Carefully curated textures and materials that create warmth and timeless elegance.
                     </p>
 
                 </div>
@@ -469,7 +154,7 @@ We believe the best results come from working closely with clients, artisans, an
                     </h4>
 
                     <p>
-                        Our designs focus on the harmony between spaces, light, and movement to create seamless and intuitive experiences.
+                        Harmonious spaces designed with movement, light, depth, and emotional balance.
                     </p>
 
                 </div>
@@ -483,7 +168,7 @@ We believe the best results come from working closely with clients, artisans, an
                     </h4>
 
                     <p>
-                        We pursue timeless elegance that transcends trends, creating spaces that remain beautiful and relevant for years to come.
+                        Luxury minimalism blended with cinematic visual storytelling and refined architecture.
                     </p>
 
                 </div>
@@ -491,7 +176,8 @@ We believe the best results come from working closely with clients, artisans, an
             </div>
 
         </div>
-        <!-- FOUNDER SECTION -->
+
+        <!-- FOUNDER -->
 
         <div class="founder-section">
 
@@ -501,23 +187,42 @@ We believe the best results come from working closely with clients, artisans, an
 
             <div class="founder-card">
 
+                <!-- LEFT -->
+
                 <div class="founder-image-wrap">
 
-                    <div class="founder-glow"></div>
+                    <!-- VIDEO -->
+
+                    <video
+                    class="founder-card-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    >
+
+                        <source
+                        src="<?= base_url('assets/videos/founder.mp4') ?>"
+                        type="video/mp4">
+
+                    </video>
+
+                    <!-- IMAGE -->
 
                     <img
-                        src="<?= base_url('assets/images/founder.png') ?>"
-                        alt="Founder"
-                        class="founder-image">
+                    src="<?= base_url('assets/images/founder.png') ?>"
+                    alt="Founder"
+                    class="founder-overlay-image"
+                    >
 
                 </div>
+
+                <!-- RIGHT -->
 
                 <div class="founder-content">
 
                     <span class="founder-label">
-
                         FB DESIGN STUDIO
-
                     </span>
 
                     <h2>
@@ -532,17 +237,7 @@ We believe the best results come from working closely with clients, artisans, an
 
                     <p>
 
-                        Founded with a passion for timeless
-                        architecture and immersive interiors,
-                        FB Design Studio reflects a design
-                        language rooted in elegance,
-                        material sensitivity, spatial harmony,
-                        and cinematic storytelling.
-
-                        Every project is approached as a
-                        living experience — balancing luxury,
-                        minimalism, and emotional connection
-                        through architecture.
+                        Founded with a passion for timeless architecture and immersive interiors, FB Design Studio reflects a design language rooted in elegance, spatial harmony, luxury minimalism, and cinematic storytelling.
 
                     </p>
 
@@ -568,99 +263,29 @@ We believe the best results come from working closely with clients, artisans, an
 
         </div>
 
-        <!-- VALUES -->
-
-        <div class="values-section">
-
-            <h3>
-                Core Values
-            </h3>
-
-            <div class="values-grid">
-
-                <div class="value-card">
-
-                    <i class="ri-heart-line"></i>
-
-                    <h4>
-                        Passion
-                    </h4>
-
-                    <p>
-                        We pour our hearts into every project, driven by a genuine love for design and creation.
-                    </p>
-
-                </div>
-
-                <div class="value-card">
-
-                    <i class="ri-lightbulb-line"></i>
-
-                    <h4>
-                        Innovation
-                    </h4>
-
-                    <p>
-                        We constantly explore new ideas, materials, and techniques to push the boundaries of design.
-                    </p>
-
-                </div>
-
-                <div class="value-card">
-
-                    <i class="ri-hand-heart-line"></i>
-
-                    <h4>
-                        Integrity
-                    </h4>
-
-                    <p>
-                        We build trust through honest communication, transparency, and delivering on our promises.
-                    </p>
-
-                </div>
-
-                <div class="value-card">
-
-                    <i class="ri-group-line"></i>
-
-                    <h4>
-                        Collaboration
-                    </h4>
-
-                    <p>
-                        We believe the best results come from working closely with clients, artisans, and craftsmen.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
->>>>>>> 41f5f4d (Redesigned nd video support)
 
 </section>
 
 <style>
-<<<<<<< HEAD
+
+/* PAGE */
 
 .about-page{
     position:relative;
 
     min-height:100vh;
 
-    padding:140px 6% 100px;
+    padding:140px 6% 120px;
 
     overflow:hidden;
 
     background:#f4f1ec;
 }
 
-/* VIDEO BG */
+/* BG VIDEO */
 
-.about-page video{
+.bg-video{
     position:absolute;
 
     inset:0;
@@ -671,8 +296,8 @@ We believe the best results come from working closely with clients, artisans, an
     object-fit:cover;
 
     filter:
-    blur(10px)
-    brightness(0.45);
+    blur(12px)
+    brightness(0.4);
 
     transform:scale(1.08);
 }
@@ -681,12 +306,13 @@ We believe the best results come from working closely with clients, artisans, an
 
 .about-overlay{
     position:absolute;
+
     inset:0;
 
     background:
-    rgba(244,241,236,0.62);
+    rgba(244,241,236,0.72);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(14px);
 }
 
 /* CONTAINER */
@@ -700,55 +326,76 @@ We believe the best results come from working closely with clients, artisans, an
 /* HEADER */
 
 .about-header{
-    margin-bottom:80px;
+    margin-bottom:100px;
+}
+
+.mini-label{
+    display:inline-block;
+
+    margin-bottom:20px;
+
+    font-size:11px;
+
+    letter-spacing:0.35em;
+
+    text-transform:uppercase;
+
+    color:#777;
 }
 
 .about-header h1{
-    font-size:96px;
+    font-size:110px;
+
+    line-height:0.9;
 
     font-weight:300;
 
-    color:#1a1a1a;
+    margin-bottom:20px;
 
-    margin-bottom:18px;
+    color:#111;
 
     font-family:
     'Cormorant Garamond',
     serif;
-
-    line-height:0.95;
 }
 
 .about-header p{
-    color:#666;
+    font-size:15px;
 
-    font-size:14px;
-
-    letter-spacing:0.18em;
+    letter-spacing:0.2em;
 
     text-transform:uppercase;
+
+    color:#666;
 }
 
-/* STUDIO STORY */
+/* STORY */
 
 .studio-story{
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+    1fr 1fr;
 
-    gap:60px;
+    gap:80px;
 
-    margin-bottom:100px;
+    align-items:center;
+
+    margin-bottom:120px;
 }
 
+/* TEXT */
+
 .story-text h2{
-    font-size:48px;
+    font-size:58px;
+
+    line-height:0.95;
 
     font-weight:300;
 
-    color:#1a1a1a;
-
     margin-bottom:30px;
+
+    color:#111;
 
     font-family:
     'Cormorant Garamond',
@@ -756,595 +403,58 @@ We believe the best results come from working closely with clients, artisans, an
 }
 
 .story-text p{
-    font-size:16px;
+    font-size:15px;
 
-    line-height:1.9;
+    line-height:2;
 
     color:#555;
 
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
+
+/* STORY VIDEO */
 
 .story-image{
-    border-radius:28px;
-
-    overflow:hidden;
-
-    height:450px;
-}
-
-.story-image img{
-=======
-    .about-page {
-        position: relative;
-
-        min-height: 100vh;
-
-        padding: 140px 6% 100px;
-
-        overflow: hidden;
-
-        background: #f4f1ec;
-    }
-
-    /* VIDEO BG */
-
-    .about-page > video {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    filter:
-        blur(10px)
-        brightness(0.45);
-
-    transform: scale(1.08);
-}
-
-    /* OVERLAY */
-
-    .about-overlay {
-        position: absolute;
-        inset: 0;
-
-        background:
-            rgba(244, 241, 236, 0.62);
-
-        backdrop-filter: blur(12px);
-    }
-
-    /* CONTAINER */
-
-    .about-container {
-        position: relative;
-
-        z-index: 2;
-    }
-
-    /* HEADER */
-
-    .about-header {
-        margin-bottom: 80px;
-    }
-
-    .about-header h1 {
-        font-size: 96px;
-
-        font-weight: 300;
-
-        color: #1a1a1a;
-
-        margin-bottom: 18px;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-
-        line-height: 0.95;
-    }
-
-    .about-header p {
-        color: #666;
-
-        font-size: 14px;
-
-        letter-spacing: 0.18em;
-
-        text-transform: uppercase;
-    }
-
-    /* STUDIO STORY */
-
-    .studio-story {
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 60px;
-
-        margin-bottom: 100px;
-    }
-
-    .story-text h2 {
-        font-size: 48px;
-
-        font-weight: 300;
-
-        color: #1a1a1a;
-
-        margin-bottom: 30px;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-    }
-
-    .story-text p {
-        font-size: 16px;
-
-        line-height: 1.9;
-
-        color: #555;
-
-        margin-bottom: 25px;
-    }
-
-    .story-image {
-        border-radius: 28px;
-
-        overflow: hidden;
-
-        height: 450px;
-    }
-
-    .story-image img {
-        width: 100%;
-        height: 100%;
-
-        object-fit: cover;
-
-        transition: 1.2s cubic-bezier(.19, 1, .22, 1);
-    }
-
-    .story-image:hover img {
-        transform: scale(1.05);
-    }
-
-    /* PHILOSOPHY SECTION */
-
-    .philosophy-section {
-        margin-bottom: 100px;
-    }
-
-    .philosophy-section h3 {
-        font-size: 42px;
-
-        font-weight: 300;
-
-        color: #1a1a1a;
-
-        margin-bottom: 50px;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-
-        text-align: center;
-    }
-
-    .philosophy-grid {
-        display: grid;
-
-        grid-template-columns: repeat(3, 1fr);
-
-        gap: 34px;
-    }
-
-    .philosophy-card {
-        background:
-            rgba(255, 255, 255, 0.45);
-
-        border:
-            1px solid rgba(255, 255, 255, 0.4);
-
-        border-radius: 28px;
-
-        padding: 40px 30px;
-
-        text-align: center;
-
-        backdrop-filter: blur(24px);
-
-        transition: 0.5s;
-    }
-
-    .philosophy-card:hover {
-        transform:
-            translateY(-10px);
-
-        box-shadow:
-            0 30px 80px rgba(0, 0, 0, 0.12);
-    }
-
-    .philosophy-card i {
-        font-size: 54px;
-
-        color: #c9a03d;
-
-        margin-bottom: 25px;
-
-        display: inline-block;
-    }
-
-    .philosophy-card h4 {
-        font-size: 24px;
-
-        font-weight: 500;
-
-        color: #1a1a1a;
-
-        margin-bottom: 20px;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-    }
-
-    .philosophy-card p {
-        font-size: 14px;
-
-        line-height: 1.7;
-
-        color: #666;
-    }
-
-
-    /* FOUNDER SECTION */
-
-    .founder-section {
-        margin-bottom: 120px;
-    }
-
-    .founder-section h3 {
-        font-size: 46px;
-
-        font-weight: 300;
-
-        color: #1a1a1a;
-
-        margin-bottom: 60px;
-
-        text-align: center;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-    }
-
-    /* CARD */
-
-    .founder-card {
-        position: relative;
-
-        display: grid;
-
-        grid-template-columns:
-            460px 1fr;
-
-        gap: 70px;
-
-        align-items: center;
-
-        padding: 50px;
-
-        border-radius: 40px;
-
-        overflow: hidden;
-
-        background:
-            rgba(255, 255, 255, 0.45);
-
-        border:
-            1px solid rgba(255, 255, 255, 0.5);
-
-        backdrop-filter: blur(28px);
-
-        box-shadow:
-            0 30px 90px rgba(0, 0, 0, 0.08);
-    }
-
-    /* IMAGE */
-
-    .founder-image-wrap {
-        position: relative;
-
-        height: 620px;
-
-        border-radius: 34px;
-
-        overflow: hidden;
-    }
-
-    .founder-glow {
-        position: absolute;
-
-        inset: 0;
-
-        background:
-            radial-gradient(circle at center,
-                rgba(201, 160, 61, 0.25),
-                transparent 70%);
-
-        z-index: 2;
-
-        pointer-events: none;
-    }
-.founder-video{
     position:relative;
 
->>>>>>> 41f5f4d (Redesigned nd video support)
-    width:100%;
-    height:100%;
+    height:720px;
 
-    object-fit:cover;
-
-<<<<<<< HEAD
-    transition:1.2s cubic-bezier(.19,1,.22,1);
-}
-
-.story-image:hover img{
-    transform:scale(1.05);
-}
-
-/* PHILOSOPHY SECTION */
-
-.philosophy-section{
-    margin-bottom:100px;
-}
-
-.philosophy-section h3{
-    font-size:42px;
-
-    font-weight:300;
-
-    color:#1a1a1a;
-
-    margin-bottom:50px;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    text-align:center;
-}
-
-.philosophy-grid{
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:34px;
-}
-
-.philosophy-card{
-    background:
-    rgba(255,255,255,0.45);
-
-    border:
-    1px solid rgba(255,255,255,0.4);
-
-    border-radius:28px;
-
-    padding:40px 30px;
-
-    text-align:center;
-
-    backdrop-filter:blur(24px);
-
-    transition:0.5s;
-}
-
-.philosophy-card:hover{
-    transform:
-    translateY(-10px);
-
-    box-shadow:
-    0 30px 80px rgba(0,0,0,0.12);
-}
-
-.philosophy-card i{
-    font-size:54px;
-
-    color:#c9a03d;
-
-    margin-bottom:25px;
-
-    display:inline-block;
-}
-
-.philosophy-card h4{
-    font-size:24px;
-
-    font-weight:500;
-
-    color:#1a1a1a;
-
-    margin-bottom:20px;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
-
-.philosophy-card p{
-    font-size:14px;
-
-    line-height:1.7;
-
-    color:#666;
-}
-
-/* TEAM SECTION */
-
-.team-section{
-    margin-bottom:100px;
-}
-
-.team-section h3{
-    font-size:42px;
-
-    font-weight:300;
-
-    color:#1a1a1a;
-
-    margin-bottom:50px;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    text-align:center;
-}
-
-.team-grid{
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:30px;
-}
-
-.team-card{
-    background:
-    rgba(255,255,255,0.45);
-
-    border:
-    1px solid rgba(255,255,255,0.4);
-
-    border-radius:28px;
-
-    padding:30px 25px;
-
-    text-align:center;
-
-    backdrop-filter:blur(24px);
-
-    transition:0.5s;
-}
-
-.team-card:hover{
-    transform:
-    translateY(-10px);
-
-    box-shadow:
-    0 30px 80px rgba(0,0,0,0.12);
-}
-
-.team-image{
-    width:180px;
-    height:180px;
-
-    margin:0 auto 20px;
-
-    border-radius:50%;
-
-    overflow:hidden;
-}
-
-.team-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:0.5s;
-}
-
-.team-card:hover .team-image img{
-    transform:scale(1.08);
-}
-
-.team-card h4{
-    font-size:22px;
-
-    font-weight:500;
-
-    color:#1a1a1a;
-
-    margin-bottom:8px;
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-}
-
-.team-role{
-    font-size:10px;
-
-    letter-spacing:0.2em;
-
-    color:#c9a03d;
-
-    text-transform:uppercase;
-
-    display:block;
-
-    margin-bottom:18px;
-}
-
-.team-social{
-=======
-    border-radius:34px;
-
-    display:block;
-
-    z-index:1;
-
-    transition:
-    1.2s cubic-bezier(.19,1,.22,1);
-}
-.founder-image-wrap{
-    position:relative;
-
-    width:100%;
-
-    min-height:620px;
-
-    border-radius:34px;
+    border-radius:40px;
 
     overflow:hidden;
 
     background:#e9e4dc;
-
->>>>>>> 41f5f4d (Redesigned nd video support)
-    display:flex;
-
-    justify-content:center;
-
-<<<<<<< HEAD
-    gap:15px;
 }
 
-.team-social a{
-    width:38px;
-    height:38px;
-=======
-    align-items:center;
-
-    padding:24px;
-}
-/* VIDEO CONTAINER */
+/* VIDEO */
 
 .founder-video-container{
     position:relative;
 
     width:100%;
     height:100%;
+}
+
+.founder-video{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    background:#e9e4dc;
+
+    border-radius:40px;
+
+    transition:
+    1.2s cubic-bezier(.19,1,.22,1);
+}
+
+.story-image:hover .founder-video{
+    transform:scale(1.02);
 }
 
 /* CONTROLS */
@@ -1362,160 +472,380 @@ We believe the best results come from working closely with clients, artisans, an
     z-index:20;
 }
 
-/* BUTTON */
-
 .founder-video-controls button{
     width:58px;
     height:58px;
 
     border:none;
->>>>>>> 41f5f4d (Redesigned nd video support)
 
     border-radius:50%;
 
     background:
-<<<<<<< HEAD
-    rgba(255,255,255,0.45);
-=======
-    rgba(255,255,255,0.12);
+    rgba(255,255,255,0.14);
 
     backdrop-filter:blur(18px);
-
-    -webkit-backdrop-filter:blur(18px);
 
     border:
     1px solid rgba(255,255,255,0.15);
 
     color:white;
->>>>>>> 41f5f4d (Redesigned nd video support)
 
     display:flex;
 
     justify-content:center;
     align-items:center;
 
-<<<<<<< HEAD
-    color:#1a1a1a;
+    cursor:pointer;
 
-    text-decoration:none;
-
-    transition:0.3s;
+    transition:0.4s;
 }
 
-.team-social a:hover{
-    background:#c9a03d;
+.founder-video-controls button:hover{
+    transform:
+    translateY(-4px)
+    scale(1.06);
 
-    color:white;
-
-    transform:translateY(-3px);
+    background:
+    rgba(255,255,255,0.24);
 }
 
-.team-social i{
-    font-size:18px;
+.founder-video-controls i{
+    font-size:24px;
 }
 
-/* VALUES SECTION */
+/* PHILOSOPHY */
 
-.values-section{
-    margin-bottom:0;
+.philosophy-section{
+    margin-bottom:120px;
 }
 
-.values-section h3{
-    font-size:42px;
+.philosophy-section h3{
+    text-align:center;
+
+    font-size:52px;
 
     font-weight:300;
 
-    color:#1a1a1a;
+    margin-bottom:60px;
 
-    margin-bottom:50px;
+    color:#111;
 
     font-family:
     'Cormorant Garamond',
     serif;
-
-    text-align:center;
 }
 
-.values-grid{
+.philosophy-grid{
     display:grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+    repeat(3,1fr);
 
-    gap:30px;
+    gap:34px;
 }
 
-.value-card{
+.philosophy-card{
+    padding:42px 34px;
+
+    border-radius:34px;
+
     background:
     rgba(255,255,255,0.45);
 
     border:
-    1px solid rgba(255,255,255,0.4);
+    1px solid rgba(255,255,255,0.45);
 
-    border-radius:28px;
-
-    padding:35px 25px;
-
-    text-align:center;
-
-    backdrop-filter:blur(24px);
+    backdrop-filter:blur(26px);
 
     transition:0.5s;
 }
 
-.value-card:hover{
+.philosophy-card:hover{
     transform:
-    translateY(-8px);
+    translateY(-10px);
 
     box-shadow:
-    0 30px 80px rgba(0,0,0,0.12);
+    0 30px 80px rgba(0,0,0,0.08);
 }
 
-.value-card i{
-    font-size:48px;
+.philosophy-card i{
+    font-size:54px;
 
     color:#c9a03d;
 
-    margin-bottom:20px;
+    margin-bottom:24px;
 
     display:inline-block;
 }
 
-.value-card h4{
-    font-size:22px;
+.philosophy-card h4{
+    font-size:30px;
 
-    font-weight:500;
+    margin-bottom:18px;
 
-    color:#1a1a1a;
-
-    margin-bottom:15px;
+    color:#111;
 
     font-family:
     'Cormorant Garamond',
     serif;
 }
 
-.value-card p{
-    font-size:13px;
+.philosophy-card p{
+    font-size:14px;
 
-    line-height:1.7;
+    line-height:1.9;
 
     color:#666;
+}
+
+/* FOUNDER */
+
+.founder-section{
+    margin-bottom:40px;
+}
+
+.founder-section h3{
+    text-align:center;
+
+    font-size:58px;
+
+    margin-bottom:70px;
+
+    font-weight:300;
+
+    color:#111;
+
+    font-family:
+    'Cormorant Garamond',
+    serif;
+}
+
+/* CARD */
+
+.founder-card{
+    display:grid;
+
+    grid-template-columns:
+    460px 1fr;
+
+    gap:80px;
+
+    align-items:center;
+
+    padding:50px;
+
+    border-radius:42px;
+
+    background:
+    rgba(255,255,255,0.45);
+
+    border:
+    1px solid rgba(255,255,255,0.5);
+
+    backdrop-filter:blur(30px);
+
+    box-shadow:
+    0 30px 90px rgba(0,0,0,0.08);
+}
+
+/* IMAGE WRAP */
+
+.founder-image-wrap{
+    position:relative;
+
+    width:100%;
+
+    height:720px;
+
+    border-radius:36px;
+
+    overflow:hidden;
+
+    background:#000;
+}
+
+/* VIDEO */
+
+.founder-card-video{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    z-index:1;
+
+    transition:1.2s;
+}
+
+/* IMAGE */
+
+.founder-overlay-image{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    z-index:2;
+
+    mix-blend-mode:lighten;
+
+    opacity:0.92;
+
+    pointer-events:none;
+
+    transition:1.2s;
+}
+
+/* HOVER */
+
+.founder-image-wrap:hover .founder-card-video{
+    transform:scale(1.04);
+}
+
+.founder-image-wrap:hover .founder-overlay-image{
+    transform:scale(1.02);
+}
+
+/* CONTENT */
+
+.founder-label{
+    display:inline-block;
+
+    margin-bottom:22px;
+
+    font-size:11px;
+
+    letter-spacing:0.35em;
+
+    text-transform:uppercase;
+
+    color:#888;
+}
+
+.founder-content h2{
+    font-size:92px;
+
+    line-height:0.88;
+
+    margin-bottom:28px;
+
+    font-weight:300;
+
+    color:#111;
+
+    font-family:
+    'Cormorant Garamond',
+    serif;
+}
+
+.founder-role{
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:12px 24px;
+
+    border-radius:100px;
+
+    background:
+    rgba(0,0,0,0.05);
+
+    font-size:11px;
+
+    letter-spacing:0.24em;
+
+    text-transform:uppercase;
+
+    color:#444;
+
+    margin-bottom:34px;
+}
+
+.founder-content p{
+    font-size:15px;
+
+    line-height:2.1;
+
+    color:#555;
+
+    margin-bottom:38px;
+
+    max-width:620px;
+}
+
+/* SOCIAL */
+
+.founder-social{
+    display:flex;
+
+    gap:16px;
+}
+
+.founder-social a{
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,0.45);
+
+    border:
+    1px solid rgba(0,0,0,0.05);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-decoration:none;
+
+    color:#111;
+
+    transition:0.4s;
+}
+
+.founder-social a:hover{
+    transform:
+    translateY(-6px);
+
+    background:#111;
+
+    color:white;
+}
+
+.founder-social i{
+    font-size:22px;
 }
 
 /* MOBILE */
 
 @media(max-width:1024px){
-    .philosophy-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-    
-    .values-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-    
-    .team-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+
+.studio-story{
+    grid-template-columns:1fr;
+}
+
+.philosophy-grid{
+    grid-template-columns:1fr 1fr;
+}
+
+.founder-card{
+    grid-template-columns:1fr;
+}
+
+.founder-content h2{
+    font-size:62px;
+}
+
 }
 
 @media(max-width:768px){
@@ -1525,388 +855,33 @@ We believe the best results come from working closely with clients, artisans, an
 }
 
 .about-header h1{
-    font-size:58px;
-}
-
-.studio-story{
-    grid-template-columns:1fr;
-    
-    gap:40px;
-}
-
-.story-text h2{
-    font-size:38px;
+    font-size:64px;
 }
 
 .story-image{
-    height:350px;
-}
-
-.philosophy-section h3{
-    font-size:34px;
+    height:540px;
 }
 
 .philosophy-grid{
     grid-template-columns:1fr;
 }
 
-.team-section h3{
-    font-size:34px;
+.founder-card{
+    padding:30px;
 }
 
-.team-grid{
-    grid-template-columns:1fr;
+.founder-image-wrap{
+    height:560px;
 }
 
-.team-image{
-    width:160px;
-    height:160px;
-}
-
-.values-section h3{
-    font-size:34px;
-}
-
-.values-grid{
-    grid-template-columns:1fr;
-}
-
-.philosophy-card{
-    padding:30px 25px;
-}
-
-.value-card{
-    padding:30px 25px;
+.founder-content h2{
+    font-size:52px;
 }
 
 }
 
 </style>
 
-=======
-    cursor:pointer;
-
-    transition:
-    0.45s cubic-bezier(.19,1,.22,1);
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.18);
-}
-
-.founder-video-controls button:hover{
-    transform:
-    translateY(-4px)
-    scale(1.06);
-
-    background:
-    rgba(255,255,255,0.2);
-}
-
-.founder-video-controls i{
-    font-size:24px;
-}
-
-/* CONTENT */
-
-    .founder-content {
-        position: relative;
-
-        z-index: 3;
-    }
-
-    .founder-label {
-        display: inline-block;
-
-        margin-bottom: 20px;
-
-        font-size: 10px;
-
-        letter-spacing: 0.35em;
-
-        text-transform: uppercase;
-
-        color: #888;
-    }
-
-    .founder-content h2 {
-        font-size: 86px;
-
-        line-height: 0.9;
-
-        font-weight: 300;
-
-        margin-bottom: 24px;
-
-        color: #111;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-    }
-
-    .founder-role {
-        display: inline-flex;
-
-        align-items: center;
-
-        padding: 12px 24px;
-
-        border-radius: 100px;
-
-        background:
-            rgba(0, 0, 0, 0.04);
-
-        font-size: 11px;
-
-        letter-spacing: 0.24em;
-
-        text-transform: uppercase;
-
-        color: #444;
-
-        margin-bottom: 32px;
-    }
-
-    .founder-content p {
-        font-size: 15px;
-
-        line-height: 2.1;
-
-        color: #555;
-
-        max-width: 620px;
-
-        margin-bottom: 36px;
-    }
-
-    /* SOCIAL */
-
-    .founder-social {
-        display: flex;
-
-        gap: 16px;
-    }
-
-    .founder-social a {
-        width: 58px;
-        height: 58px;
-
-        border-radius: 50%;
-
-        background:
-            rgba(255, 255, 255, 0.45);
-
-        border:
-            1px solid rgba(0, 0, 0, 0.05);
-
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
-
-        text-decoration: none;
-
-        color: #111;
-
-        transition: 0.4s;
-    }
-
-    .founder-social a:hover {
-        transform:
-            translateY(-6px);
-
-        background: #111;
-
-        color: white;
-    }
-
-    .founder-social i {
-        font-size: 22px;
-    }
-
-
-
-
-    /* VALUES SECTION */
-
-    .values-section {
-        margin-bottom: 0;
-    }
-
-    .values-section h3 {
-        font-size: 42px;
-
-        font-weight: 300;
-
-        color: #1a1a1a;
-
-        margin-bottom: 50px;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-
-        text-align: center;
-    }
-
-    .values-grid {
-        display: grid;
-
-        grid-template-columns: repeat(4, 1fr);
-
-        gap: 30px;
-    }
-
-    .value-card {
-        background:
-            rgba(255, 255, 255, 0.45);
-
-        border:
-            1px solid rgba(255, 255, 255, 0.4);
-
-        border-radius: 28px;
-
-        padding: 35px 25px;
-
-        text-align: center;
-
-        backdrop-filter: blur(24px);
-
-        transition: 0.5s;
-    }
-
-    .value-card:hover {
-        transform:
-            translateY(-8px);
-
-        box-shadow:
-            0 30px 80px rgba(0, 0, 0, 0.12);
-    }
-
-    .value-card i {
-        font-size: 48px;
-
-        color: #c9a03d;
-
-        margin-bottom: 20px;
-
-        display: inline-block;
-    }
-
-    .value-card h4 {
-        font-size: 22px;
-
-        font-weight: 500;
-
-        color: #1a1a1a;
-
-        margin-bottom: 15px;
-
-        font-family:
-            'Cormorant Garamond',
-            serif;
-    }
-
-    .value-card p {
-        font-size: 13px;
-
-        line-height: 1.7;
-
-        color: #666;
-    }
-
-    /* MOBILE */
-
-    @media(max-width:1024px) {
-        .philosophy-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .values-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .founder-card {
-            grid-template-columns: 1fr;
-
-            gap: 40px;
-
-            padding: 30px;
-        }
-
-        .founder-image-wrap {
-            height: 420px;
-        }
-
-        .founder-content h2 {
-            font-size: 54px;
-        }
-
-    }
-
-    @media(max-width:768px) {
-
-        .about-page {
-            padding: 120px 20px 80px;
-        }
-
-        .about-header h1 {
-            font-size: 58px;
-        }
-
-        .studio-story {
-            grid-template-columns: 1fr;
-
-            gap: 40px;
-        }
-
-        .story-text h2 {
-            font-size: 38px;
-        }
-
-        .story-image {
-            height: 350px;
-        }
-
-        .philosophy-section h3 {
-            font-size: 34px;
-        }
-
-        .philosophy-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .team-section h3 {
-            font-size: 34px;
-        }
-
-        .team-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .team-image {
-            width: 160px;
-            height: 160px;
-        }
-
-        .values-section h3 {
-            font-size: 34px;
-        }
-
-        .values-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .philosophy-card {
-            padding: 30px 25px;
-        }
-
-        .value-card {
-            padding: 30px 25px;
-        }
-
-    }
-</style>
 <script>
 
 const founderVideo =
@@ -1924,11 +899,7 @@ document.getElementById(
 'muteBtn'
 );
 
-/*
-|--------------------------------------------------------------------------
-| PLAY / PAUSE
-|--------------------------------------------------------------------------
-*/
+/* PLAY / PAUSE */
 
 function toggleFounderPlay()
 {
@@ -1948,11 +919,7 @@ function toggleFounderPlay()
     }
 }
 
-/*
-|--------------------------------------------------------------------------
-| MUTE / UNMUTE
-|--------------------------------------------------------------------------
-*/
+/* MUTE / UNMUTE */
 
 function toggleFounderMute()
 {
@@ -1972,5 +939,5 @@ function toggleFounderMute()
 }
 
 </script>
->>>>>>> 41f5f4d (Redesigned nd video support)
+
 <?= $this->endSection() ?>
